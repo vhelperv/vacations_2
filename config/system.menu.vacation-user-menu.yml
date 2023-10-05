@@ -1,0 +1,8 @@
+uuid: 3cf7545a-619b-4a16-890f-662ef6c04a82
+langcode: en
+status: true
+dependencies: {  }
+id: vacation-user-menu
+label: 'Vacation User Menu'
+description: ''
+locked: false

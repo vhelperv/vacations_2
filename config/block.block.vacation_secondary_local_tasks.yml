@@ -1,0 +1,22 @@
+uuid: 5b7e9ccc-f92b-4adc-8b23-5b67dcc40411
+langcode: en
+status: true
+dependencies:
+  theme:
+    - vacation
+_core:
+  default_config_hash: BCWhood0xXFQYqxFgL1spXdb9KeIuXH1YvTdjIEedDg
+id: vacation_secondary_local_tasks
+theme: vacation
+region: header
+weight: -3
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Secondary tabs'
+  label_display: '0'
+  provider: core
+  primary: false
+  secondary: true
+visibility: {  }

@@ -1,0 +1,48 @@
+uuid: a9cb37c5-faee-43e8-b060-2b88ee043251
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.vacation-user-menu
+  module:
+    - system
+    - user
+  theme:
+    - vacation
+id: vacationusermenu
+theme: vacation
+region: primary_menu
+weight: -5
+provider: null
+plugin: 'system_menu_block:vacation-user-menu'
+settings:
+  id: 'system_menu_block:vacation-user-menu'
+  label: 'Vacation User Menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      ceo: ceo
+      developer_junior: developer_junior
+      developer_middle: developer_middle
+      developer_senior: developer_senior
+      teamlead: teamlead
+      pm: pm
+      shief_pm: shief_pm
+      head_of_department: head_of_department
+      sales: sales
+      marketing: marketing
+      recruiting: recruiting
+      hr: hr
+      om: om
+      accounting: accounting
+      admin_staff: admin_staff
+      client: client

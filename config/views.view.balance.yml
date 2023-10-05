@@ -7,7 +7,6 @@ dependencies:
     - node.type.certificate
     - user.role.accounting
     - user.role.admin_staff
-    - user.role.administrator
     - user.role.ceo
     - user.role.developer_junior
     - user.role.developer_middle
@@ -131,7 +130,6 @@ display:
         type: role
         options:
           role:
-            administrator: administrator
             ceo: ceo
             developer_junior: developer_junior
             developer_middle: developer_middle

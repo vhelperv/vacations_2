@@ -1,0 +1,52 @@
+uuid: 90662ff9-a161-42ed-a3e2-482fa0813f56
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.balance
+  module:
+    - system
+    - user
+    - views
+  theme:
+    - vacation
+id: vacation_views_block__balance_block_2
+theme: vacation
+region: primary_menu
+weight: -4
+provider: null
+plugin: 'views_block:balance-block_2'
+settings:
+  id: 'views_block:balance-block_2'
+  label: ''
+  label_display: visible
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: '/admin/config/workflow/eca/*'
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      ceo: ceo
+      developer_junior: developer_junior
+      developer_middle: developer_middle
+      developer_senior: developer_senior
+      teamlead: teamlead
+      pm: pm
+      shief_pm: shief_pm
+      head_of_department: head_of_department
+      sales: sales
+      marketing: marketing
+      recruiting: recruiting
+      hr: hr
+      om: om
+      accounting: accounting
+      admin_staff: admin_staff

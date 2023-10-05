@@ -13,7 +13,6 @@ dependencies:
     - paragraphs
     - paragraphs_type_permissions
     - system
-    - toolbar
     - update
     - view_unpublished
     - workflow
@@ -26,7 +25,6 @@ permissions:
   - 'access comments'
   - 'access content'
   - 'access request_status workflow_transition form'
-  - 'access toolbar'
   - 'access user profiles'
   - 'change own username'
   - 'create agreement workflow_transition'

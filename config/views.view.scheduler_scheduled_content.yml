@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - system.menu.admin
+    - user.role.administrator
   module:
     - node
     - user
@@ -533,9 +534,10 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: perm
+        type: role
         options:
-          perm: 'view scheduled content'
+          role:
+            administrator: administrator
       cache:
         type: tag
         options: {  }
@@ -996,7 +998,7 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags: {  }
   overview:
     id: overview
@@ -1031,7 +1033,7 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags: {  }
   user_page:
     id: user_page
@@ -1040,9 +1042,10 @@ display:
     position: 2
     display_options:
       access:
-        type: perm
+        type: role
         options:
-          perm: 'access content'
+          role:
+            administrator: administrator
       empty:
         area_text_custom:
           id: area_text_custom
@@ -1130,5 +1133,5 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags: {  }

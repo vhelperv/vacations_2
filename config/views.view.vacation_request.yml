@@ -701,7 +701,7 @@ display:
         context: '0'
       tab_options:
         type: none
-        title: ''
+        title: Approved
         description: ''
         weight: 0
     cache_metadata:

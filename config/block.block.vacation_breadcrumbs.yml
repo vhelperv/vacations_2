@@ -1,0 +1,30 @@
+uuid: 923763bc-af17-41b2-876a-0f910db90a53
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - user
+  theme:
+    - vacation
+_core:
+  default_config_hash: y9X3xgCsO59pQyzNLzY1D3SDJJxCHILLWkpPnmuTJ2E
+id: vacation_breadcrumbs
+theme: vacation
+region: header
+weight: -5
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      administrator: administrator

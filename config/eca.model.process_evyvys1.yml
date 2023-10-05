@@ -2273,6 +2273,211 @@ modeldata: |
           </camunda:field>
         </bpmn2:extensionElements>
       </bpmn2:sequenceFlow>
+      <bpmn2:startEvent id="Event_05qdrcu" name="Validation Time" camunda:modelerTemplate="org.drupal.event.form:form_validate">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="form:form_validate" />
+          </camunda:properties>
+          <camunda:field name="form_id">
+            <camunda:string>node-vacation-form</camunda:string>
+          </camunda:field>
+          <camunda:field name="entity_type_id">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="bundle">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="operation">
+            <camunda:string></camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>Flow_0rujw9m</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:sequenceFlow id="Flow_0rujw9m" sourceRef="Event_05qdrcu" targetRef="Activity_0wyll02" />
+      <bpmn2:task id="Activity_0wyll02" name="Get start vacation time [vactimestart]" camunda:modelerTemplate="org.drupal.action.eca_form_field_get_value">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_get_value" />
+          </camunda:properties>
+          <camunda:field name="field_name">
+            <camunda:string>field_time_vacation.0.from</camunda:string>
+          </camunda:field>
+          <camunda:field name="token_name">
+            <camunda:string>vactimestart</camunda:string>
+          </camunda:field>
+          <camunda:field name="strip_tags">
+            <camunda:string>yes</camunda:string>
+          </camunda:field>
+          <camunda:field name="trim">
+            <camunda:string>yes</camunda:string>
+          </camunda:field>
+          <camunda:field name="xss_filter">
+            <camunda:string>yes</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0rujw9m</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1f2i672</bpmn2:outgoing>
+        <bpmn2:outgoing>Flow_1cfu4or</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="Activity_12767co" name="ERROR: Vacation is late" camunda:modelerTemplate="org.drupal.action.eca_form_field_set_error">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_set_error" />
+          </camunda:properties>
+          <camunda:field name="field_name">
+            <camunda:string>op</camunda:string>
+          </camunda:field>
+          <camunda:field name="message">
+            <camunda:string>Working hours end at 06:00 PM, choose an earlier time.</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0qox0ue</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:task id="Activity_1g1dku8" name="ERROR: Vacation is too early" camunda:modelerTemplate="org.drupal.action.eca_form_field_set_error">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_set_error" />
+          </camunda:properties>
+          <camunda:field name="field_name">
+            <camunda:string>op</camunda:string>
+          </camunda:field>
+          <camunda:field name="message">
+            <camunda:string>Working hours start at 09:00 AM, choose a later time.</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1f2i672</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:sequenceFlow id="Flow_1f2i672" camunda:modelerTemplate="org.drupal.condition.eca_scalar" sourceRef="Activity_0wyll02" targetRef="Activity_1g1dku8">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_scalar" />
+          </camunda:properties>
+          <camunda:field name="left">
+            <camunda:string>[vactimestart]</camunda:string>
+          </camunda:field>
+          <camunda:field name="operator">
+            <camunda:string>lessthan</camunda:string>
+          </camunda:field>
+          <camunda:field name="right">
+            <camunda:string>32400</camunda:string>
+          </camunda:field>
+          <camunda:field name="type">
+            <camunda:string>value</camunda:string>
+          </camunda:field>
+          <camunda:field name="case">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="negate">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+      <bpmn2:sequenceFlow id="Flow_0qox0ue" camunda:modelerTemplate="org.drupal.condition.eca_scalar" sourceRef="Activity_1wldfhs" targetRef="Activity_12767co">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_scalar" />
+          </camunda:properties>
+          <camunda:field name="left">
+            <camunda:string>[vactimeend]</camunda:string>
+          </camunda:field>
+          <camunda:field name="operator">
+            <camunda:string>greaterthan</camunda:string>
+          </camunda:field>
+          <camunda:field name="right">
+            <camunda:string>64800</camunda:string>
+          </camunda:field>
+          <camunda:field name="type">
+            <camunda:string>value</camunda:string>
+          </camunda:field>
+          <camunda:field name="case">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="negate">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+      <bpmn2:task id="Activity_1wldfhs" name="Get end vacation time [vactimeend]" camunda:modelerTemplate="org.drupal.action.eca_form_field_get_value">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_get_value" />
+          </camunda:properties>
+          <camunda:field name="field_name">
+            <camunda:string>field_time_vacation.0.to</camunda:string>
+          </camunda:field>
+          <camunda:field name="token_name">
+            <camunda:string>vactimeend</camunda:string>
+          </camunda:field>
+          <camunda:field name="strip_tags">
+            <camunda:string>yes</camunda:string>
+          </camunda:field>
+          <camunda:field name="trim">
+            <camunda:string>yes</camunda:string>
+          </camunda:field>
+          <camunda:field name="xss_filter">
+            <camunda:string>yes</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1cfu4or</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_0tk9wbn</bpmn2:outgoing>
+        <bpmn2:outgoing>Flow_0qox0ue</bpmn2:outgoing>
+        <bpmn2:outgoing>Flow_18oi2lc</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:sequenceFlow id="Flow_1cfu4or" sourceRef="Activity_0wyll02" targetRef="Activity_1wldfhs" />
+      <bpmn2:task id="Activity_0us6moy" camunda:modelerTemplate="org.drupal.action.eca_form_field_set_error">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_set_error" />
+          </camunda:properties>
+          <camunda:field name="field_name">
+            <camunda:string>op</camunda:string>
+          </camunda:field>
+          <camunda:field name="message">
+            <camunda:string>The vacation start date cannot be later than the end date.</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0tk9wbn</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:sequenceFlow id="Flow_0tk9wbn" camunda:modelerTemplate="org.drupal.condition.eca_scalar" sourceRef="Activity_1wldfhs" targetRef="Activity_0us6moy">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_scalar" />
+          </camunda:properties>
+          <camunda:field name="left">
+            <camunda:string>[vactimestart]</camunda:string>
+          </camunda:field>
+          <camunda:field name="operator">
+            <camunda:string>greaterthan</camunda:string>
+          </camunda:field>
+          <camunda:field name="right">
+            <camunda:string>[vactimeend]</camunda:string>
+          </camunda:field>
+          <camunda:field name="type">
+            <camunda:string>value</camunda:string>
+          </camunda:field>
+          <camunda:field name="case">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="negate">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+      <bpmn2:task id="Activity_1c33hf5" camunda:modelerTemplate="org.drupal.action.eca_form_field_set_error">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_form_field_set_error" />
+          </camunda:properties>
+          <camunda:field name="field_name">
+            <camunda:string>op</camunda:string>
+          </camunda:field>
+          <camunda:field name="message">
+            <camunda:string></camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_18oi2lc</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:sequenceFlow id="Flow_18oi2lc" sourceRef="Activity_1wldfhs" targetRef="Activity_1c33hf5" />
       <bpmn2:textAnnotation id="TextAnnotation_0px04cb">
         <bpmn2:text>Past days</bpmn2:text>
       </bpmn2:textAnnotation>
@@ -2301,9 +2506,41 @@ modeldata: |
         <bpmn2:text>Start vacation in Sun or Sat</bpmn2:text>
       </bpmn2:textAnnotation>
       <bpmn2:association id="Association_18pz5qb" sourceRef="Activity_03akgun" targetRef="TextAnnotation_0jt49d8" />
+      <bpmn2:textAnnotation id="TextAnnotation_1jr888c">
+        <bpmn2:text>Certificate for yourself</bpmn2:text>
+      </bpmn2:textAnnotation>
+      <bpmn2:association id="Association_04q18oh" sourceRef="Activity_191wffh" targetRef="TextAnnotation_1jr888c" />
+      <bpmn2:textAnnotation id="TextAnnotation_1l5o1mm">
+        <bpmn2:text>You cannot take on past days</bpmn2:text>
+      </bpmn2:textAnnotation>
+      <bpmn2:association id="Association_0d1r4rm" sourceRef="Activity_18sltp8" targetRef="TextAnnotation_1l5o1mm" />
+      <bpmn2:textAnnotation id="TextAnnotation_0skax6d">
+        <bpmn2:text>Vacation is too early</bpmn2:text>
+      </bpmn2:textAnnotation>
+      <bpmn2:association id="Association_1k7rckp" sourceRef="Activity_1g1dku8" targetRef="TextAnnotation_0skax6d" />
+      <bpmn2:textAnnotation id="TextAnnotation_1koivm3">
+        <bpmn2:text>Vacation is late</bpmn2:text>
+      </bpmn2:textAnnotation>
+      <bpmn2:association id="Association_18nzni1" sourceRef="Activity_12767co" targetRef="TextAnnotation_1koivm3" />
     </bpmn2:process>
     <bpmndi:BPMNDiagram id="sid-6693f546-015f-481b-bc9b-818f69406367">
       <bpmndi:BPMNPlane id="sid-f49538db-8474-42a0-81ee-aa980006265e" bpmnElement="Process_eVYvYS1">
+        <bpmndi:BPMNShape id="TextAnnotation_1jr888c_di" bpmnElement="TextAnnotation_1jr888c">
+          <dc:Bounds x="-1470" y="-1250" width="99.97575067476384" height="39" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="TextAnnotation_1l5o1mm_di" bpmnElement="TextAnnotation_1l5o1mm">
+          <dc:Bounds x="-1330" y="-1130" width="99.97575067476382" height="55.32536268556006" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="TextAnnotation_0skax6d_di" bpmnElement="TextAnnotation_0skax6d">
+          <dc:Bounds x="-1630" y="-2130" width="99.99950143586472" height="40.832402680280794" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="TextAnnotation_1koivm3_di" bpmnElement="TextAnnotation_1koivm3">
+          <dc:Bounds x="-1430" y="-1870" width="99.99950143586472" height="29.98863273771538" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
         <bpmndi:BPMNShape id="Event_0jtndhm_di" bpmnElement="Event_1x6jxwe">
           <dc:Bounds x="-1788" y="-1148" width="36" height="36" />
           <bpmndi:BPMNLabel>
@@ -2629,6 +2866,50 @@ modeldata: |
           <dc:Bounds x="-1710" y="40" width="99.99260434595526" height="39" />
           <bpmndi:BPMNLabel />
         </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Event_05qdrcu_di" bpmnElement="Event_05qdrcu">
+          <dc:Bounds x="-1838" y="-1918" width="36" height="36" />
+          <bpmndi:BPMNLabel>
+            <dc:Bounds x="-1856" y="-1875" width="75" height="14" />
+          </bpmndi:BPMNLabel>
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_1w5rimu_di" bpmnElement="Activity_0wyll02">
+          <dc:Bounds x="-1730" y="-1940" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_1g1dku8_di" bpmnElement="Activity_1g1dku8">
+          <dc:Bounds x="-1730" y="-2050" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_1wldfhs_di" bpmnElement="Activity_1wldfhs">
+          <dc:Bounds x="-1730" y="-1810" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_0us6moy_di" bpmnElement="Activity_0us6moy">
+          <dc:Bounds x="-1730" y="-1690" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_12767co_di" bpmnElement="Activity_12767co">
+          <dc:Bounds x="-1590" y="-1810" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_1c33hf5_di" bpmnElement="Activity_1c33hf5">
+          <dc:Bounds x="-1870" y="-1810" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNEdge id="Association_04q18oh_di" bpmnElement="Association_04q18oh">
+          <di:waypoint x="-1482" y="-1170" />
+          <di:waypoint x="-1443" y="-1211" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Association_0d1r4rm_di" bpmnElement="Association_0d1r4rm">
+          <di:waypoint x="-1342" y="-1050" />
+          <di:waypoint x="-1318" y="-1075" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Association_1k7rckp_di" bpmnElement="Association_1k7rckp">
+          <di:waypoint x="-1642" y="-2050" />
+          <di:waypoint x="-1605" y="-2089" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Association_18nzni1_di" bpmnElement="Association_18nzni1">
+          <di:waypoint x="-1490" y="-1797" />
+          <di:waypoint x="-1408" y="-1840" />
+        </bpmndi:BPMNEdge>
         <bpmndi:BPMNEdge id="Flow_0op3yyr_di" bpmnElement="Flow_0op3yyr">
           <di:waypoint x="-1752" y="-1130" />
           <di:waypoint x="-1710" y="-1130" />
@@ -3046,6 +3327,30 @@ modeldata: |
         <bpmndi:BPMNEdge id="Association_18pz5qb_di" bpmnElement="Association_18pz5qb">
           <di:waypoint x="-1643" y="0" />
           <di:waypoint x="-1655" y="40" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0rujw9m_di" bpmnElement="Flow_0rujw9m">
+          <di:waypoint x="-1802" y="-1900" />
+          <di:waypoint x="-1730" y="-1900" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1f2i672_di" bpmnElement="Flow_1f2i672">
+          <di:waypoint x="-1680" y="-1940" />
+          <di:waypoint x="-1680" y="-1970" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0qox0ue_di" bpmnElement="Flow_0qox0ue">
+          <di:waypoint x="-1630" y="-1770" />
+          <di:waypoint x="-1590" y="-1770" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1cfu4or_di" bpmnElement="Flow_1cfu4or">
+          <di:waypoint x="-1680" y="-1860" />
+          <di:waypoint x="-1680" y="-1810" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0tk9wbn_di" bpmnElement="Flow_0tk9wbn">
+          <di:waypoint x="-1680" y="-1730" />
+          <di:waypoint x="-1680" y="-1690" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_18oi2lc_di" bpmnElement="Flow_18oi2lc">
+          <di:waypoint x="-1730" y="-1770" />
+          <di:waypoint x="-1770" y="-1770" />
         </bpmndi:BPMNEdge>
       </bpmndi:BPMNPlane>
     </bpmndi:BPMNDiagram>

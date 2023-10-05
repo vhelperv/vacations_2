@@ -1,0 +1,141 @@
+header {
+  height: auto!important;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  box-shadow: gray 0 7px 5px;
+}
+.primary-menu {
+  width: 100%;
+}
+
+.page-wrapper__node-edit-form {
+  & > .region {
+    display: flex;
+    justify-content: flex-end!important;
+    align-items: center;
+  }
+}
+.region .region-primary-menu {
+  display: flex;
+  justify-content: space-between!important;
+  align-items: center;
+}
+
+#block-vacation-addvacation {
+  float: left;
+  & > div {
+    & > p {
+      margin: 0;
+      padding-bottom: 30px;
+      & > a {
+        margin: 0;
+      }
+    }
+  }
+}
+
+#block-vacationusermenu {
+  & > ul {
+    display: flex;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    & > li {
+      list-style-type: none;
+      text-transform: uppercase;
+      padding: 0 14px;
+      & > a {
+        text-decoration: none;
+        color: #000;
+        font-size: 20px;
+        font-weight: 500;
+        font-style: italic;
+      }
+      &:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 3px;
+        position: relative;
+        & > ul {
+          position: absolute;
+          display: block;
+          z-index: 102;
+          padding-top: 5px;
+          padding-bottom: 10px;
+          text-align: center;
+          background-color: var(--gin-bg-app);
+          width: 100%;
+          box-shadow: gray 0 10px 3px -2px;
+          & > li {
+            &:hover {
+              text-decoration: underline;
+              text-decoration-thickness: 2px;
+            }
+          }
+        }
+      }
+      & > ul {
+        display: none;
+        margin: 0;
+
+        & > li {
+          list-style-type: none;
+          text-transform: uppercase;
+
+          & > a {
+            text-decoration: none;
+            color: #000;
+            font-size: 17px;
+            font-weight: 500;
+            font-style: italic;
+          }
+        }
+      }
+    }
+  }
+}
+
+#block-vacation-views-block-balance-block-2 {
+  display: flex;
+  & > h2 {
+    margin: auto auto;
+    text-transform: uppercase;
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 500;
+    color: #000;
+    &:after {
+      content: ":";
+    }
+  }
+  & > div {
+    background-color: transparent;
+    & > .view-id-balance {
+      background-color: transparent;
+      & > .gin-layer-wrapper {
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        & > div {
+          background-color: transparent;
+          margin: 0;
+          padding: 0;
+          & > table {
+            display: flex;
+            margin: 0;
+            border-collapse: inherit;
+            & > thead {
+              display: none;
+            }
+            & > tbody {
+              font-weight: 500;
+              color: #000;
+              font-style: italic;
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

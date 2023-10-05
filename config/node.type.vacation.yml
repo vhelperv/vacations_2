@@ -28,5 +28,5 @@ type: vacation
 description: 'This CT can be created by anyone who is authenticated and has a role.'
 help: ''
 new_revision: true
-preview_mode: 1
+preview_mode: 0
 display_submitted: false

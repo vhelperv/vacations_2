@@ -68,6 +68,18 @@ events:
       -
         id: Activity_0lyxbkg
         condition: ''
+  Event_05qdrcu:
+    plugin: 'form:form_validate'
+    label: 'Validation Time'
+    configuration:
+      form_id: node-vacation-form
+      entity_type_id: ''
+      bundle: ''
+      operation: ''
+    successors:
+      -
+        id: Activity_0wyll02
+        condition: ''
 conditions:
   Flow_1b7hrrh:
     plugin: eca_scalar
@@ -386,6 +398,33 @@ conditions:
     configuration:
       negate: false
       token_name: enderror
+  Flow_1f2i672:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[vactimestart]'
+      right: '32400'
+      operator: lessthan
+      type: value
+  Flow_0qox0ue:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[vactimeend]'
+      right: '64800'
+      operator: greaterthan
+      type: value
+  Flow_0tk9wbn:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[vactimestart]'
+      right: '[vactimeend]'
+      operator: greaterthan
+      type: value
 gateways:
   Gateway_0riv56h:
     type: 0
@@ -1199,4 +1238,67 @@ actions:
       token_name: enderror
       token_value: '1'
       use_yaml: false
+    successors: {  }
+  Activity_0wyll02:
+    plugin: eca_form_field_get_value
+    label: 'Get start vacation time [vactimestart]'
+    configuration:
+      token_name: vactimestart
+      field_name: field_time_vacation.0.from
+      strip_tags: true
+      trim: true
+      xss_filter: true
+    successors:
+      -
+        id: Activity_1g1dku8
+        condition: Flow_1f2i672
+      -
+        id: Activity_1wldfhs
+        condition: ''
+  Activity_12767co:
+    plugin: eca_form_field_set_error
+    label: 'ERROR: Vacation is late'
+    configuration:
+      message: 'Working hours end at 06:00 PM, choose an earlier time.'
+      field_name: op
+    successors: {  }
+  Activity_1g1dku8:
+    plugin: eca_form_field_set_error
+    label: 'ERROR: Vacation is too early'
+    configuration:
+      message: 'Working hours start at 09:00 AM, choose a later time.'
+      field_name: op
+    successors: {  }
+  Activity_1wldfhs:
+    plugin: eca_form_field_get_value
+    label: 'Get end vacation time [vactimeend]'
+    configuration:
+      token_name: vactimeend
+      field_name: field_time_vacation.0.to
+      strip_tags: true
+      trim: true
+      xss_filter: true
+    successors:
+      -
+        id: Activity_12767co
+        condition: Flow_0qox0ue
+      -
+        id: Activity_0us6moy
+        condition: Flow_0tk9wbn
+      -
+        id: Activity_1c33hf5
+        condition: ''
+  Activity_0us6moy:
+    plugin: eca_form_field_set_error
+    label: Activity_0us6moy
+    configuration:
+      message: 'The vacation start date cannot be later than the end date.'
+      field_name: op
+    successors: {  }
+  Activity_1c33hf5:
+    plugin: eca_form_field_set_error
+    label: Activity_1c33hf5
+    configuration:
+      message: ''
+      field_name: op
     successors: {  }

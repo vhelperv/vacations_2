@@ -1833,7 +1833,7 @@ actions:
     label: 'Use Ajax'
     configuration:
       disable_validation_errors: false
-      validate_fields: ''
+      validate_fields: field_type_vacation
       target: field_part_day
       field_name: field_type_vacation
     successors:
@@ -1848,7 +1848,7 @@ actions:
       field_name: field_part_day
     successors:
       -
-        id: Activity_1p6lxif
+        id: Activity_1twif9y
         condition: ''
   Activity_1ae0sj3:
     plugin: eca_form_field_disable
@@ -1856,10 +1856,7 @@ actions:
     configuration:
       flag: true
       field_name: field_time_vacation
-    successors:
-      -
-        id: Activity_1sih0b9
-        condition: ''
+    successors: {  }
   Activity_05i205h:
     plugin: eca_form_field_require
     label: 'Required field'
@@ -1875,7 +1872,7 @@ actions:
       field_name: field_part_day
     successors:
       -
-        id: Activity_1ae0sj3
+        id: Activity_1sih0b9
         condition: ''
   Activity_0hgakll:
     plugin: eca_form_field_disable
@@ -1907,12 +1904,12 @@ actions:
       -
         id: Gateway_0dx304z
         condition: ''
-  Activity_1p6lxif:
+  Activity_1twif9y:
     plugin: eca_form_add_ajax
     label: 'Use Ajax'
     configuration:
       disable_validation_errors: false
-      validate_fields: ''
+      validate_fields: field_part_day
       target: field_time_vacation
       field_name: field_part_day
     successors:
