@@ -1,0 +1,36 @@
+uuid: 23451a17-b2b6-4777-94e2-f54df50d11cb
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.vacation
+  module:
+    - content_moderation
+    - node
+    - paragraphs
+    - paragraphs_type_permissions
+    - update
+    - view_unpublished
+    - workflow
+id: pm
+label: PM
+weight: 9
+is_admin: null
+permissions:
+  - 'access any request_status workflow_transion overview'
+  - 'access request_status workflow_transition form'
+  - 'create agreement workflow_transition'
+  - 'create paragraph content person_who_approve'
+  - 'create request_status workflow_transition'
+  - 'create status_approve workflow_transition'
+  - 'create vacation content'
+  - 'delete paragraph content person_who_approve'
+  - 'update paragraph content person_who_approve'
+  - 'view any unpublished certificate content'
+  - 'view any unpublished content'
+  - 'view any unpublished transaction content'
+  - 'view any unpublished vacation content'
+  - 'view own unpublished content'
+  - 'view paragraph content person_who_approve'
+  - 'view unpublished paragraphs'
+  - 'view update notifications'

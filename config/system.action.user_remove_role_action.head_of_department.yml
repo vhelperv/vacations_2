@@ -1,0 +1,14 @@
+uuid: 9cae499a-d861-49e9-856f-95575511860f
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.head_of_department
+  module:
+    - user
+id: user_remove_role_action.head_of_department
+label: 'Remove the Head of Department role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: head_of_department

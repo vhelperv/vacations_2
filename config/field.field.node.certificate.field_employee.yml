@@ -1,0 +1,47 @@
+uuid: c588a26b-387d-4017-ad76-5580616306fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_employee
+    - node.type.certificate
+id: node.certificate.field_employee
+field_name: field_employee
+entity_type: node
+bundle: certificate
+label: Employee
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    filter:
+      type: role
+      role:
+        ceo: ceo
+        developer_junior: developer_junior
+        developer_middle: developer_middle
+        developer_senior: developer_senior
+        teamlead: teamlead
+        pm: pm
+        shief_pm: shief_pm
+        head_of_department: head_of_department
+        sales: sales
+        marketing: marketing
+        recruiting: recruiting
+        hr: hr
+        om: om
+        accounting: accounting
+        admin_staff: admin_staff
+        client: client
+        administrator: '0'
+    include_anonymous: false
+field_type: entity_reference

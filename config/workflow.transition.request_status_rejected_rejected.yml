@@ -1,0 +1,12 @@
+uuid: 7695820e-56be-430b-86a5-188478cdaac5
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflow.state.request_status_rejected
+id: request_status_rejected_rejected
+label: null
+module: workflow
+from_sid: request_status_rejected
+to_sid: request_status_rejected
+roles: {  }

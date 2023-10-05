@@ -1,0 +1,20 @@
+uuid: af10863a-e067-41ea-8f8d-bf9d204da579
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_type_vacation
+field_name: field_type_vacation
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

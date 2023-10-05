@@ -1,0 +1,36 @@
+uuid: 59919642-d50c-42f9-a3e4-a649f86c559f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.transaction.field__account_balance
+    - field.field.node.transaction.field_add_day
+    - field.field.node.transaction.field_balance
+    - field.field.node.transaction.field_certificate
+    - field.field.node.transaction.field_employee_vacation
+    - field.field.node.transaction.field_numb_day
+    - field.field.node.transaction.field_refer_to_vacation_entity
+    - field.field.node.transaction.field_timestamp
+    - node.type.transaction
+  module:
+    - user
+id: node.transaction.teaser
+targetEntityType: node
+bundle: transaction
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field__account_balance: true
+  field_add_day: true
+  field_balance: true
+  field_certificate: true
+  field_employee_vacation: true
+  field_numb_day: true
+  field_refer_to_vacation_entity: true
+  field_timestamp: true

@@ -1,0 +1,23 @@
+uuid: 79a295ba-9325-4b34-b6b2-bcb050efa139
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_numb_day
+    - node.type.transaction
+id: node.transaction.field_numb_day
+field_name: field_numb_day
+entity_type: node
+bundle: transaction
+label: 'Numb Day'
+description: 'The number of days that is subtracted'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: '-'
+  suffix: ''
+field_type: integer

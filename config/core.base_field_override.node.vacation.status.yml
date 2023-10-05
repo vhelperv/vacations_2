@@ -1,0 +1,22 @@
+uuid: 424b6163-9c48-4415-a64f-452fe0c72a0e
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.vacation
+id: node.vacation.status
+field_name: status
+entity_type: node
+bundle: vacation
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

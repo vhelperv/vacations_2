@@ -1,0 +1,14 @@
+uuid: cad981c0-0e06-4b71-ab76-6010ce67c837
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.ceo
+  module:
+    - user
+id: user_add_role_action.ceo
+label: 'Add the CEO role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: ceo

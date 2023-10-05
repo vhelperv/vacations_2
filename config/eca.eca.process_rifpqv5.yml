@@ -1,0 +1,1921 @@
+uuid: 356280be-9e96-4814-9092-71d723b6f730
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.certificate.field_remainder
+    - field.field.node.transaction.field__account_balance
+    - field.field.node.transaction.field_balance
+    - field.field.node.transaction.field_certificate
+    - field.field.node.transaction.field_employee_vacation
+    - field.field.node.transaction.field_numb_day
+    - field.field.node.transaction.field_refer_to_vacation_entity
+    - field.field.node.vacation.field_approve
+    - field.field.node.vacation.field_numb_day
+    - field.field.node.vacation.field_part_day
+    - field.field.node.vacation.field_range
+    - field.field.node.vacation.field_state_vacation
+    - field.field.node.vacation.field_time_vacation
+    - field.field.node.vacation.field_type_vacation
+    - field.field.node.vacation.field_vacation_s_employee_
+    - field.field.paragraph.person_who_approve.field_permission
+    - field.field.paragraph.person_who_approve.field_person
+    - field.storage.node.field__account_balance
+    - field.storage.node.field_approve
+    - field.storage.node.field_balance
+    - field.storage.node.field_certificate
+    - field.storage.node.field_employee_vacation
+    - field.storage.node.field_numb_day
+    - field.storage.node.field_part_day
+    - field.storage.node.field_range
+    - field.storage.node.field_refer_to_vacation_entity
+    - field.storage.node.field_remainder
+    - field.storage.node.field_state_vacation
+    - field.storage.node.field_time_vacation
+    - field.storage.node.field_type_vacation
+    - field.storage.node.field_vacation_s_employee_
+    - field.storage.paragraph.field_permission
+    - field.storage.paragraph.field_person
+    - node.type.transaction
+    - node.type.vacation
+    - paragraphs.paragraphs_type.person_who_approve
+    - views.view.balance
+    - views.view.vacations_waiting_for_approval
+  module:
+    - eca_base
+    - eca_content
+    - eca_form
+    - eca_tamper
+    - eca_user
+    - eca_views
+id: process_rifpqv5
+modeller: bpmn_io
+label: 'Approval system & Subtracting days'
+version: v1
+weight: -10
+events:
+  Event_1cytdr3:
+    plugin: 'content_entity:insert'
+    label: 'Insert paragraph'
+    configuration:
+      type: 'paragraph person_who_approve'
+    successors:
+      -
+        id: Activity_1jd9bh0
+        condition: ''
+  Event_1pckq2l:
+    plugin: 'content_entity:update'
+    label: 'Update paragraph'
+    configuration:
+      type: 'paragraph person_who_approve'
+    successors:
+      -
+        id: Activity_1nv7w3k
+        condition: ''
+  Event_1mkjlbs:
+    plugin: 'content_entity:update'
+    label: 'Load Vacation'
+    configuration:
+      type: 'paragraph person_who_approve'
+    successors:
+      -
+        id: Activity_0mv2u7z
+        condition: ''
+  Event_1smsc0f:
+    plugin: 'content_entity:create'
+    label: 'Init vacation'
+    configuration:
+      type: 'node vacation'
+    successors:
+      -
+        id: Activity_00ejyen
+        condition: ''
+  Event_1wu1c7r:
+    plugin: 'content_entity:insert'
+    label: 'Save vacation'
+    configuration:
+      type: 'node vacation'
+    successors:
+      -
+        id: Activity_10b0nh7
+        condition: ''
+  Event_0gf2lxx:
+    plugin: 'content_entity:update'
+    label: 'Update vacation'
+    configuration:
+      type: 'node vacation'
+    successors: {  }
+  Event_19acke4:
+    plugin: 'form:form_build'
+    label: 'Build Form Vacation'
+    configuration:
+      form_id: node-vacation-form
+      entity_type_id: ''
+      bundle: ''
+      operation: ''
+    successors:
+      -
+        id: Activity_059cyvn
+        condition: ''
+conditions:
+  Flow_1880gj1:
+    plugin: eca_scalar
+    configuration:
+      case: false
+      left: '[usercheck:field_person:entity:uid]'
+      right: '[current-user:uid]'
+      operator: equal
+      type: value
+      negate: true
+  Flow_14scwzs:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[variable]'
+      right: '[countitem]'
+      operator: lessthan
+      type: value
+  Flow_0stapv6:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[paragraph:field_permission:value]'
+      right: request_status_approved
+      operator: equal
+      type: value
+  Flow_1niw684:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[countapprove]'
+      right: '[countitem]'
+      operator: equal
+      type: value
+  Flow_064ui2n:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[paragraph:field_permission:value]'
+      right: request_status_rejected
+      operator: equal
+      type: value
+  Flow_0x6ossg:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[variable]'
+      right: '[countitem]'
+      operator: lessthan
+      type: value
+  Flow_0bg0pzi:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[paragraph:field_permission:value]'
+      right: request_status_on_hold
+      operator: equal
+      type: value
+  Flow_0m3h7np:
+    plugin: eca_scalar
+    configuration:
+      case: false
+      left: '[countcert]'
+      right: '0'
+      operator: equal
+      type: value
+      negate: true
+  Flow_1on24zn:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[countcert]'
+      right: '0'
+      operator: equal
+      type: value
+  Flow_0liimr4:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[loadvac:field_numb_day:value]'
+      right: '[certsubtract:field_remainder:value]'
+      operator: lessthan
+      type: value
+  Flow_176fw6t:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[loadvac:field_numb_day:value]'
+      right: '[certsubtract:field_remainder:value]'
+      operator: equal
+      type: value
+  Flow_0ksli21:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[loadvac:field_numb_day:value]'
+      right: '[certsubtract:field_remainder:value]'
+      operator: greaterthan
+      type: value
+  Flow_1lvacce:
+    plugin: eca_token_exists
+    configuration:
+      negate: false
+      token_name: savenumbday
+  Flow_1yloyuz:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[loadvac:field_type_vacation:target_id]'
+      right: '1'
+      operator: equal
+      type: value
+  Flow_1wc1xma:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[rest]'
+      right: '0'
+      operator: equal
+      type: value
+  Flow_0c4zflf:
+    plugin: eca_entity_field_value
+    configuration:
+      negate: false
+      case: false
+      expected_value: request_status_approved
+      field_name: '[field_state_vacation:value]'
+      operator: equal
+      type: value
+      entity: vacat
+  Flow_1locuzc:
+    plugin: eca_scalar
+    configuration:
+      case: false
+      left: '[countbal]'
+      right: '0'
+      operator: equal
+      type: value
+      negate: true
+  Flow_0m2hq2a:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[countbal]'
+      right: '0'
+      operator: equal
+      type: value
+  Flow_0e6b23s:
+    plugin: eca_scalar
+    configuration:
+      case: false
+      left: '[countwfa]'
+      right: '0'
+      operator: equal
+      type: value
+      negate: true
+  Flow_095roqw:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[wforapproval:0:field_numb_day]'
+      right: '[balance]'
+      operator: greaterthan
+      type: value
+  Flow_03m5vjv:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[wforapproval:0:field_numb_day]'
+      right: '[balance]'
+      operator: lessthan
+      type: value
+  Flow_0hwo7ql:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[wforapproval:0:field_numb_day]'
+      right: '[balance]'
+      operator: equal
+      type: value
+  Flow_0dtrupu:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[countwfa]'
+      right: '0'
+      operator: equal
+      type: value
+  Flow_1hjrjah:
+    plugin: eca_scalar
+    configuration:
+      case: false
+      left: '[var]'
+      right: '0'
+      operator: equal
+      type: value
+      negate: true
+  Flow_1rnyhnv:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[type]'
+      right: '1'
+      operator: equal
+      type: value
+  Flow_1cfefh2:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[type]'
+      right: '2'
+      operator: equal
+      type: value
+  Flow_098sago:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[partday]'
+      right: '5'
+      operator: equal
+      type: value
+  Flow_1ci79s6:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[partday]'
+      right: '6'
+      operator: equal
+      type: value
+gateways:
+  Gateway_05pv8vu:
+    type: 0
+    successors:
+      -
+        id: Activity_0a8w5tr
+        condition: Flow_14scwzs
+      -
+        id: Activity_0kr7hwe
+        condition: Flow_1niw684
+  Gateway_1sxe2lv:
+    type: 0
+    successors:
+      -
+        id: Activity_00yaic9
+        condition: Flow_0stapv6
+      -
+        id: Activity_0ilmsz0
+        condition: Flow_064ui2n
+      -
+        id: Activity_045gvlj
+        condition: Flow_0bg0pzi
+  Gateway_1vzq9rl:
+    type: 0
+    successors:
+      -
+        id: Activity_0gmm4si
+        condition: Flow_0x6ossg
+  Gateway_1etrybe:
+    type: 0
+    successors:
+      -
+        id: Activity_0ksziyg
+        condition: Flow_0m3h7np
+      -
+        id: Activity_0o2cdwj
+        condition: Flow_1on24zn
+  Gateway_1x8nv9p:
+    type: 0
+    successors:
+      -
+        id: Activity_0zkvs1o
+        condition: Flow_0ksli21
+      -
+        id: Gateway_1xveerc
+        condition: ''
+  Gateway_1xveerc:
+    type: 0
+    successors:
+      -
+        id: Activity_1tonknm
+        condition: Flow_0liimr4
+      -
+        id: Activity_1tonknm
+        condition: Flow_176fw6t
+  Gateway_0w0sflf:
+    type: 0
+    successors:
+      -
+        id: Activity_0d5ufmg
+        condition: Flow_1locuzc
+      -
+        id: Gateway_0oipdxr
+        condition: Flow_0m2hq2a
+  Gateway_0oipdxr:
+    type: 0
+    successors:
+      -
+        id: Gateway_0xo7a0h
+        condition: Flow_0e6b23s
+      -
+        id: Gateway_1ffbk2p
+        condition: Flow_0dtrupu
+      -
+        id: Activity_0rfcb5t
+        condition: ''
+  Gateway_0xo7a0h:
+    type: 0
+    successors:
+      -
+        id: Activity_12873bx
+        condition: Flow_095roqw
+      -
+        id: Activity_0oj0s4w
+        condition: Flow_03m5vjv
+      -
+        id: Activity_0oj0s4w
+        condition: Flow_0hwo7ql
+      -
+        id: Activity_03mjeej
+        condition: ''
+  Gateway_0krb3bu:
+    type: 0
+    successors:
+      -
+        id: Gateway_0oipdxr
+        condition: ''
+  Gateway_1ffbk2p:
+    type: 0
+    successors:
+      -
+        id: Activity_0u1i0mn
+        condition: ''
+  Gateway_17jg2q1:
+    type: 0
+    successors:
+      -
+        id: Activity_06rab4n
+        condition: Flow_1hjrjah
+  Gateway_124jw3t:
+    type: 0
+    successors:
+      -
+        id: Activity_03bb4vr
+        condition: Flow_1rnyhnv
+      -
+        id: Activity_04cfg1r
+        condition: Flow_1cfefh2
+  Gateway_0dx304z:
+    type: 0
+    successors:
+      -
+        id: Activity_0hgakll
+        condition: Flow_098sago
+      -
+        id: Activity_1bylo0x
+        condition: Flow_1ci79s6
+actions:
+  Activity_1jd9bh0:
+    plugin: eca_token_load_entity
+    label: 'Load paragraph entity'
+    configuration:
+      token_name: state
+      from: current
+      entity_type: _none
+      entity_id: ''
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_1gd1jm0
+        condition: ''
+  Activity_1gd1jm0:
+    plugin: eca_set_field_value
+    label: 'Set value [On-hold]'
+    configuration:
+      field_name: '[field_permission:value]'
+      field_value: request_status_on_hold
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: state
+    successors: {  }
+  Activity_1nv7w3k:
+    plugin: eca_token_load_entity
+    label: 'Load paragraph entity'
+    configuration:
+      token_name: usercheck
+      from: current
+      entity_type: _none
+      entity_id: ''
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_1b7b2n4
+        condition: Flow_1880gj1
+  Activity_1b7b2n4:
+    plugin: eca_set_field_value
+    label: 'Set value [On-hold]'
+    configuration:
+      field_name: '[field_permission:value]'
+      field_value: request_status_on_hold
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: usercheck
+    successors: {  }
+  Activity_00ejyen:
+    plugin: eca_token_load_entity
+    label: 'Load vacation entity'
+    configuration:
+      token_name: vacation
+      from: current
+      entity_type: _none
+      entity_id: ''
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_0r2y3av
+        condition: ''
+  Activity_0pj75s9:
+    plugin: eca_set_field_value
+    label: 'Set state'
+    configuration:
+      field_name: '[field_state_vacation:value]'
+      field_value: request_status_on_hold
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: false
+      object: vacation
+    successors:
+      -
+        id: Activity_0ipphie
+        condition: ''
+  Activity_0a28vpb:
+    plugin: 'eca_tamper:math'
+    label: 'Calc Numb Day'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '[vacation:field_range:start_date:raw]'
+      eca_data: '[vacation:field_range:end_date:raw]'
+      eca_token_name: numb
+    successors:
+      -
+        id: Activity_0pxpwwn
+        condition: ''
+  Activity_0n6kbzq:
+    plugin: eca_set_field_value
+    label: 'Set Numb Day'
+    configuration:
+      field_name: '[field_numb_day:value]'
+      field_value: '[number]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: vacation
+    successors: {  }
+  Activity_0pxpwwn:
+    plugin: 'eca_tamper:timetodate'
+    label: 'Convert Unix to Day'
+    configuration:
+      date_format: d
+      eca_data: '[numb]'
+      eca_token_name: number
+    successors:
+      -
+        id: Activity_0n6kbzq
+        condition: ''
+  Activity_0ipphie:
+    plugin: eca_set_field_value
+    label: 'Set Vacation''s Employee'
+    configuration:
+      field_name: '[field_vacation_s_employee_:target_id]'
+      field_value: '[user:uid]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: false
+      object: vacation
+    successors:
+      -
+        id: Activity_0poljyu
+        condition: ''
+  Activity_0innsk8:
+    plugin: eca_token_load_entity
+    label: 'Load vacation entity'
+    configuration:
+      token_name: loadvac
+      from: id
+      entity_type: node
+      entity_id: '[paragr:parent_id:value]'
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: true
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_16b0to0
+        condition: ''
+  Activity_18rbrxi:
+    plugin: eca_count
+    label: 'Count list listapprove [countitem]'
+    configuration:
+      token_name: countitem
+      list_token: listapprove
+    successors:
+      -
+        id: Activity_04ut7x3
+        condition: ''
+  Activity_16b0to0:
+    plugin: eca_list_add_entity
+    label: 'Create list field_approve [listapprove]'
+    configuration:
+      method: append
+      index: ''
+      list_token: listapprove
+      object: loadvac.field_approve
+    successors:
+      -
+        id: Activity_18rbrxi
+        condition: ''
+  Activity_00yaic9:
+    plugin: 'eca_tamper:math'
+    label: 'Add 1 to [countapprove]'
+    configuration:
+      operation: addition
+      flip: false
+      value: '1'
+      eca_data: '[countapprove]'
+      eca_token_name: countapprove
+    successors:
+      -
+        id: Activity_045gvlj
+        condition: ''
+  Activity_1gykxij:
+    plugin: eca_token_set_value
+    label: 'Set 0 [countapprove]'
+    configuration:
+      token_name: countapprove
+      token_value: '0'
+      use_yaml: false
+    successors:
+      -
+        id: Gateway_05pv8vu
+        condition: ''
+  Activity_0a8w5tr:
+    plugin: eca_token_set_value
+    label: 'Save first entity in [temp]'
+    configuration:
+      token_name: temp
+      token_value: '[listapprove:0]'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_194z4lz
+        condition: ''
+  Activity_04ut7x3:
+    plugin: eca_token_set_value
+    label: 'Set 0 [variable]'
+    configuration:
+      token_name: variable
+      token_value: '0'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_1gykxij
+        condition: ''
+  Activity_1ag8hw9:
+    plugin: eca_list_remove_entity
+    label: 'Drop first from [listapprove]'
+    configuration:
+      token_name: ''
+      method: first
+      index: ''
+      list_token: listapprove
+      object: ''
+    successors:
+      -
+        id: Gateway_05pv8vu
+        condition: ''
+  Activity_045gvlj:
+    plugin: 'eca_tamper:math'
+    label: 'Add 1 to [variable]'
+    configuration:
+      operation: addition
+      flip: false
+      value: '1'
+      eca_data: '[variable]'
+      eca_token_name: variable
+    successors:
+      -
+        id: Activity_1ag8hw9
+        condition: ''
+  Activity_194z4lz:
+    plugin: eca_token_load_entity
+    label: 'Load paragraph by Entity  ID [paragraph]'
+    configuration:
+      token_name: paragraph
+      from: id
+      entity_type: paragraph
+      entity_id: '[temp]'
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Gateway_1sxe2lv
+        condition: ''
+  Activity_0kr7hwe:
+    plugin: eca_set_field_value
+    label: 'Set status [Approved]'
+    configuration:
+      field_name: '[field_state_vacation:value]'
+      field_value: request_status_approved
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: loadvac
+    successors:
+      -
+        id: Activity_0lw7qtz
+        condition: ''
+  Activity_0ilmsz0:
+    plugin: eca_token_set_value
+    label: 'Set 0 [variable]'
+    configuration:
+      token_name: variable
+      token_value: '0'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_1efx5fc
+        condition: ''
+  Activity_0gmm4si:
+    plugin: eca_token_set_value
+    label: 'Save first entity in [temp]'
+    configuration:
+      token_name: temp
+      token_value: '[listreject:0]'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_0ia1e4u
+        condition: ''
+  Activity_0ia1e4u:
+    plugin: eca_token_load_entity
+    label: 'Load paragraph by Entity  ID [paragraph]'
+    configuration:
+      token_name: paragraph
+      from: id
+      entity_type: paragraph
+      entity_id: '[temp]'
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_1crxup1
+        condition: ''
+  Activity_0lz7bzs:
+    plugin: eca_set_field_value
+    label: 'Set user status [Rejected]'
+    configuration:
+      field_name: '[field_permission:value]'
+      field_value: request_status_rejected
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: paragraph
+    successors:
+      -
+        id: Activity_0zik2hi
+        condition: ''
+  Activity_1efx5fc:
+    plugin: eca_set_field_value
+    label: 'Set status [Rejected]'
+    configuration:
+      field_name: '[field_state_vacation:value]'
+      field_value: request_status_rejected
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: loadvac
+    successors:
+      -
+        id: Activity_1996w30
+        condition: ''
+  Activity_0zik2hi:
+    plugin: 'eca_tamper:math'
+    label: 'Add 1 to [variable]'
+    configuration:
+      operation: addition
+      flip: false
+      value: '1'
+      eca_data: '[variable]'
+      eca_token_name: variable
+    successors:
+      -
+        id: Activity_0efx9ps
+        condition: ''
+  Activity_0efx9ps:
+    plugin: eca_list_remove_entity
+    label: 'Drop first from [listapprove]'
+    configuration:
+      token_name: ''
+      method: first
+      index: ''
+      list_token: listreject
+      object: ''
+    successors:
+      -
+        id: Gateway_1vzq9rl
+        condition: ''
+  Activity_1crxup1:
+    plugin: eca_token_set_value
+    label: 'Get paragraph user [user]'
+    configuration:
+      token_name: user
+      token_value: '[paragraph:field_person:target_id]'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_1sq1tyx
+        condition: ''
+  Activity_1sq1tyx:
+    plugin: eca_switch_account
+    label: 'Switch user to [user]'
+    configuration:
+      user_id: '[user]'
+    successors:
+      -
+        id: Activity_0lz7bzs
+        condition: ''
+  Activity_1hn25e9:
+    plugin: eca_set_field_value
+    label: 'Set status node [1]'
+    configuration:
+      field_name: '[status:value]'
+      field_value: '1'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: loadvac
+    successors:
+      -
+        id: Activity_0comzng
+        condition: Flow_1yloyuz
+  Activity_1996w30:
+    plugin: eca_list_add_entity
+    label: 'Create list field_approve [listreject]'
+    configuration:
+      method: append
+      index: ''
+      list_token: listreject
+      object: loadvac.field_approve
+    successors:
+      -
+        id: Gateway_1vzq9rl
+        condition: ''
+  Activity_0comzng:
+    plugin: eca_new_entity
+    label: 'Create transaction [transaction]'
+    configuration:
+      token_name: transaction
+      type: 'node transaction'
+      langcode: en
+      label: ''
+      published: true
+      owner: '[user]'
+    successors:
+      -
+        id: Activity_1tgbbw3
+        condition: ''
+  Activity_010wb3q:
+    plugin: eca_set_field_value
+    label: |-
+      Set -day from 
+      vacation
+    configuration:
+      field_name: field_numb_day.value
+      field_value: '[loadvac:field_numb_day:value]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: transaction
+    successors:
+      -
+        id: Activity_1wd8qrn
+        condition: ''
+  Activity_1tgbbw3:
+    plugin: eca_set_field_value
+    label: 'Set Title'
+    configuration:
+      field_name: title
+      field_value: 'Vacation''s Transaction #[random:number]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: transaction
+    successors:
+      -
+        id: Activity_11vsxln
+        condition: ''
+  Activity_11vsxln:
+    plugin: eca_set_field_value
+    label: 'Set Employee Vacation'
+    configuration:
+      field_name: field_employee_vacation
+      field_value: '[loadvac:author:uid]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: transaction
+    successors:
+      -
+        id: Activity_01ku8g4
+        condition: ''
+  Activity_0mv2u7z:
+    plugin: eca_token_load_entity
+    label: 'Load entity paragraph'
+    configuration:
+      token_name: paragr
+      from: current
+      entity_type: _none
+      entity_id: ''
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_0innsk8
+        condition: ''
+  Activity_11maila:
+    plugin: eca_views_query
+    label: 'Load Balance [balanceview]'
+    configuration:
+      token_name: balanceview
+      view_id: balance
+      display_id: block_1
+      arguments: ''
+    successors:
+      -
+        id: Activity_1sxmt63
+        condition: ''
+  Activity_1sxmt63:
+    plugin: eca_count
+    label: 'Count user''s certificate [countcert]'
+    configuration:
+      token_name: countcert
+      list_token: balanceview
+    successors:
+      -
+        id: Activity_0qh9hp9
+        condition: ''
+  Activity_0qh9hp9:
+    plugin: eca_token_set_value
+    label: 'Token 0 [balance]'
+    configuration:
+      token_name: balance
+      token_value: '0'
+      use_yaml: false
+    successors:
+      -
+        id: Gateway_1etrybe
+        condition: ''
+  Activity_0cu6lg4:
+    plugin: 'eca_tamper:math'
+    label: 'Subtraction 1 from countcert'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '1'
+      eca_data: '[countcert]'
+      eca_token_name: countcert
+    successors:
+      -
+        id: Activity_091l015
+        condition: ''
+  Activity_091l015:
+    plugin: eca_list_remove
+    label: 'Drop first from [balanceview]'
+    configuration:
+      value: ''
+      token_name: ''
+      method: first
+      index: ''
+      list_token: balanceview
+    successors:
+      -
+        id: Gateway_1etrybe
+        condition: ''
+  Activity_0ksziyg:
+    plugin: 'eca_tamper:math'
+    label: 'Add field_remainder to balance'
+    configuration:
+      operation: addition
+      flip: false
+      value: '[balanceview:0:field_remainder]'
+      eca_data: '[balance]'
+      eca_token_name: balance
+    successors:
+      -
+        id: Activity_0cu6lg4
+        condition: ''
+  Activity_1wnor07:
+    plugin: eca_set_field_value
+    label: 'Set Balance'
+    configuration:
+      field_name: field_balance.value
+      field_value: '[balance]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: transaction
+    successors:
+      -
+        id: Activity_1fjgsgh
+        condition: ''
+  Activity_1wd8qrn:
+    plugin: 'eca_tamper:math'
+    label: 'Subtraction day [accbalance]'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '[loadvac:field_numb_day:value]'
+      eca_data: '[balance]'
+      eca_token_name: accbalance
+    successors:
+      -
+        id: Activity_0we2pu3
+        condition: ''
+  Activity_0we2pu3:
+    plugin: eca_set_field_value
+    label: 'Set Account Balance'
+    configuration:
+      field_name: field__account_balance.value
+      field_value: '[accbalance]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: transaction
+    successors:
+      -
+        id: Activity_0xm3lkw
+        condition: Flow_1lvacce
+  Activity_0u6rnsn:
+    plugin: eca_token_load_entity
+    label: 'Load by nid [certsubtract]'
+    configuration:
+      token_name: certsubtract
+      from: id
+      entity_type: node
+      entity_id: '[balanceview2:0:nid]'
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_1sbiffq
+        condition: ''
+  Activity_1tonknm:
+    plugin: 'eca_tamper:math'
+    label: 'Substract day [rest]'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '[loadvac:field_numb_day:value]'
+      eca_data: '[certsubtract:field_remainder:value]'
+      eca_token_name: '[rest]'
+    successors:
+      -
+        id: Activity_1cgkcbq
+        condition: ''
+  Activity_1cgkcbq:
+    plugin: eca_set_field_value
+    label: 'Set new value into field_remainder'
+    configuration:
+      field_name: field_remainder
+      field_value: '[rest]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: certsubtract
+    successors:
+      -
+        id: Activity_010wb3q
+        condition: ''
+      -
+        id: Activity_0jhr6au
+        condition: Flow_1wc1xma
+  Activity_0n3g0xi:
+    plugin: 'eca_tamper:math'
+    label: 'Set need subtraction from other certificate [needsubtract]'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '[certsubtract:field_remainder:value]'
+      eca_data: '[loadvac:field_numb_day:value]'
+      eca_token_name: needsubtract
+    successors:
+      -
+        id: Activity_0i3yonk
+        condition: ''
+  Activity_1prvh9t:
+    plugin: eca_set_field_value
+    label: 'Set new value into field_remainder'
+    configuration:
+      field_name: field_remainder
+      field_value: '0'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: certsubtract
+    successors:
+      -
+        id: Activity_16vrahd
+        condition: ''
+  Activity_0i3yonk:
+    plugin: eca_set_field_value
+    label: 'Set new value into field_numb_day'
+    configuration:
+      field_name: field_numb_day
+      field_value: '[needsubtract]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: loadvac
+    successors:
+      -
+        id: Activity_1llcixo
+        condition: ''
+  Activity_16vrahd:
+    plugin: eca_set_field_value
+    label: 'Unpublish certificate'
+    configuration:
+      field_name: '[status:value]'
+      field_value: '0'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: certsubtract
+    successors:
+      -
+        id: Activity_044go7i
+        condition: ''
+  Activity_0zkvs1o:
+    plugin: eca_token_set_value
+    label: 'Save value field_numb_day'
+    configuration:
+      token_name: savenumbday
+      token_value: '[loadvac:field_numb_day:value]'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_0n3g0xi
+        condition: ''
+  Activity_0xm3lkw:
+    plugin: eca_set_field_value
+    label: 'Set value field_numb_day if [savenumbday] exists'
+    configuration:
+      field_name: field_numb_day
+      field_value: '[savenumbday]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: loadvac
+    successors: {  }
+  Activity_1sbiffq:
+    plugin: eca_set_field_value
+    label: 'Set certificate into transaction'
+    configuration:
+      field_name: field_certificate
+      field_value: '[certsubtract:nid]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: transaction
+    successors:
+      -
+        id: Activity_1d92hop
+        condition: ''
+  Activity_1d92hop:
+    plugin: eca_set_field_value
+    label: 'Set vacation into transaction'
+    configuration:
+      field_name: field_refer_to_vacation_entity
+      field_value: '[loadvac:nid]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: transaction
+    successors:
+      -
+        id: Gateway_1x8nv9p
+        condition: ''
+  Activity_1llcixo:
+    plugin: eca_set_field_value
+    label: |-
+      Set -day from 
+      vacation
+    configuration:
+      field_name: field_numb_day.value
+      field_value: '[certsubtract:field_remainder:value]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: transaction
+    successors:
+      -
+        id: Activity_0ycdo84
+        condition: ''
+  Activity_1ecvcvi:
+    plugin: eca_set_field_value
+    label: 'Set Account Balance'
+    configuration:
+      field_name: field__account_balance.value
+      field_value: '[accbalance]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: transaction
+    successors:
+      -
+        id: Activity_1prvh9t
+        condition: ''
+  Activity_0ycdo84:
+    plugin: 'eca_tamper:math'
+    label: 'Subtraction day [accbalance]'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '[certsubtract:field_remainder:value]'
+      eca_data: '[balance]'
+      eca_token_name: accbalance
+    successors:
+      -
+        id: Activity_1ecvcvi
+        condition: ''
+  Activity_0jhr6au:
+    plugin: eca_set_field_value
+    label: 'Unpublish certificate'
+    configuration:
+      field_name: '[status:value]'
+      field_value: '0'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: certsubtract
+    successors: {  }
+  Activity_0lw7qtz:
+    plugin: eca_switch_account
+    label: 'Switch to admin'
+    configuration:
+      user_id: '1'
+    successors:
+      -
+        id: Activity_1hn25e9
+        condition: ''
+  Activity_01ku8g4:
+    plugin: eca_switch_account
+    label: 'Swich user to author'
+    configuration:
+      user_id: '[loadvac:author:uid]'
+    successors:
+      -
+        id: Activity_11maila
+        condition: ''
+  Activity_044go7i:
+    plugin: eca_switch_account
+    label: 'Switch to admin'
+    configuration:
+      user_id: '1'
+    successors:
+      -
+        id: Activity_0comzng
+        condition: ''
+  Activity_16nzv53:
+    plugin: eca_set_field_value
+    label: 'Set title'
+    configuration:
+      field_name: title
+      field_value: 'Vacation #[random:number]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: false
+      object: vacation
+    successors:
+      -
+        id: Activity_0pj75s9
+        condition: ''
+  Activity_1knpz9i:
+    plugin: eca_switch_account
+    label: 'Switch to admin'
+    configuration:
+      user_id: '1'
+    successors:
+      -
+        id: Activity_16nzv53
+        condition: ''
+  Activity_0poljyu:
+    plugin: eca_switch_account
+    label: 'Switch to author '
+    configuration:
+      user_id: '[user]'
+    successors: {  }
+  Activity_0r2y3av:
+    plugin: eca_token_set_value
+    label: 'Set current user into token'
+    configuration:
+      token_name: user
+      token_value: '[current-user:uid]'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_1knpz9i
+        condition: ''
+  Activity_0o2cdwj:
+    plugin: eca_switch_account
+    label: 'Switch to admin'
+    configuration:
+      user_id: '1'
+    successors:
+      -
+        id: Activity_1wnor07
+        condition: ''
+  Activity_0qtcq7b:
+    plugin: eca_switch_account
+    label: 'Switch to admin'
+    configuration:
+      user_id: '1'
+    successors:
+      -
+        id: Activity_0a28vpb
+        condition: ''
+  Activity_10b0nh7:
+    plugin: eca_token_load_entity
+    label: 'Load Vacation'
+    configuration:
+      token_name: vacation
+      from: current
+      entity_type: _none
+      entity_id: ''
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_0qtcq7b
+        condition: ''
+  Activity_1fjgsgh:
+    plugin: eca_switch_account
+    label: 'Swich user to author'
+    configuration:
+      user_id: '[loadvac:author:uid]'
+    successors:
+      -
+        id: Activity_0frf6av
+        condition: ''
+  Activity_0az0kea:
+    plugin: eca_switch_account
+    label: 'Switch to admin'
+    configuration:
+      user_id: '1'
+    successors:
+      -
+        id: Activity_0u6rnsn
+        condition: ''
+  Activity_0frf6av:
+    plugin: eca_views_query
+    label: 'Load Balance [balanceview2]'
+    configuration:
+      token_name: balanceview2
+      view_id: balance
+      display_id: block_1
+      arguments: ''
+    successors:
+      -
+        id: Activity_0az0kea
+        condition: ''
+  Activity_0yllpid:
+    plugin: eca_token_load_entity
+    label: 'Load entity [vacat]'
+    configuration:
+      token_name: vacat
+      from: current
+      entity_type: _none
+      entity_id: ''
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_1cz2nr7
+        condition: Flow_0c4zflf
+  Activity_1cz2nr7:
+    plugin: eca_views_query
+    label: 'Load view Waiting For Approval [wforapproval]'
+    configuration:
+      token_name: wforapproval
+      view_id: vacations_waiting_for_approval
+      display_id: block_1
+      arguments: ''
+    successors:
+      -
+        id: Activity_1139jhf
+        condition: ''
+      -
+        id: Activity_0fm863q
+        condition: ''
+  Activity_1139jhf:
+    plugin: eca_count
+    label: 'Count list [countwfa]'
+    configuration:
+      token_name: countwfa
+      list_token: wforapproval
+    successors:
+      -
+        id: Activity_0hgdb1e
+        condition: ''
+  Activity_1jrgpb5:
+    plugin: eca_views_query
+    label: 'Load Balance [balanceview]'
+    configuration:
+      token_name: balanceview
+      view_id: balance
+      display_id: block_1
+      arguments: ''
+    successors:
+      -
+        id: Activity_15xd3kr
+        condition: ''
+  Activity_15xd3kr:
+    plugin: eca_count
+    label: 'Count certificate [countbal]'
+    configuration:
+      token_name: countbal
+      list_token: balanceview
+    successors:
+      -
+        id: Activity_16f03bp
+        condition: ''
+  Activity_16f03bp:
+    plugin: eca_token_set_value
+    label: 'Token 0 [balance]'
+    configuration:
+      token_name: balance
+      token_value: '0'
+      use_yaml: false
+    successors:
+      -
+        id: Gateway_0w0sflf
+        condition: ''
+  Activity_0hgdb1e:
+    plugin: eca_token_set_value
+    label: 'Token 0 [forapproval]'
+    configuration:
+      token_name: forapproval
+      token_value: '0'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_1jrgpb5
+        condition: ''
+  Activity_0d5ufmg:
+    plugin: 'eca_tamper:math'
+    label: 'Add field_remainder to balance'
+    configuration:
+      operation: addition
+      flip: false
+      value: '[balanceview:0:field_remainder]'
+      eca_data: '[balance]'
+      eca_token_name: balance
+    successors:
+      -
+        id: Activity_1ga6ivy
+        condition: ''
+  Activity_1ga6ivy:
+    plugin: 'eca_tamper:math'
+    label: 'Subtraction 1 from countbal'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '1'
+      eca_data: '[countbal]'
+      eca_token_name: countbal
+    successors:
+      -
+        id: Activity_0i8cmy2
+        condition: ''
+  Activity_0i8cmy2:
+    plugin: eca_list_remove
+    label: 'Drop first from [balanceview]'
+    configuration:
+      value: ''
+      token_name: ''
+      method: first
+      index: ''
+      list_token: balanceview
+    successors:
+      -
+        id: Gateway_0w0sflf
+        condition: ''
+  Activity_0fm863q:
+    plugin: action_message_action
+    label: Activity_0fm863q
+    configuration:
+      replace_tokens: false
+      message: '[wforapproval]-dfg'
+    successors: {  }
+  Activity_12873bx:
+    plugin: eca_list_add_entity
+    label: 'Add to list [needreject]'
+    configuration:
+      method: append
+      index: ''
+      list_token: needreject
+      object: '[wforapproval:0]'
+    successors:
+      -
+        id: Activity_0pvyyo8
+        condition: ''
+      -
+        id: Activity_072wj7t
+        condition: ''
+  Activity_0oj0s4w:
+    plugin: 'eca_tamper:math'
+    label: 'Subtraction 1 from countwfa'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '1'
+      eca_data: '[countwfa]'
+      eca_token_name: countwfa
+    successors:
+      -
+        id: Activity_0kn8oxj
+        condition: ''
+      -
+        id: Activity_0xm752n
+        condition: ''
+  Activity_0kn8oxj:
+    plugin: eca_list_remove
+    label: 'Drop first from [wforapproval]'
+    configuration:
+      value: ''
+      token_name: ''
+      method: first
+      index: ''
+      list_token: wforapproval
+    successors:
+      -
+        id: Gateway_0krb3bu
+        condition: ''
+  Activity_0u1i0mn:
+    plugin: eca_switch_account
+    label: 'Switch to admin'
+    configuration:
+      user_id: '1'
+    successors:
+      -
+        id: Activity_07pci83
+        condition: ''
+      -
+        id: Gateway_17jg2q1
+        condition: ''
+  Activity_06rab4n:
+    plugin: eca_token_set_value
+    label: 'Set [needreject:0] into [reject]'
+    configuration:
+      token_name: reject
+      token_value: '[needreject:0]'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_0n6jgvy
+        condition: ''
+      -
+        id: Activity_00z3ou9
+        condition: ''
+  Activity_0pvyyo8:
+    plugin: eca_token_set_value
+    label: 'Token 0 [var]'
+    configuration:
+      token_name: var
+      token_value: '0'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_1sbnhnt
+        condition: ''
+  Activity_0n6jgvy:
+    plugin: eca_set_field_value
+    label: Activity_0n6jgvy
+    configuration:
+      field_name: '[field_state_vacation:value]'
+      field_value: request_status_rejected
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: reject
+    successors:
+      -
+        id: Activity_0ezj85k
+        condition: ''
+  Activity_0ezj85k:
+    plugin: 'eca_tamper:math'
+    label: Activity_0ezj85k
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '1'
+      eca_data: '[var]'
+      eca_token_name: var
+    successors:
+      -
+        id: Activity_1r4ah9j
+        condition: ''
+  Activity_1sbnhnt:
+    plugin: 'eca_tamper:math'
+    label: 'var + 1'
+    configuration:
+      operation: addition
+      flip: false
+      value: '1'
+      eca_data: '[var]'
+      eca_token_name: var
+    successors:
+      -
+        id: Activity_05quupb
+        condition: ''
+  Activity_1r4ah9j:
+    plugin: eca_list_remove
+    label: Activity_1r4ah9j
+    configuration:
+      value: ''
+      token_name: ''
+      method: first
+      index: ''
+      list_token: needreject
+    successors:
+      -
+        id: Gateway_17jg2q1
+        condition: ''
+  Activity_0rfcb5t:
+    plugin: action_message_action
+    label: Activity_0rfcb5t
+    configuration:
+      replace_tokens: false
+      message: '[balance]'
+    successors: {  }
+  Activity_03mjeej:
+    plugin: action_message_action
+    label: Activity_03mjeej
+    configuration:
+      replace_tokens: false
+      message: '1'
+    successors: {  }
+  Activity_0xm752n:
+    plugin: action_message_action
+    label: Activity_0xm752n
+    configuration:
+      replace_tokens: false
+      message: '2'
+    successors: {  }
+  Activity_072wj7t:
+    plugin: action_message_action
+    label: Activity_072wj7t
+    configuration:
+      replace_tokens: false
+      message: '3'
+    successors: {  }
+  Activity_07pci83:
+    plugin: action_message_action
+    label: Activity_07pci83
+    configuration:
+      replace_tokens: false
+      message: '4 - [var]'
+    successors: {  }
+  Activity_00z3ou9:
+    plugin: action_message_action
+    label: Activity_00z3ou9
+    configuration:
+      replace_tokens: false
+      message: '5'
+    successors: {  }
+  Activity_05quupb:
+    plugin: eca_list_remove
+    label: 'Drop first from [wforapproval]'
+    configuration:
+      value: ''
+      token_name: ''
+      method: first
+      index: ''
+      list_token: wforapproval
+    successors:
+      -
+        id: Activity_1amqp16
+        condition: ''
+  Activity_1amqp16:
+    plugin: 'eca_tamper:math'
+    label: 'Subtraction 1 from countwfa'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '1'
+      eca_data: '[countwfa]'
+      eca_token_name: countwfa
+    successors:
+      -
+        id: Gateway_0krb3bu
+        condition: ''
+  Activity_01bbszy:
+    plugin: eca_form_field_get_value
+    label: 'Get type vacation [type]'
+    configuration:
+      token_name: type
+      field_name: field_type_vacation.0.target_id
+      strip_tags: true
+      trim: true
+      xss_filter: true
+    successors:
+      -
+        id: Gateway_124jw3t
+        condition: ''
+  Activity_03bb4vr:
+    plugin: eca_form_field_disable
+    label: 'Disable field'
+    configuration:
+      flag: true
+      field_name: field_part_day
+    successors: {  }
+  Activity_1sih0b9:
+    plugin: eca_form_add_ajax
+    label: 'Use Ajax'
+    configuration:
+      disable_validation_errors: false
+      validate_fields: ''
+      target: field_part_day
+      field_name: field_type_vacation
+    successors:
+      -
+        id: Activity_01bbszy
+        condition: ''
+  Activity_04cfg1r:
+    plugin: eca_form_field_disable
+    label: 'Eneble field'
+    configuration:
+      flag: false
+      field_name: field_part_day
+    successors:
+      -
+        id: Activity_1p6lxif
+        condition: ''
+  Activity_1ae0sj3:
+    plugin: eca_form_field_disable
+    label: 'Disable field'
+    configuration:
+      flag: true
+      field_name: field_time_vacation
+    successors:
+      -
+        id: Activity_1sih0b9
+        condition: ''
+  Activity_05i205h:
+    plugin: eca_form_field_require
+    label: 'Required field'
+    configuration:
+      flag: true
+      field_name: field_time_vacation
+    successors: {  }
+  Activity_059cyvn:
+    plugin: eca_form_field_disable
+    label: 'Disable field'
+    configuration:
+      flag: true
+      field_name: field_part_day
+    successors:
+      -
+        id: Activity_1ae0sj3
+        condition: ''
+  Activity_0hgakll:
+    plugin: eca_form_field_disable
+    label: 'Disable field'
+    configuration:
+      flag: true
+      field_name: field_time_vacation
+    successors: {  }
+  Activity_1bylo0x:
+    plugin: eca_form_field_disable
+    label: 'Enable field'
+    configuration:
+      flag: false
+      field_name: field_time_vacation
+    successors:
+      -
+        id: Activity_05i205h
+        condition: ''
+  Activity_0pz9y06:
+    plugin: eca_form_field_get_value
+    label: 'Get part day [partday]'
+    configuration:
+      token_name: partday
+      field_name: field_part_day.0.target_id
+      strip_tags: true
+      trim: true
+      xss_filter: true
+    successors:
+      -
+        id: Gateway_0dx304z
+        condition: ''
+  Activity_1p6lxif:
+    plugin: eca_form_add_ajax
+    label: 'Use Ajax'
+    configuration:
+      disable_validation_errors: false
+      validate_fields: ''
+      target: field_time_vacation
+      field_name: field_part_day
+    successors:
+      -
+        id: Activity_0pz9y06
+        condition: ''

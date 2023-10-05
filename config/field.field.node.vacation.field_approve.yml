@@ -1,0 +1,31 @@
+uuid: 7792ae80-ab3d-4ae5-96b5-51f9b66edc30
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_approve
+    - node.type.vacation
+    - paragraphs.paragraphs_type.person_who_approve
+  module:
+    - entity_reference_revisions
+id: node.vacation.field_approve
+field_name: field_approve
+entity_type: node
+bundle: vacation
+label: Approve
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      person_who_approve: person_who_approve
+    negate: 0
+    target_bundles_drag_drop:
+      person_who_approve:
+        weight: 2
+        enabled: true
+field_type: entity_reference_revisions

@@ -1,0 +1,21 @@
+uuid: d15a62f7-552d-48be-9f06-3642d48cc418
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_time_vacation
+    - node.type.vacation
+  module:
+    - time_field
+id: node.vacation.field_time_vacation
+field_name: field_time_vacation
+entity_type: node
+bundle: vacation
+label: 'Time Vacation'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: time_range

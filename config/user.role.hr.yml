@@ -1,0 +1,29 @@
+uuid: 7c761d60-d537-4e7f-bbf6-ccc5ed192657
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.vacation
+  module:
+    - node
+    - paragraphs
+    - paragraphs_type_permissions
+    - update
+    - workflow
+id: hr
+label: HR
+weight: 15
+is_admin: null
+permissions:
+  - 'access request_status workflow_transition form'
+  - 'create agreement workflow_transition'
+  - 'create paragraph content person_who_approve'
+  - 'create request_status workflow_transition'
+  - 'create status_approve workflow_transition'
+  - 'create vacation content'
+  - 'delete paragraph content person_who_approve'
+  - 'update paragraph content person_who_approve'
+  - 'view own unpublished content'
+  - 'view paragraph content person_who_approve'
+  - 'view unpublished paragraphs'
+  - 'view update notifications'

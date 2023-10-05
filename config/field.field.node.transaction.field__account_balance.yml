@@ -1,0 +1,23 @@
+uuid: 3f29e953-3f2e-4de7-8d9c-7a15d788342c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field__account_balance
+    - node.type.transaction
+id: node.transaction.field__account_balance
+field_name: field__account_balance
+entity_type: node
+bundle: transaction
+label: ' Account Balance'
+description: 'Balance after transaction'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

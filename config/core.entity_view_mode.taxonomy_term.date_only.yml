@@ -1,0 +1,10 @@
+uuid: 1eb7a560-e6ee-4914-8b84-9e1911d3e4db
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.date_only
+label: 'Date only'
+targetEntityType: taxonomy_term
+cache: true

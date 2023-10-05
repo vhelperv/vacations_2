@@ -1,0 +1,29 @@
+uuid: 129ba62a-42bb-4cd5-b15b-d7494b0c7c4d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_refer_to_vacation_entity
+    - node.type.transaction
+    - node.type.vacation
+id: node.transaction.field_refer_to_vacation_entity
+field_name: field_refer_to_vacation_entity
+entity_type: node
+bundle: transaction
+label: 'Refer to vacation entity'
+description: 'Reference to entity vacation  '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      vacation: vacation
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

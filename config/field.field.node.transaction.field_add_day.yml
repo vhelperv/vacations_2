@@ -1,0 +1,23 @@
+uuid: d923bb02-d35b-4a46-9801-0361770d682b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_add_day
+    - node.type.transaction
+id: node.transaction.field_add_day
+field_name: field_add_day
+entity_type: node
+bundle: transaction
+label: 'Add Day'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: +
+  suffix: ''
+field_type: integer

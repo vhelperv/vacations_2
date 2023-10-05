@@ -1,0 +1,49 @@
+uuid: c8146756-77df-4873-a420-4052eee5b4a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+  module:
+    - admin_toolbar_search
+    - comment
+    - content_moderation
+    - filter
+    - node
+    - paragraphs
+    - paragraphs_type_permissions
+    - system
+    - toolbar
+    - update
+    - view_unpublished
+    - workflow
+id: client
+label: Client
+weight: 19
+is_admin: null
+permissions:
+  - 'access any request_status workflow_transion overview'
+  - 'access comments'
+  - 'access content'
+  - 'access request_status workflow_transition form'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'change own username'
+  - 'create agreement workflow_transition'
+  - 'create paragraph content person_who_approve'
+  - 'create request_status workflow_transition'
+  - 'create status_approve workflow_transition'
+  - 'delete paragraph content person_who_approve'
+  - 'edit own comments'
+  - 'post comments'
+  - 'skip comment approval'
+  - 'update paragraph content person_who_approve'
+  - 'use admin toolbar search'
+  - 'use text format basic_html'
+  - 'view any unpublished content'
+  - 'view any unpublished vacation content'
+  - 'view own unpublished content'
+  - 'view paragraph content person_who_approve'
+  - 'view unpublished paragraphs'
+  - 'view update notifications'
+  - 'view user email addresses'

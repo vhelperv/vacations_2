@@ -1,0 +1,14 @@
+uuid: ddc93956-d188-4974-a653-3a78cefeac04
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.shief_pm
+  module:
+    - user
+id: user_add_role_action.shief_pm
+label: 'Add the Сhief PM role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: shief_pm

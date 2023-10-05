@@ -1,0 +1,19 @@
+uuid: 9cdc17e9-80b5-4146-a2ec-c6709de1de6a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - time_field
+id: node.field_time_vacation
+field_name: field_time_vacation
+entity_type: node
+type: time_range
+settings: {  }
+module: time_field
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

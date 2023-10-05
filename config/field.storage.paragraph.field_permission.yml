@@ -1,0 +1,22 @@
+uuid: 0f216d02-5c8b-4a15-93a5-86913fcfda44
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - workflow
+id: paragraph.field_permission
+field_name: field_permission
+entity_type: paragraph
+type: workflow
+settings:
+  workflow_type: request_status
+  allowed_values: {  }
+  allowed_values_function: ''
+module: workflow
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

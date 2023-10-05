@@ -1,0 +1,12 @@
+uuid: 5cf2818c-4b0c-4ecf-b8ad-5299622ad805
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflow.workflow.request_status
+id: request_status_creation
+label: Creation
+module: workflow
+wid: request_status
+weight: -11
+sysid: 1

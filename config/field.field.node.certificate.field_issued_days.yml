@@ -1,0 +1,25 @@
+uuid: 28289c2b-a825-4e33-a42c-4263fb0b16a5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_issued_days
+    - node.type.certificate
+id: node.certificate.field_issued_days
+field_name: field_issued_days
+entity_type: node
+bundle: certificate
+label: 'Issued Days'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 7
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

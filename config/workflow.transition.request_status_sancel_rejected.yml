@@ -1,0 +1,32 @@
+uuid: 12a527cb-c990-41ce-8dfe-27cc7a61a21f
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflow.state.request_status_rejected
+    - workflow.state.request_status_sancel
+id: request_status_sancel_rejected
+label: null
+module: workflow
+from_sid: request_status_sancel
+to_sid: request_status_rejected
+roles:
+  workflow_author: '0'
+  anonymous: '0'
+  administrator: '0'
+  ceo: '0'
+  developer_junior: '0'
+  developer_middle: '0'
+  developer_senior: '0'
+  teamlead: '0'
+  pm: '0'
+  shief_pm: '0'
+  head_of_department: '0'
+  sales: '0'
+  marketing: '0'
+  recruiting: '0'
+  hr: '0'
+  om: '0'
+  accounting: '0'
+  admin_staff: '0'
+  client: '0'

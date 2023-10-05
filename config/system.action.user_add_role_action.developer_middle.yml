@@ -1,0 +1,14 @@
+uuid: 4200405d-5381-4e21-adb3-a1b72b605238
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.developer_middle
+  module:
+    - user
+id: user_add_role_action.developer_middle
+label: 'Add the Developer-Middle role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: developer_middle

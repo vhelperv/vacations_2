@@ -1,0 +1,53 @@
+uuid: 5fe1b32d-54f6-4b8b-8ec0-3e7e13478c9e
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:3f4925b8-af01-42f4-ae7c-350b0519ee58'
+  module:
+    - block_content
+    - system
+    - user
+  theme:
+    - gin
+id: addvacation
+theme: gin
+region: header
+weight: -4
+provider: null
+plugin: 'block_content:3f4925b8-af01-42f4-ae7c-350b0519ee58'
+settings:
+  id: 'block_content:3f4925b8-af01-42f4-ae7c-350b0519ee58'
+  label: 'Add Vacation'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      administrator: administrator
+      ceo: ceo
+      developer_junior: developer_junior
+      developer_middle: developer_middle
+      developer_senior: developer_senior
+      teamlead: teamlead
+      pm: pm
+      shief_pm: shief_pm
+      head_of_department: head_of_department
+      sales: sales
+      marketing: marketing
+      recruiting: recruiting
+      hr: hr
+      om: om
+      accounting: accounting
+      admin_staff: admin_staff
+  request_path:
+    id: request_path
+    negate: false
+    pages: "<front>\r\n/my-vacation"

@@ -1,0 +1,12 @@
+uuid: dafe2240-4ab7-4e0b-b441-d27c3137db40
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflow.workflow.request_status
+id: request_status_on_hold
+label: On-hold
+module: workflow
+wid: request_status
+weight: -8
+sysid: 0

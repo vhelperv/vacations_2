@@ -1,0 +1,22 @@
+uuid: c8b3c80f-2bf0-49e2-9585-ecf7ac0508b6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_person
+    - paragraphs.paragraphs_type.person_who_approve
+id: paragraph.person_who_approve.field_person
+field_name: field_person
+entity_type: paragraph
+bundle: person_who_approve
+label: Person
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: eca
+  handler_settings:
+    field_name: field_person
+field_type: entity_reference

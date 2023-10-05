@@ -1,0 +1,40 @@
+uuid: e654e370-db76-45b4-b343-2a41954516cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+  module:
+    - comment
+    - contact
+    - filter
+    - scheduler
+    - search
+    - shortcut
+    - system
+    - toolbar
+    - workflow
+_core:
+  default_config_hash: I44QAB4es39lNzMQWiJLq2dfjX7VRSOzT_5KzAcUq_M
+id: authenticated
+label: 'Authenticated user'
+weight: 1
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access content'
+  - 'access shortcuts'
+  - 'access site-wide contact form'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'change own username'
+  - 'create agreement workflow_transition'
+  - 'create status_approve workflow_transition'
+  - 'edit own comments'
+  - 'post comments'
+  - 'schedule publishing of nodes'
+  - 'search content'
+  - 'skip comment approval'
+  - 'use text format basic_html'
+  - 'view scheduled content'
+  - 'view user email addresses'

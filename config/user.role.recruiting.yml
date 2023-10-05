@@ -1,0 +1,29 @@
+uuid: e26174e2-3848-47ed-9b67-e1febc07fe90
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.vacation
+  module:
+    - node
+    - paragraphs
+    - paragraphs_type_permissions
+    - update
+    - workflow
+id: recruiting
+label: Recruiting
+weight: 14
+is_admin: null
+permissions:
+  - 'access request_status workflow_transition form'
+  - 'create agreement workflow_transition'
+  - 'create paragraph content person_who_approve'
+  - 'create request_status workflow_transition'
+  - 'create status_approve workflow_transition'
+  - 'create vacation content'
+  - 'delete paragraph content person_who_approve'
+  - 'update paragraph content person_who_approve'
+  - 'view own unpublished content'
+  - 'view paragraph content person_who_approve'
+  - 'view unpublished paragraphs'
+  - 'view update notifications'

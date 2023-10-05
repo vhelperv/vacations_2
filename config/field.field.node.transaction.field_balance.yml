@@ -1,0 +1,23 @@
+uuid: 0708c4e5-fad7-4232-b013-efd705161584
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_balance
+    - node.type.transaction
+id: node.transaction.field_balance
+field_name: field_balance
+entity_type: node
+bundle: transaction
+label: Balance
+description: 'Current balance'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

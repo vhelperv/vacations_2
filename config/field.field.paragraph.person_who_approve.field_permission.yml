@@ -1,0 +1,22 @@
+uuid: 58b33fe6-4106-47aa-a81c-0fa534a275df
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_permission
+    - paragraphs.paragraphs_type.person_who_approve
+  module:
+    - workflow
+id: paragraph.person_who_approve.field_permission
+field_name: field_permission
+entity_type: paragraph
+bundle: person_who_approve
+label: Permission
+description: ''
+required: true
+translatable: false
+default_value:
+  - {  }
+default_value_callback: ''
+settings: {  }
+field_type: workflow

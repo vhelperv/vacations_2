@@ -1,0 +1,20 @@
+uuid: 05d3ae83-3e26-4f8d-9bdb-fc2eb26fa6c3
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_numb_day
+field_name: field_numb_day
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

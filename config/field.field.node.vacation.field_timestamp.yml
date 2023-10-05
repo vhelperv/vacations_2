@@ -1,0 +1,24 @@
+uuid: 84097dae-b926-45bf-be93-91884c1ad2f6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_timestamp
+    - node.type.vacation
+  module:
+    - datetime
+id: node.vacation.field_timestamp
+field_name: field_timestamp
+entity_type: node
+bundle: vacation
+label: TimeStamp
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

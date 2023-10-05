@@ -1,0 +1,14 @@
+uuid: 2df97c32-4725-44f6-a444-b64f0236fc4d
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.admin_staff
+  module:
+    - user
+id: user_remove_role_action.admin_staff
+label: 'Remove the Admin Staff role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: admin_staff

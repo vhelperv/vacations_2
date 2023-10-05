@@ -1,0 +1,892 @@
+uuid: 1fcd0462-4dfd-4ff0-bbd9-096f18cc7e4b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.certificate.field_bonus
+    - field.field.node.certificate.field_employee
+    - field.field.node.certificate.field_issued_days
+    - field.field.node.certificate.field_remainder
+    - field.field.node.transaction.field__account_balance
+    - field.field.node.transaction.field_add_day
+    - field.field.node.transaction.field_balance
+    - field.field.node.transaction.field_certificate
+    - field.field.node.transaction.field_employee_vacation
+    - field.field.node.transaction.field_numb_day
+    - field.field.node.vacation.field_numb_day
+    - field.storage.node.field__account_balance
+    - field.storage.node.field_add_day
+    - field.storage.node.field_balance
+    - field.storage.node.field_bonus
+    - field.storage.node.field_certificate
+    - field.storage.node.field_employee
+    - field.storage.node.field_employee_vacation
+    - field.storage.node.field_issued_days
+    - field.storage.node.field_numb_day
+    - field.storage.node.field_remainder
+    - node.type.certificate
+    - node.type.transaction
+    - views.view.balance
+  module:
+    - eca_base
+    - eca_content
+    - eca_queue
+    - eca_tamper
+    - eca_user
+    - eca_views
+    - user
+id: process_xkulvkc
+modeller: bpmn_io
+label: 'Set value into Certificate'
+version: v1
+weight: -10
+events:
+  Event_0azw4w1:
+    plugin: 'eca_queue:processing_task'
+    label: 'Task [delaycert]'
+    configuration:
+      distribute: false
+      task_name: delaycert
+      task_value: ''
+      cron: ''
+    successors:
+      -
+        id: Activity_1yfeyl9
+        condition: ''
+  Event_1umtqxz:
+    plugin: 'content_entity:insert'
+    label: 'Insert User'
+    configuration:
+      type: 'user user'
+    successors:
+      -
+        id: Activity_0daw65u
+        condition: ''
+  Event_06to1gf:
+    plugin: 'content_entity:insert'
+    label: 'Insert Certificate'
+    configuration:
+      type: 'node certificate'
+    successors:
+      -
+        id: Activity_1co706p
+        condition: ''
+  Event_0x1mqgg:
+    plugin: 'eca_queue:processing_task'
+    label: 'Task [burn]'
+    configuration:
+      distribute: false
+      task_name: burn
+      task_value: ''
+      cron: ''
+    successors:
+      -
+        id: Activity_0f742oj
+        condition: ''
+  Event_1rh6bo4:
+    plugin: 'content_entity:create'
+    label: 'Init Certificate'
+    configuration:
+      type: 'node certificate'
+    successors:
+      -
+        id: Activity_1ryh96q
+        condition: ''
+conditions:
+  Flow_0vkm900:
+    plugin: eca_user_role
+    configuration:
+      negate: false
+      account: '[employee:uid]'
+      role: pm
+  Flow_11tqlhr:
+    plugin: eca_user_role
+    configuration:
+      negate: false
+      account: '[employee:uid]'
+      role: developer_middle
+  Flow_1xi2ygc:
+    plugin: eca_user_role
+    configuration:
+      negate: false
+      account: '[employee:uid]'
+      role: developer_senior
+  Flow_04vsfep:
+    plugin: eca_user_role
+    configuration:
+      account: '[employee:uid]'
+      role: developer_senior
+      negate: true
+  Flow_0sd1a5m:
+    plugin: eca_user_role
+    configuration:
+      account: '[employee:uid]'
+      role: developer_middle
+      negate: true
+  Flow_0p0fkgh:
+    plugin: eca_user_role
+    configuration:
+      account: '[employee:uid]'
+      role: pm
+      negate: true
+  Flow_0k4ajeh:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[countcert]'
+      right: '0'
+      operator: equal
+      type: value
+  Flow_1akfdbc:
+    plugin: eca_scalar
+    configuration:
+      case: false
+      left: '[countcert]'
+      right: '0'
+      operator: equal
+      type: value
+      negate: true
+  Flow_1ly17lk:
+    plugin: eca_entity_exists
+    configuration:
+      negate: false
+      unchanged: false
+      latest_revision: false
+      from: id
+      entity_type: user
+      entity_id: '[employee:uid]'
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      entity: ''
+  Flow_13xs27c:
+    plugin: eca_token_exists
+    configuration:
+      token_name: check
+      negate: true
+  Flow_1iftyqo:
+    plugin: eca_token_exists
+    configuration:
+      negate: false
+      token_name: check
+  Flow_0bwnbl2:
+    plugin: eca_entity_field_value
+    configuration:
+      negate: false
+      case: false
+      expected_value: '1'
+      field_name: status.value
+      operator: equal
+      type: value
+      entity: certend
+gateways:
+  Gateway_1d27b5v:
+    type: 0
+    successors:
+      -
+        id: Gateway_1vn2hx5
+        condition: Flow_0sd1a5m
+  Gateway_1vn2hx5:
+    type: 0
+    successors:
+      -
+        id: Gateway_015rpo2
+        condition: Flow_0p0fkgh
+  Gateway_015rpo2:
+    type: 0
+    successors:
+      -
+        id: Activity_1s9zeju
+        condition: ''
+  Gateway_134cf2z:
+    type: 0
+    successors:
+      -
+        id: Activity_1ptt6gb
+        condition: Flow_0vkm900
+      -
+        id: Activity_1ptt6gb
+        condition: Flow_11tqlhr
+      -
+        id: Activity_08klt8j
+        condition: Flow_1xi2ygc
+      -
+        id: Gateway_1d27b5v
+        condition: Flow_04vsfep
+  Gateway_0136wo5:
+    type: 0
+    successors:
+      -
+        id: Activity_1krcv59
+        condition: Flow_0k4ajeh
+      -
+        id: Activity_164ls2g
+        condition: Flow_1akfdbc
+  Gateway_0k9e5yd:
+    type: 0
+    successors:
+      -
+        id: Activity_01w5tpy
+        condition: Flow_13xs27c
+      -
+        id: Activity_14eabts
+        condition: Flow_1iftyqo
+actions:
+  Activity_12jvxut:
+    plugin: eca_enqueue_task_delayed
+    label: 'Queue task'
+    configuration:
+      delay_value: '10'
+      delay_unit: '60'
+      task_name: delaycert
+      task_value: ''
+      tokens: employee
+    successors:
+      -
+        id: Activity_09wvu70
+        condition: ''
+  Activity_0gr7n7o:
+    plugin: eca_new_entity
+    label: 'Create certificate'
+    configuration:
+      token_name: certif
+      type: 'node certificate'
+      langcode: en
+      label: ''
+      published: true
+      owner: '[employee:uid]'
+    successors:
+      -
+        id: Activity_0ya2jl3
+        condition: ''
+  Activity_1yfeyl9:
+    plugin: eca_switch_account
+    label: 'User to admin'
+    configuration:
+      user_id: '1'
+    successors:
+      -
+        id: Activity_0gr7n7o
+        condition: Flow_1ly17lk
+  Activity_0ya2jl3:
+    plugin: eca_set_field_value
+    label: 'Set title'
+    configuration:
+      field_name: title
+      field_value: 'Certificate #[random:number]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: false
+      object: certif
+    successors:
+      -
+        id: Activity_0h3562s
+        condition: ''
+  Activity_0h3562s:
+    plugin: eca_set_field_value
+    label: 'Set employee'
+    configuration:
+      field_name: field_employee.target_id
+      field_value: '[employee:uid]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: false
+      object: certif
+    successors:
+      -
+        id: Activity_0vw4d7e
+        condition: ''
+  Activity_0daw65u:
+    plugin: eca_token_load_entity
+    label: 'Load user'
+    configuration:
+      token_name: employee
+      from: current
+      entity_type: _none
+      entity_id: ''
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_12jvxut
+        condition: ''
+  Activity_0rnccp2:
+    plugin: eca_set_field_value
+    label: 'Set field_remainder'
+    configuration:
+      field_name: field_remainder.value
+      field_value: '[loadcert:field_issued_days:value]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: loadcert
+    successors:
+      -
+        id: Activity_0eksrfx
+        condition: ''
+  Activity_0vw4d7e:
+    plugin: eca_set_field_value
+    label: 'Set bonus'
+    configuration:
+      field_name: field_bonus
+      field_value: '0'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: false
+      object: certif
+    successors:
+      -
+        id: Gateway_134cf2z
+        condition: ''
+  Activity_1ptt6gb:
+    plugin: eca_set_field_value
+    label: 'Set [9] day'
+    configuration:
+      field_name: field_issued_days
+      field_value: '9'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: false
+      object: certif
+    successors:
+      -
+        id: Activity_0fme5gh
+        condition: ''
+  Activity_0fme5gh:
+    plugin: eca_set_field_value
+    label: 'Set remainder [9]'
+    configuration:
+      field_name: field_remainder
+      field_value: '9'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: false
+      object: certif
+    successors:
+      -
+        id: Gateway_015rpo2
+        condition: ''
+  Activity_08klt8j:
+    plugin: eca_set_field_value
+    label: 'Set [11] day'
+    configuration:
+      field_name: field_issued_days
+      field_value: '11'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: false
+      object: certif
+    successors:
+      -
+        id: Activity_0s9608i
+        condition: ''
+  Activity_0s9608i:
+    plugin: eca_set_field_value
+    label: 'Set remainder [11]'
+    configuration:
+      field_name: field_remainder
+      field_value: '11'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: false
+      object: certif
+    successors:
+      -
+        id: Gateway_015rpo2
+        condition: ''
+  Activity_1dqxhee:
+    plugin: eca_enqueue_task_delayed
+    label: 'Queue task'
+    configuration:
+      delay_value: '10'
+      delay_unit: '60'
+      task_name: delaycert
+      task_value: ''
+      tokens: employee
+    successors:
+      -
+        id: Activity_0pxx0fq
+        condition: ''
+  Activity_0pxx0fq:
+    plugin: action_message_action
+    label: Activity_0pxx0fq
+    configuration:
+      replace_tokens: false
+      message: 'done - 2'
+    successors: {  }
+  Activity_1co706p:
+    plugin: eca_token_load_entity
+    label: 'Load [loadcert]'
+    configuration:
+      token_name: loadcert
+      from: current
+      entity_type: _none
+      entity_id: ''
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: true
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_0rnccp2
+        condition: ''
+  Activity_1vo7lfn:
+    plugin: action_message_action
+    label: Activity_1vo7lfn
+    configuration:
+      replace_tokens: false
+      message: 'done - 3'
+    successors: {  }
+  Activity_0eksrfx:
+    plugin: eca_enqueue_task_delayed
+    label: 'Delay task [burn]'
+    configuration:
+      delay_value: '20'
+      delay_unit: '60'
+      task_name: burn
+      task_value: ''
+      tokens: loadcert
+    successors:
+      -
+        id: Activity_1vo7lfn
+        condition: ''
+      -
+        id: Activity_17puumx
+        condition: ''
+  Activity_0f742oj:
+    plugin: eca_switch_account
+    label: 'Swich user to admin'
+    configuration:
+      user_id: '1'
+    successors:
+      -
+        id: Activity_0swx7iv
+        condition: ''
+  Activity_1vqgas0:
+    plugin: action_message_action
+    label: Activity_1vqgas0
+    configuration:
+      replace_tokens: false
+      message: 'done - 4 ---- [loadcert:nid]'
+    successors: {  }
+  Activity_0rhxso6:
+    plugin: eca_set_field_value
+    label: 'Unpublish certificate'
+    configuration:
+      field_name: '[status:value]'
+      field_value: '0'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: loadcert
+    successors:
+      -
+        id: Activity_1vqgas0
+        condition: ''
+      -
+        id: Activity_15ltp1w
+        condition: Flow_0bwnbl2
+  Activity_09wvu70:
+    plugin: action_message_action
+    label: Activity_09wvu70
+    configuration:
+      replace_tokens: false
+      message: 'done - 1'
+    successors: {  }
+  Activity_17puumx:
+    plugin: eca_switch_account
+    label: 'Switch user to admin'
+    configuration:
+      user_id: '1'
+    successors:
+      -
+        id: Activity_1w9oty5
+        condition: ''
+  Activity_1w9oty5:
+    plugin: eca_new_entity
+    label: 'Create transaction [transact]'
+    configuration:
+      token_name: transact
+      type: 'node transaction'
+      langcode: en
+      label: ''
+      published: true
+      owner: '[loadcert:field_employee:entity:uid]'
+    successors:
+      -
+        id: Activity_1e6tr2k
+        condition: ''
+  Activity_1e6tr2k:
+    plugin: eca_set_field_value
+    label: 'Set title'
+    configuration:
+      field_name: title
+      field_value: 'Certificate''s Transaction "[loadcert:title]"'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: transact
+    successors:
+      -
+        id: Activity_15shh48
+        condition: ''
+  Activity_15shh48:
+    plugin: eca_set_field_value
+    label: 'Set employee transaction'
+    configuration:
+      field_name: field_employee_vacation
+      field_value: '[loadcert:field_employee:entity:uid]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: transact
+    successors:
+      -
+        id: Activity_0yqo7uc
+        condition: ''
+  Activity_0e1kfo1:
+    plugin: eca_switch_account
+    label: 'Switch user to author'
+    configuration:
+      user_id: '[loadcert:field_employee:entity:uid]'
+    successors:
+      -
+        id: Activity_1az8wez
+        condition: ''
+  Activity_1az8wez:
+    plugin: eca_views_query
+    label: 'Load Balance [balanceview]'
+    configuration:
+      token_name: balanceview
+      view_id: balance
+      display_id: block_1
+      arguments: ''
+    successors:
+      -
+        id: Activity_1ddcaa7
+        condition: ''
+  Activity_1ddcaa7:
+    plugin: eca_count
+    label: 'Count user''s certificate [countcert]'
+    configuration:
+      token_name: countcert
+      list_token: balanceview
+    successors:
+      -
+        id: Activity_0xc2ddw
+        condition: ''
+  Activity_0xc2ddw:
+    plugin: eca_token_set_value
+    label: 'Token 0 [accbalance]'
+    configuration:
+      token_name: accbalance
+      token_value: '0'
+      use_yaml: false
+    successors:
+      -
+        id: Gateway_0136wo5
+        condition: ''
+  Activity_0yqo7uc:
+    plugin: eca_set_field_value
+    label: 'Set added day'
+    configuration:
+      field_name: field_add_day.value
+      field_value: '[loadcert:field_issued_days:value]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: transact
+    successors:
+      -
+        id: Activity_0uw01kn
+        condition: ''
+  Activity_0uw01kn:
+    plugin: eca_set_field_value
+    label: 'Set certificate ref'
+    configuration:
+      field_name: field_certificate
+      field_value: '[loadcert:nid]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: transact
+    successors:
+      -
+        id: Activity_0e1kfo1
+        condition: ''
+  Activity_05f71tk:
+    plugin: eca_set_field_value
+    label: 'Set Balance'
+    configuration:
+      field_name: field_balance.value
+      field_value: '[balance]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: transact
+    successors: {  }
+  Activity_164ls2g:
+    plugin: 'eca_tamper:math'
+    label: 'Add field_remainder to accbalance'
+    configuration:
+      operation: addition
+      flip: false
+      value: '[balanceview:0:field_remainder]'
+      eca_data: '[accbalance]'
+      eca_token_name: accbalance
+    successors:
+      -
+        id: Activity_0pinbjg
+        condition: ''
+  Activity_0pinbjg:
+    plugin: 'eca_tamper:math'
+    label: 'Subtraction 1 from countcert'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '1'
+      eca_data: '[countcert]'
+      eca_token_name: countcert
+    successors:
+      -
+        id: Activity_16e77j7
+        condition: ''
+  Activity_16e77j7:
+    plugin: eca_list_remove
+    label: 'Drop first from [balanceview]'
+    configuration:
+      value: ''
+      token_name: ''
+      method: first
+      index: ''
+      list_token: balanceview
+    successors:
+      -
+        id: Gateway_0136wo5
+        condition: ''
+  Activity_1ryh96q:
+    plugin: eca_set_field_value
+    label: 'Set title'
+    configuration:
+      field_name: title
+      field_value: 'Bonus Certificate #[random:number]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: false
+      object: ''
+    successors: {  }
+  Activity_01w5tpy:
+    plugin: eca_set_field_value
+    label: |-
+      {transact} 
+      Set Аccount Balance
+    configuration:
+      field_name: field__account_balance.value
+      field_value: '[accbalance]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: transact
+    successors:
+      -
+        id: Activity_0p2kyt6
+        condition: ''
+  Activity_0p2kyt6:
+    plugin: 'eca_tamper:math'
+    label: 'Prev balance'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '[loadcert:field_issued_days:value]'
+      eca_data: '[accbalance]'
+      eca_token_name: balance
+    successors:
+      -
+        id: Activity_05f71tk
+        condition: ''
+  Activity_1krcv59:
+    plugin: eca_switch_account
+    label: 'Switch to admin'
+    configuration:
+      user_id: '1'
+    successors:
+      -
+        id: Gateway_0k9e5yd
+        condition: ''
+  Activity_1s9zeju:
+    plugin: eca_save_entity
+    label: 'Save entity'
+    configuration:
+      object: certif
+    successors:
+      -
+        id: Activity_1dqxhee
+        condition: ''
+  Activity_15ltp1w:
+    plugin: eca_new_entity
+    label: 'Create transaction [exptransact]'
+    configuration:
+      token_name: exptransact
+      type: 'node transaction'
+      langcode: en
+      label: ''
+      published: true
+      owner: '[loadcert:field_employee:entity:uid]'
+    successors:
+      -
+        id: Activity_0fyifas
+        condition: ''
+  Activity_0fyifas:
+    plugin: eca_set_field_value
+    label: 'Set title'
+    configuration:
+      field_name: title
+      field_value: 'Certificate Expired Transaction "[loadcert:title]"'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: exptransact
+    successors:
+      -
+        id: Activity_0b0127s
+        condition: ''
+  Activity_0b0127s:
+    plugin: eca_set_field_value
+    label: 'Set employee transaction'
+    configuration:
+      field_name: field_employee_vacation
+      field_value: '[loadcert:field_employee:entity:uid]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: exptransact
+    successors:
+      -
+        id: Activity_027pfp3
+        condition: ''
+  Activity_027pfp3:
+    plugin: eca_set_field_value
+    label: 'Set numb day'
+    configuration:
+      field_name: field_numb_day.value
+      field_value: '[certend:field_remainder:value]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: exptransact
+    successors:
+      -
+        id: Activity_0bjbj7s
+        condition: ''
+  Activity_0swx7iv:
+    plugin: eca_token_load_entity
+    label: 'Load cert by ID loadcert [certend]'
+    configuration:
+      token_name: certend
+      from: properties
+      entity_type: node
+      entity_id: ''
+      revision_id: ''
+      properties: 'nid: "[loadcert:nid]"'
+      langcode: _interface
+      latest_revision: true
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_0rhxso6
+        condition: ''
+  Activity_0bjbj7s:
+    plugin: eca_set_field_value
+    label: 'Set certificate ref'
+    configuration:
+      field_name: field_certificate
+      field_value: '[loadcert:nid]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: exptransact
+    successors:
+      -
+        id: Activity_09z79zr
+        condition: ''
+  Activity_09z79zr:
+    plugin: eca_token_set_value
+    label: 'Set check [1]'
+    configuration:
+      token_name: check
+      token_value: '1'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_0e1kfo1
+        condition: ''
+  Activity_14eabts:
+    plugin: eca_set_field_value
+    label: |-
+      {exptransact}
+      Set Аccount Balance
+    configuration:
+      field_name: field__account_balance.value
+      field_value: '[accbalance]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: exptransact
+    successors:
+      -
+        id: Activity_1blcwmn
+        condition: ''
+  Activity_1blcwmn:
+    plugin: 'eca_tamper:math'
+    label: 'Prev balance'
+    configuration:
+      operation: addition
+      flip: false
+      value: '[certend:field_remainder:value]'
+      eca_data: '[accbalance]'
+      eca_token_name: balance
+    successors:
+      -
+        id: Activity_1eeerwe
+        condition: ''
+  Activity_1eeerwe:
+    plugin: eca_set_field_value
+    label: 'Set Balance'
+    configuration:
+      field_name: field_balance.value
+      field_value: '[balance]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: exptransact
+    successors: {  }

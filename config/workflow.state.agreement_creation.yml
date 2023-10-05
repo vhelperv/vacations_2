@@ -1,0 +1,12 @@
+uuid: fc624110-136a-4254-94b0-7deb9e82f49d
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflow.workflow.agreement
+id: agreement_creation
+label: Creation
+module: workflow
+wid: agreement
+weight: -11
+sysid: 1

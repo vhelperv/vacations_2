@@ -1,0 +1,12 @@
+uuid: a6c0f61c-2d12-4a88-8d72-b9340bcb2d38
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflow.workflow.request_status
+id: request_status_sancel
+label: Сancel
+module: workflow
+wid: request_status
+weight: -8
+sysid: 0

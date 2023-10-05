@@ -1,0 +1,24 @@
+uuid: cc9a2420-cd62-422d-b843-3f3de27e83dd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_timestamp
+    - node.type.transaction
+  module:
+    - datetime
+id: node.transaction.field_timestamp
+field_name: field_timestamp
+entity_type: node
+bundle: transaction
+label: TimeStamp
+description: 'Data and time transaction'
+required: false
+translatable: true
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

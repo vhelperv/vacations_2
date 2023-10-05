@@ -1,0 +1,33 @@
+uuid: 2c042df7-20c3-48cb-aad6-2f775c43e71c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_type_vacation
+    - node.type.vacation
+    - taxonomy.vocabulary.type_vacation
+  content:
+    - 'taxonomy_term:type_vacation:47399f17-61d2-4ecb-a59f-11488aa342e3'
+id: node.vacation.field_type_vacation
+field_name: field_type_vacation
+entity_type: node
+bundle: vacation
+label: 'Type Vacation'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    target_uuid: 47399f17-61d2-4ecb-a59f-11488aa342e3
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      type_vacation: type_vacation
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

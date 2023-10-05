@@ -1,0 +1,39 @@
+uuid: e758b2c4-ba3c-4369-9d08-57326ab1a32f
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.certificate
+    - node.type.vacation
+  module:
+    - content_moderation
+    - node
+    - paragraphs
+    - paragraphs_type_permissions
+    - update
+    - view_unpublished
+    - workflow
+id: ceo
+label: CEO
+weight: 4
+is_admin: null
+permissions:
+  - 'access any request_status workflow_transion overview'
+  - 'access request_status workflow_transition form'
+  - 'create agreement workflow_transition'
+  - 'create certificate content'
+  - 'create paragraph content person_who_approve'
+  - 'create request_status workflow_transition'
+  - 'create status_approve workflow_transition'
+  - 'create vacation content'
+  - 'delete paragraph content person_who_approve'
+  - 'edit own certificate content'
+  - 'update paragraph content person_who_approve'
+  - 'view any unpublished certificate content'
+  - 'view any unpublished content'
+  - 'view any unpublished transaction content'
+  - 'view any unpublished vacation content'
+  - 'view own unpublished content'
+  - 'view paragraph content person_who_approve'
+  - 'view unpublished paragraphs'
+  - 'view update notifications'

@@ -1,0 +1,27 @@
+uuid: 2904c6b9-eb33-488a-96f2-211e0380e381
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.date_only
+    - taxonomy.vocabulary.type_vacation
+  module:
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: taxonomy_term.type_vacation.date_only
+targetEntityType: taxonomy_term
+bundle: type_vacation
+mode: date_only
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

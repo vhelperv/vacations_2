@@ -1,0 +1,23 @@
+uuid: cfbeea10-3543-4d0b-af4a-ae8637869ba2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_numb_day
+    - node.type.vacation
+id: node.vacation.field_numb_day
+field_name: field_numb_day
+entity_type: node
+bundle: vacation
+label: 'Numb Day'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

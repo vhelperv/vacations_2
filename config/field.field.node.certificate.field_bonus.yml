@@ -1,0 +1,23 @@
+uuid: c9e1a05c-aba5-4a71-bc7c-e505de3cf74e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_bonus
+    - node.type.certificate
+id: node.certificate.field_bonus
+field_name: field_bonus
+entity_type: node
+bundle: certificate
+label: Bonus
+description: 'Is the certificate a bonus? Yes/No'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

@@ -1,0 +1,14 @@
+uuid: e13e9ed9-7099-4c50-9d19-be7246881e84
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.accounting
+  module:
+    - user
+id: user_add_role_action.accounting
+label: 'Add the Accounting role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: accounting

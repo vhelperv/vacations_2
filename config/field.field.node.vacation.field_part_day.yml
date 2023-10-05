@@ -1,0 +1,33 @@
+uuid: cd5c818a-2249-4941-9285-00410ed60631
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_part_day
+    - node.type.vacation
+    - taxonomy.vocabulary.part_day
+  content:
+    - 'taxonomy_term:part_day:ddc953c6-09f6-4cb7-b1da-42edd23bc40e'
+id: node.vacation.field_part_day
+field_name: field_part_day
+entity_type: node
+bundle: vacation
+label: 'Part Day'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    target_uuid: ddc953c6-09f6-4cb7-b1da-42edd23bc40e
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      part_day: part_day
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

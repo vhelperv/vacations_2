@@ -1,0 +1,23 @@
+uuid: 3a4b441f-f88b-452a-aa1b-d0105200cf02
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.person_who_approve.field_permission
+    - field.field.paragraph.person_who_approve.field_person
+    - paragraphs.paragraphs_type.person_who_approve
+id: paragraph.person_who_approve.default
+targetEntityType: paragraph
+bundle: person_who_approve
+mode: default
+content:
+  field_person:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_permission: true
+  status: true

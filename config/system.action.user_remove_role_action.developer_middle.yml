@@ -1,0 +1,14 @@
+uuid: 94d278a4-ff17-4bbc-8732-15192c87a794
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.developer_middle
+  module:
+    - user
+id: user_remove_role_action.developer_middle
+label: 'Remove the Developer-Middle role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: developer_middle

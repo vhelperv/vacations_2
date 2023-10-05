@@ -1,0 +1,21 @@
+uuid: 69379752-0caf-4fba-9b97-e01085b9af92
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.type_vacation
+  module:
+    - text
+id: taxonomy_term.type_vacation.default
+targetEntityType: taxonomy_term
+bundle: type_vacation
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

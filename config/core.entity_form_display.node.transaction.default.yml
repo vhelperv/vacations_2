@@ -1,0 +1,104 @@
+uuid: bdcafc0c-d38d-4a9b-9bce-418c7c7c070a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.transaction.field__account_balance
+    - field.field.node.transaction.field_add_day
+    - field.field.node.transaction.field_balance
+    - field.field.node.transaction.field_certificate
+    - field.field.node.transaction.field_employee_vacation
+    - field.field.node.transaction.field_numb_day
+    - field.field.node.transaction.field_refer_to_vacation_entity
+    - field.field.node.transaction.field_timestamp
+    - node.type.transaction
+  module:
+    - datetime
+    - path
+id: node.transaction.default
+targetEntityType: node
+bundle: transaction
+mode: default
+content:
+  field__account_balance:
+    type: number
+    weight: 6
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_add_day:
+    type: number
+    weight: 8
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_balance:
+    type: number
+    weight: 5
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_certificate:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_employee_vacation:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_numb_day:
+    type: number
+    weight: 4
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_refer_to_vacation_entity:
+    type: entity_reference_autocomplete
+    weight: 7
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_timestamp:
+    type: datetime_default
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  promote: true
+  publish_on: true
+  status: true
+  sticky: true
+  uid: true
+  unpublish_on: true

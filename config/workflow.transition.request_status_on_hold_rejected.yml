@@ -1,0 +1,32 @@
+uuid: fcef577f-a510-4fa0-bffe-e27f967f22e8
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflow.state.request_status_on_hold
+    - workflow.state.request_status_rejected
+id: request_status_on_hold_rejected
+label: null
+module: workflow
+from_sid: request_status_on_hold
+to_sid: request_status_rejected
+roles:
+  ceo: ceo
+  teamlead: teamlead
+  pm: pm
+  shief_pm: shief_pm
+  head_of_department: head_of_department
+  client: client
+  workflow_author: '0'
+  anonymous: '0'
+  administrator: '0'
+  developer_junior: '0'
+  developer_middle: '0'
+  developer_senior: '0'
+  sales: '0'
+  marketing: '0'
+  recruiting: '0'
+  hr: '0'
+  om: '0'
+  accounting: '0'
+  admin_staff: '0'

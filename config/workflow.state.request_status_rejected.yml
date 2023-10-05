@@ -1,0 +1,12 @@
+uuid: 29250dcc-b9a4-46fe-9f35-2500c270afef
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflow.workflow.request_status
+id: request_status_rejected
+label: Rejected
+module: workflow
+wid: request_status
+weight: -8
+sysid: 0

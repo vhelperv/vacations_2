@@ -1,0 +1,22 @@
+uuid: 7a9bb123-db29-4545-8b53-641bf44374d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_state_vacation
+    - node.type.vacation
+  module:
+    - workflow
+id: node.vacation.field_state_vacation
+field_name: field_state_vacation
+entity_type: node
+bundle: vacation
+label: 'State Vacation'
+description: ''
+required: true
+translatable: false
+default_value:
+  - {  }
+default_value_callback: ''
+settings: {  }
+field_type: workflow

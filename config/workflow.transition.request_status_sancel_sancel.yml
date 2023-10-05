@@ -1,0 +1,12 @@
+uuid: b13e0ac5-d625-4f2c-b80e-51d7224a6055
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflow.state.request_status_sancel
+id: request_status_sancel_sancel
+label: null
+module: workflow
+from_sid: request_status_sancel
+to_sid: request_status_sancel
+roles: {  }

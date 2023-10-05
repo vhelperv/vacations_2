@@ -1,0 +1,12 @@
+uuid: b36a22fb-200a-40a5-9268-228594586374
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflow.workflow.agreement
+id: agreement_yes
+label: 'Yes'
+module: workflow
+wid: agreement
+weight: -8
+sysid: 0

@@ -1,0 +1,178 @@
+uuid: 512d4930-21f9-44d5-87ee-e3b84b75c6b7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.certificate.field_bonus
+    - field.field.node.certificate.field_employee
+    - field.field.node.certificate.field_issued_days
+    - field.field.node.certificate.field_period_of_validity
+    - field.field.node.certificate.field_remainder
+    - node.type.certificate
+    - views.view._certificate_transaction
+  module:
+    - datetime_range
+    - layout_builder
+    - layout_discovery
+    - user
+    - views
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          fde9edb3-14b4-412a-8747-c63084f839b3:
+            uuid: fde9edb3-14b4-412a-8747-c63084f839b3
+            region: content
+            configuration:
+              id: 'field_block:node:certificate:field_employee'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: inline
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          78a36fd8-9d8c-42e4-9ee8-8f8c5f213da8:
+            uuid: 78a36fd8-9d8c-42e4-9ee8-8f8c5f213da8
+            region: content
+            configuration:
+              id: 'field_block:node:certificate:field_issued_days'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: number_integer
+                label: inline
+                settings:
+                  thousand_separator: ''
+                  prefix_suffix: true
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          ca319a0c-c388-4b43-913b-e7838b3dc763:
+            uuid: ca319a0c-c388-4b43-913b-e7838b3dc763
+            region: content
+            configuration:
+              id: 'field_block:node:certificate:field_remainder'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: number_integer
+                label: inline
+                settings:
+                  thousand_separator: ''
+                  prefix_suffix: true
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
+          e514ddb2-893d-4df3-a16e-02f2344fbeb7:
+            uuid: e514ddb2-893d-4df3-a16e-02f2344fbeb7
+            region: content
+            configuration:
+              id: 'views_block:_certificate_transaction-block_1'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 7
+            additional: {  }
+          ca594102-44ed-4aba-93ca-ea0e24c78c97:
+            uuid: ca594102-44ed-4aba-93ca-ea0e24c78c97
+            region: content
+            configuration:
+              id: 'field_block:node:certificate:field_bonus'
+              label: Bonus
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: boolean
+                label: inline
+                settings:
+                  format: yes-no
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          7340ab85-5caf-43a6-8917-491b3dcba5b1:
+            uuid: 7340ab85-5caf-43a6-8917-491b3dcba5b1
+            region: content
+            configuration:
+              id: 'field_block:node:certificate:field_period_of_validity'
+              label: 'Period of validity'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: daterange_custom
+                label: inline
+                settings:
+                  timezone_override: ''
+                  date_format: d/m/Y
+                  separator: to
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+        third_party_settings: {  }
+id: node.certificate.default
+targetEntityType: node
+bundle: certificate
+mode: default
+content:
+  field_employee:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_issued_days:
+    type: number_integer
+    label: inline
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_period_of_validity:
+    type: daterange_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+      separator: '-'
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_remainder:
+    type: number_integer
+    label: inline
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+hidden:
+  field_bonus: true
+  links: true

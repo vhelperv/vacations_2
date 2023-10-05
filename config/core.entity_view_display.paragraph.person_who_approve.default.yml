@@ -1,0 +1,31 @@
+uuid: 98302806-1c4d-4f82-8d54-85523c8fe39b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.person_who_approve.field_permission
+    - field.field.paragraph.person_who_approve.field_person
+    - paragraphs.paragraphs_type.person_who_approve
+  module:
+    - workflow
+id: paragraph.person_who_approve.default
+targetEntityType: paragraph
+bundle: person_who_approve
+mode: default
+content:
+  field_permission:
+    type: workflow_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_person:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

@@ -1,0 +1,25 @@
+uuid: c5069dc8-89e9-4d81-a571-048415eaf701
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_remainder
+    - node.type.certificate
+id: node.certificate.field_remainder
+field_name: field_remainder
+entity_type: node
+bundle: certificate
+label: Remainder
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 7
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
