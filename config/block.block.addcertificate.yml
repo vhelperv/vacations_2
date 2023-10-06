@@ -1,0 +1,41 @@
+uuid: 4d050cac-1c0b-498b-9695-9d0f62fbd4ae
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:ba9b1a39-0579-44a6-b498-48f41dc7149d'
+  module:
+    - block_content
+    - system
+    - user
+  theme:
+    - vacation
+id: addcertificate
+theme: vacation
+region: content
+weight: -3
+provider: null
+plugin: 'block_content:ba9b1a39-0579-44a6-b498-48f41dc7149d'
+settings:
+  id: 'block_content:ba9b1a39-0579-44a6-b498-48f41dc7149d'
+  label: 'Add Certificate'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /vacation-request
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      ceo: ceo
+      teamlead: teamlead
+      shief_pm: shief_pm
+      head_of_department: head_of_department
