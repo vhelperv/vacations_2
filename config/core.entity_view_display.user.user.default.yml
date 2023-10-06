@@ -4,10 +4,76 @@ status: true
 dependencies:
   config:
     - field.field.user.user.user_picture
-    - image.style.thumbnail
+    - views.view.recent_events
   module:
     - image
+    - layout_builder
+    - layout_discovery
     - user
+    - views
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          99bc0ffd-9d76-46ab-85e8-0f8c68e0efe4:
+            uuid: 99bc0ffd-9d76-46ab-85e8-0f8c68e0efe4
+            region: content
+            configuration:
+              id: 'field_block:user:user:user_picture'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: image
+                label: above
+                settings:
+                  image_link: ''
+                  image_style: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          fdbe447a-e254-4a82-9acf-a728a23a9e1e:
+            uuid: fdbe447a-e254-4a82-9acf-a728a23a9e1e
+            region: content
+            configuration:
+              id: 'extra_field_block:user:user:member_for'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 1
+            additional: {  }
+          3ec3a8bf-8b0e-4097-beba-096c7a8d779b:
+            uuid: 3ec3a8bf-8b0e-4097-beba-096c7a8d779b
+            region: content
+            configuration:
+              id: 'extra_field_block:user:user:masquerade'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 2
+            additional: {  }
+          c6561411-90e4-47af-a184-aa143578e8de:
+            uuid: c6561411-90e4-47af-a184-aa143578e8de
+            region: content
+            configuration:
+              id: 'views_block:recent_events-block_1'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 3
+            additional: {  }
+        third_party_settings: {  }
 _core:
   default_config_hash: mZLyuWM9CQx2ZJVqFGSbzgFnHzudVbHBYmdU256A5Wk
 id: user.user.default
@@ -15,15 +81,22 @@ targetEntityType: user
 bundle: user
 mode: default
 content:
+  masquerade:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
   member_for:
-    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
     region: content
   user_picture:
     type: image
-    label: hidden
+    label: above
     settings:
-      image_style: thumbnail
-      image_link: content
+      image_link: ''
+      image_style: ''
       image_loading:
         attribute: lazy
     third_party_settings: {  }

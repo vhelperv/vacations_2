@@ -1856,7 +1856,10 @@ actions:
     configuration:
       flag: true
       field_name: field_time_vacation
-    successors: {  }
+    successors:
+      -
+        id: Activity_1sih0b9
+        condition: ''
   Activity_05i205h:
     plugin: eca_form_field_require
     label: 'Required field'
@@ -1872,7 +1875,7 @@ actions:
       field_name: field_part_day
     successors:
       -
-        id: Activity_1sih0b9
+        id: Activity_1ae0sj3
         condition: ''
   Activity_0hgakll:
     plugin: eca_form_field_disable

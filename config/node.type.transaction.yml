@@ -9,6 +9,7 @@ third_party_settings:
   menu_ui:
     available_menus:
       - main
+      - vacation-user-menu
     parent: 'main:'
   scheduler:
     expand_fieldset: when_required
@@ -28,5 +29,5 @@ type: transaction
 description: 'Balance change transactions. Only ECA is used.'
 help: ''
 new_revision: true
-preview_mode: 1
+preview_mode: 0
 display_submitted: false

@@ -2291,9 +2291,8 @@ modeldata: |
             <camunda:string></camunda:string>
           </camunda:field>
         </bpmn2:extensionElements>
-        <bpmn2:outgoing>Flow_0rujw9m</bpmn2:outgoing>
+        <bpmn2:outgoing>Flow_1yn4o2t</bpmn2:outgoing>
       </bpmn2:startEvent>
-      <bpmn2:sequenceFlow id="Flow_0rujw9m" sourceRef="Event_05qdrcu" targetRef="Activity_0wyll02" />
       <bpmn2:task id="Activity_0wyll02" name="Get start vacation time [vactimestart]" camunda:modelerTemplate="org.drupal.action.eca_form_field_get_value">
         <bpmn2:extensionElements>
           <camunda:properties>
@@ -2315,9 +2314,9 @@ modeldata: |
             <camunda:string>yes</camunda:string>
           </camunda:field>
         </bpmn2:extensionElements>
-        <bpmn2:incoming>Flow_0rujw9m</bpmn2:incoming>
+        <bpmn2:incoming>Flow_1yn4o2t</bpmn2:incoming>
         <bpmn2:outgoing>Flow_1f2i672</bpmn2:outgoing>
-        <bpmn2:outgoing>Flow_1cfu4or</bpmn2:outgoing>
+        <bpmn2:outgoing>Flow_1uc5mmq</bpmn2:outgoing>
       </bpmn2:task>
       <bpmn2:task id="Activity_12767co" name="ERROR: Vacation is late" camunda:modelerTemplate="org.drupal.action.eca_form_field_set_error">
         <bpmn2:extensionElements>
@@ -2418,12 +2417,11 @@ modeldata: |
             <camunda:string>yes</camunda:string>
           </camunda:field>
         </bpmn2:extensionElements>
-        <bpmn2:incoming>Flow_1cfu4or</bpmn2:incoming>
+        <bpmn2:incoming>Flow_1uc5mmq</bpmn2:incoming>
         <bpmn2:outgoing>Flow_0tk9wbn</bpmn2:outgoing>
         <bpmn2:outgoing>Flow_0qox0ue</bpmn2:outgoing>
         <bpmn2:outgoing>Flow_18oi2lc</bpmn2:outgoing>
       </bpmn2:task>
-      <bpmn2:sequenceFlow id="Flow_1cfu4or" sourceRef="Activity_0wyll02" targetRef="Activity_1wldfhs" />
       <bpmn2:task id="Activity_0us6moy" camunda:modelerTemplate="org.drupal.action.eca_form_field_set_error">
         <bpmn2:extensionElements>
           <camunda:properties>
@@ -2463,7 +2461,7 @@ modeldata: |
           </camunda:field>
         </bpmn2:extensionElements>
       </bpmn2:sequenceFlow>
-      <bpmn2:task id="Activity_1c33hf5" camunda:modelerTemplate="org.drupal.action.eca_form_field_set_error">
+      <bpmn2:task id="Activity_1c33hf5" name="ERROR: Vacation less than hour" camunda:modelerTemplate="org.drupal.action.eca_form_field_set_error">
         <bpmn2:extensionElements>
           <camunda:properties>
             <camunda:property name="pluginid" value="eca_form_field_set_error" />
@@ -2472,12 +2470,63 @@ modeldata: |
             <camunda:string>op</camunda:string>
           </camunda:field>
           <camunda:field name="message">
-            <camunda:string></camunda:string>
+            <camunda:string>You cannot take a vacation for less than an hour.</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1at7p1q</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:sequenceFlow id="Flow_18oi2lc" sourceRef="Activity_1wldfhs" targetRef="Activity_16c82k4" />
+      <bpmn2:task id="Activity_16c82k4" name="Calc period vacation [period]" camunda:modelerTemplate="org.drupal.action.eca_tamper:math">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_tamper:math" />
+          </camunda:properties>
+          <camunda:field name="eca_data">
+            <camunda:string>[vactimeend]</camunda:string>
+          </camunda:field>
+          <camunda:field name="operation">
+            <camunda:string>subtraction</camunda:string>
+          </camunda:field>
+          <camunda:field name="flip">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="value">
+            <camunda:string>[vactimestart]</camunda:string>
+          </camunda:field>
+          <camunda:field name="eca_token_name">
+            <camunda:string>period</camunda:string>
           </camunda:field>
         </bpmn2:extensionElements>
         <bpmn2:incoming>Flow_18oi2lc</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1at7p1q</bpmn2:outgoing>
       </bpmn2:task>
-      <bpmn2:sequenceFlow id="Flow_18oi2lc" sourceRef="Activity_1wldfhs" targetRef="Activity_1c33hf5" />
+      <bpmn2:sequenceFlow id="Flow_1at7p1q" camunda:modelerTemplate="org.drupal.condition.eca_scalar" sourceRef="Activity_16c82k4" targetRef="Activity_1c33hf5">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_scalar" />
+          </camunda:properties>
+          <camunda:field name="left">
+            <camunda:string>[period]</camunda:string>
+          </camunda:field>
+          <camunda:field name="operator">
+            <camunda:string>lessthan</camunda:string>
+          </camunda:field>
+          <camunda:field name="right">
+            <camunda:string>60</camunda:string>
+          </camunda:field>
+          <camunda:field name="type">
+            <camunda:string>value</camunda:string>
+          </camunda:field>
+          <camunda:field name="case">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="negate">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+      <bpmn2:sequenceFlow id="Flow_1yn4o2t" sourceRef="Event_05qdrcu" targetRef="Activity_0wyll02" />
+      <bpmn2:sequenceFlow id="Flow_1uc5mmq" sourceRef="Activity_0wyll02" targetRef="Activity_1wldfhs" />
       <bpmn2:textAnnotation id="TextAnnotation_0px04cb">
         <bpmn2:text>Past days</bpmn2:text>
       </bpmn2:textAnnotation>
@@ -2522,25 +2571,13 @@ modeldata: |
         <bpmn2:text>Vacation is late</bpmn2:text>
       </bpmn2:textAnnotation>
       <bpmn2:association id="Association_18nzni1" sourceRef="Activity_12767co" targetRef="TextAnnotation_1koivm3" />
+      <bpmn2:textAnnotation id="TextAnnotation_1p7dtpg">
+        <bpmn2:text>Vacation less than hour</bpmn2:text>
+      </bpmn2:textAnnotation>
+      <bpmn2:association id="Association_1nlljq5" sourceRef="Activity_1c33hf5" targetRef="TextAnnotation_1p7dtpg" />
     </bpmn2:process>
     <bpmndi:BPMNDiagram id="sid-6693f546-015f-481b-bc9b-818f69406367">
       <bpmndi:BPMNPlane id="sid-f49538db-8474-42a0-81ee-aa980006265e" bpmnElement="Process_eVYvYS1">
-        <bpmndi:BPMNShape id="TextAnnotation_1jr888c_di" bpmnElement="TextAnnotation_1jr888c">
-          <dc:Bounds x="-1470" y="-1250" width="99.97575067476384" height="39" />
-          <bpmndi:BPMNLabel />
-        </bpmndi:BPMNShape>
-        <bpmndi:BPMNShape id="TextAnnotation_1l5o1mm_di" bpmnElement="TextAnnotation_1l5o1mm">
-          <dc:Bounds x="-1330" y="-1130" width="99.97575067476382" height="55.32536268556006" />
-          <bpmndi:BPMNLabel />
-        </bpmndi:BPMNShape>
-        <bpmndi:BPMNShape id="TextAnnotation_0skax6d_di" bpmnElement="TextAnnotation_0skax6d">
-          <dc:Bounds x="-1630" y="-2130" width="99.99950143586472" height="40.832402680280794" />
-          <bpmndi:BPMNLabel />
-        </bpmndi:BPMNShape>
-        <bpmndi:BPMNShape id="TextAnnotation_1koivm3_di" bpmnElement="TextAnnotation_1koivm3">
-          <dc:Bounds x="-1430" y="-1870" width="99.99950143586472" height="29.98863273771538" />
-          <bpmndi:BPMNLabel />
-        </bpmndi:BPMNShape>
         <bpmndi:BPMNShape id="Event_0jtndhm_di" bpmnElement="Event_1x6jxwe">
           <dc:Bounds x="-1788" y="-1148" width="36" height="36" />
           <bpmndi:BPMNLabel>
@@ -2838,6 +2875,33 @@ modeldata: |
           <dc:Bounds x="-1850" y="-190" width="100" height="80" />
           <bpmndi:BPMNLabel />
         </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_1w5rimu_di" bpmnElement="Activity_0wyll02">
+          <dc:Bounds x="-1730" y="-1940" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_12767co_di" bpmnElement="Activity_12767co">
+          <dc:Bounds x="-1590" y="-1810" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_1g1dku8_di" bpmnElement="Activity_1g1dku8">
+          <dc:Bounds x="-1730" y="-2050" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_1wldfhs_di" bpmnElement="Activity_1wldfhs">
+          <dc:Bounds x="-1730" y="-1810" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_0us6moy_di" bpmnElement="Activity_0us6moy">
+          <dc:Bounds x="-1730" y="-1690" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_1c33hf5_di" bpmnElement="Activity_1c33hf5">
+          <dc:Bounds x="-2020" y="-1810" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_16c82k4_di" bpmnElement="Activity_16c82k4">
+          <dc:Bounds x="-1870" y="-1810" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
         <bpmndi:BPMNShape id="TextAnnotation_0px04cb_di" bpmnElement="TextAnnotation_0px04cb">
           <dc:Bounds x="-650" y="-1190" width="100" height="30" />
           <bpmndi:BPMNLabel />
@@ -2866,50 +2930,32 @@ modeldata: |
           <dc:Bounds x="-1710" y="40" width="99.99260434595526" height="39" />
           <bpmndi:BPMNLabel />
         </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="TextAnnotation_1jr888c_di" bpmnElement="TextAnnotation_1jr888c">
+          <dc:Bounds x="-1470" y="-1250" width="99.97575067476384" height="39" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="TextAnnotation_1l5o1mm_di" bpmnElement="TextAnnotation_1l5o1mm">
+          <dc:Bounds x="-1330" y="-1130" width="99.97575067476382" height="55.32536268556006" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="TextAnnotation_0skax6d_di" bpmnElement="TextAnnotation_0skax6d">
+          <dc:Bounds x="-1630" y="-2130" width="99.99950143586472" height="40.832402680280794" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="TextAnnotation_1koivm3_di" bpmnElement="TextAnnotation_1koivm3">
+          <dc:Bounds x="-1430" y="-1870" width="99.99950143586472" height="29.98863273771538" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="TextAnnotation_1p7dtpg_di" bpmnElement="TextAnnotation_1p7dtpg">
+          <dc:Bounds x="-2090" y="-1900" width="99.99202297383536" height="40.8423739629866" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
         <bpmndi:BPMNShape id="Event_05qdrcu_di" bpmnElement="Event_05qdrcu">
-          <dc:Bounds x="-1838" y="-1918" width="36" height="36" />
+          <dc:Bounds x="-1848" y="-1918" width="36" height="36" />
           <bpmndi:BPMNLabel>
-            <dc:Bounds x="-1856" y="-1875" width="75" height="14" />
+            <dc:Bounds x="-1866" y="-1875" width="75" height="14" />
           </bpmndi:BPMNLabel>
         </bpmndi:BPMNShape>
-        <bpmndi:BPMNShape id="Activity_1w5rimu_di" bpmnElement="Activity_0wyll02">
-          <dc:Bounds x="-1730" y="-1940" width="100" height="80" />
-          <bpmndi:BPMNLabel />
-        </bpmndi:BPMNShape>
-        <bpmndi:BPMNShape id="Activity_1g1dku8_di" bpmnElement="Activity_1g1dku8">
-          <dc:Bounds x="-1730" y="-2050" width="100" height="80" />
-          <bpmndi:BPMNLabel />
-        </bpmndi:BPMNShape>
-        <bpmndi:BPMNShape id="Activity_1wldfhs_di" bpmnElement="Activity_1wldfhs">
-          <dc:Bounds x="-1730" y="-1810" width="100" height="80" />
-          <bpmndi:BPMNLabel />
-        </bpmndi:BPMNShape>
-        <bpmndi:BPMNShape id="Activity_0us6moy_di" bpmnElement="Activity_0us6moy">
-          <dc:Bounds x="-1730" y="-1690" width="100" height="80" />
-        </bpmndi:BPMNShape>
-        <bpmndi:BPMNShape id="Activity_12767co_di" bpmnElement="Activity_12767co">
-          <dc:Bounds x="-1590" y="-1810" width="100" height="80" />
-          <bpmndi:BPMNLabel />
-        </bpmndi:BPMNShape>
-        <bpmndi:BPMNShape id="Activity_1c33hf5_di" bpmnElement="Activity_1c33hf5">
-          <dc:Bounds x="-1870" y="-1810" width="100" height="80" />
-        </bpmndi:BPMNShape>
-        <bpmndi:BPMNEdge id="Association_04q18oh_di" bpmnElement="Association_04q18oh">
-          <di:waypoint x="-1482" y="-1170" />
-          <di:waypoint x="-1443" y="-1211" />
-        </bpmndi:BPMNEdge>
-        <bpmndi:BPMNEdge id="Association_0d1r4rm_di" bpmnElement="Association_0d1r4rm">
-          <di:waypoint x="-1342" y="-1050" />
-          <di:waypoint x="-1318" y="-1075" />
-        </bpmndi:BPMNEdge>
-        <bpmndi:BPMNEdge id="Association_1k7rckp_di" bpmnElement="Association_1k7rckp">
-          <di:waypoint x="-1642" y="-2050" />
-          <di:waypoint x="-1605" y="-2089" />
-        </bpmndi:BPMNEdge>
-        <bpmndi:BPMNEdge id="Association_18nzni1_di" bpmnElement="Association_18nzni1">
-          <di:waypoint x="-1490" y="-1797" />
-          <di:waypoint x="-1408" y="-1840" />
-        </bpmndi:BPMNEdge>
         <bpmndi:BPMNEdge id="Flow_0op3yyr_di" bpmnElement="Flow_0op3yyr">
           <di:waypoint x="-1752" y="-1130" />
           <di:waypoint x="-1710" y="-1130" />
@@ -3300,6 +3346,26 @@ modeldata: |
           <di:waypoint x="-1510" y="-40" />
           <di:waypoint x="-1450" y="-40" />
         </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1f2i672_di" bpmnElement="Flow_1f2i672">
+          <di:waypoint x="-1680" y="-1940" />
+          <di:waypoint x="-1680" y="-1970" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0qox0ue_di" bpmnElement="Flow_0qox0ue">
+          <di:waypoint x="-1630" y="-1770" />
+          <di:waypoint x="-1590" y="-1770" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0tk9wbn_di" bpmnElement="Flow_0tk9wbn">
+          <di:waypoint x="-1680" y="-1730" />
+          <di:waypoint x="-1680" y="-1690" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_18oi2lc_di" bpmnElement="Flow_18oi2lc">
+          <di:waypoint x="-1730" y="-1770" />
+          <di:waypoint x="-1770" y="-1770" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1at7p1q_di" bpmnElement="Flow_1at7p1q">
+          <di:waypoint x="-1870" y="-1770" />
+          <di:waypoint x="-1920" y="-1770" />
+        </bpmndi:BPMNEdge>
         <bpmndi:BPMNEdge id="Association_066nu0f_di" bpmnElement="Association_066nu0f">
           <di:waypoint x="-662" y="-1110" />
           <di:waypoint x="-614" y="-1160" />
@@ -3328,29 +3394,33 @@ modeldata: |
           <di:waypoint x="-1643" y="0" />
           <di:waypoint x="-1655" y="40" />
         </bpmndi:BPMNEdge>
-        <bpmndi:BPMNEdge id="Flow_0rujw9m_di" bpmnElement="Flow_0rujw9m">
-          <di:waypoint x="-1802" y="-1900" />
+        <bpmndi:BPMNEdge id="Association_04q18oh_di" bpmnElement="Association_04q18oh">
+          <di:waypoint x="-1482" y="-1170" />
+          <di:waypoint x="-1443" y="-1211" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Association_0d1r4rm_di" bpmnElement="Association_0d1r4rm">
+          <di:waypoint x="-1342" y="-1050" />
+          <di:waypoint x="-1318" y="-1075" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Association_1k7rckp_di" bpmnElement="Association_1k7rckp">
+          <di:waypoint x="-1642" y="-2050" />
+          <di:waypoint x="-1605" y="-2089" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Association_18nzni1_di" bpmnElement="Association_18nzni1">
+          <di:waypoint x="-1490" y="-1797" />
+          <di:waypoint x="-1408" y="-1840" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Association_1nlljq5_di" bpmnElement="Association_1nlljq5">
+          <di:waypoint x="-1994" y="-1810" />
+          <di:waypoint x="-2024" y="-1859" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1yn4o2t_di" bpmnElement="Flow_1yn4o2t">
+          <di:waypoint x="-1812" y="-1900" />
           <di:waypoint x="-1730" y="-1900" />
         </bpmndi:BPMNEdge>
-        <bpmndi:BPMNEdge id="Flow_1f2i672_di" bpmnElement="Flow_1f2i672">
-          <di:waypoint x="-1680" y="-1940" />
-          <di:waypoint x="-1680" y="-1970" />
-        </bpmndi:BPMNEdge>
-        <bpmndi:BPMNEdge id="Flow_0qox0ue_di" bpmnElement="Flow_0qox0ue">
-          <di:waypoint x="-1630" y="-1770" />
-          <di:waypoint x="-1590" y="-1770" />
-        </bpmndi:BPMNEdge>
-        <bpmndi:BPMNEdge id="Flow_1cfu4or_di" bpmnElement="Flow_1cfu4or">
+        <bpmndi:BPMNEdge id="Flow_1uc5mmq_di" bpmnElement="Flow_1uc5mmq">
           <di:waypoint x="-1680" y="-1860" />
           <di:waypoint x="-1680" y="-1810" />
-        </bpmndi:BPMNEdge>
-        <bpmndi:BPMNEdge id="Flow_0tk9wbn_di" bpmnElement="Flow_0tk9wbn">
-          <di:waypoint x="-1680" y="-1730" />
-          <di:waypoint x="-1680" y="-1690" />
-        </bpmndi:BPMNEdge>
-        <bpmndi:BPMNEdge id="Flow_18oi2lc_di" bpmnElement="Flow_18oi2lc">
-          <di:waypoint x="-1730" y="-1770" />
-          <di:waypoint x="-1770" y="-1770" />
         </bpmndi:BPMNEdge>
       </bpmndi:BPMNPlane>
     </bpmndi:BPMNDiagram>

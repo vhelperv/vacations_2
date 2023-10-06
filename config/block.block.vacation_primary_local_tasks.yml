@@ -1,7 +1,9 @@
 uuid: fd67690a-500f-4bb5-932b-8d92956d26f3
 langcode: en
-status: true
+status: false
 dependencies:
+  module:
+    - user
   theme:
     - vacation
 _core:
@@ -19,4 +21,11 @@ settings:
   provider: core
   primary: true
   secondary: false
-visibility: {  }
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      administrator: administrator

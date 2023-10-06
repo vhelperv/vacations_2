@@ -11,8 +11,8 @@ _core:
   default_config_hash: y9X3xgCsO59pQyzNLzY1D3SDJJxCHILLWkpPnmuTJ2E
 id: vacation_breadcrumbs
 theme: vacation
-region: header
-weight: -5
+region: highlighted
+weight: -4
 provider: null
 plugin: system_breadcrumb_block
 settings:

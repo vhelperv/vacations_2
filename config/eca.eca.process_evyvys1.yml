@@ -425,6 +425,15 @@ conditions:
       right: '[vactimeend]'
       operator: greaterthan
       type: value
+  Flow_1at7p1q:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[period]'
+      right: '60'
+      operator: lessthan
+      type: value
 gateways:
   Gateway_0riv56h:
     type: 0
@@ -1286,7 +1295,7 @@ actions:
         id: Activity_0us6moy
         condition: Flow_0tk9wbn
       -
-        id: Activity_1c33hf5
+        id: Activity_16c82k4
         condition: ''
   Activity_0us6moy:
     plugin: eca_form_field_set_error
@@ -1297,8 +1306,21 @@ actions:
     successors: {  }
   Activity_1c33hf5:
     plugin: eca_form_field_set_error
-    label: Activity_1c33hf5
+    label: 'ERROR: Vacation less than hour'
     configuration:
-      message: ''
+      message: 'You cannot take a vacation for less than an hour.'
       field_name: op
     successors: {  }
+  Activity_16c82k4:
+    plugin: 'eca_tamper:math'
+    label: 'Calc period vacation [period]'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '[vactimestart]'
+      eca_data: '[vactimeend]'
+      eca_token_name: period
+    successors:
+      -
+        id: Activity_1c33hf5
+        condition: Flow_1at7p1q
