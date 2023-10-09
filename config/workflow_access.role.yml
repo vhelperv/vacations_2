@@ -306,3 +306,165 @@ request_status_sancel:
     grant_view: 0
     grant_update: 0
     grant_delete: 0
+agreement_yes:
+  workflow_author:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  anonymous:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  authenticated:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  administrator:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  ceo:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  developer_junior:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  developer_middle:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  developer_senior:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  teamlead:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  pm:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  shief_pm:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  head_of_department:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  sales:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  marketing:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  recruiting:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  hr:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  om:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  accounting:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  admin_staff:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  client:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+agreement_no:
+  workflow_author:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  anonymous:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  authenticated:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  administrator:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  ceo:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  developer_junior:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  developer_middle:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  developer_senior:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  teamlead:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  pm:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  shief_pm:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  head_of_department:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  sales:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  marketing:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  recruiting:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  hr:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  om:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  accounting:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  admin_staff:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  client:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0

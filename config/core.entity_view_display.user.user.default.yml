@@ -65,13 +65,39 @@ third_party_settings:
             region: content
             configuration:
               id: 'views_block:recent_events-block_1'
-              label: ''
+              label: 'Last Vacation'
               label_display: visible
               provider: views
               context_mapping: {  }
-              views_label: ''
-              items_per_page: none
+              views_label: 'Last Vacation'
+              items_per_page: '5'
             weight: 3
+            additional: {  }
+          90adce03-b553-495c-bd2d-79ae733d5658:
+            uuid: 90adce03-b553-495c-bd2d-79ae733d5658
+            region: content
+            configuration:
+              id: 'views_block:recent_events-block_2'
+              label: 'Last Certificate'
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: 'Last Certificate'
+              items_per_page: '5'
+            weight: 4
+            additional: {  }
+          746b91a5-581d-444f-8e5c-017f88bbbfa9:
+            uuid: 746b91a5-581d-444f-8e5c-017f88bbbfa9
+            region: content
+            configuration:
+              id: 'views_block:recent_events-block_3'
+              label: 'Last Transaction'
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: 'Last Transaction'
+              items_per_page: '5'
+            weight: 5
             additional: {  }
         third_party_settings: {  }
 _core:

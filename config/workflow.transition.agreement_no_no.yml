@@ -1,0 +1,12 @@
+uuid: 388013f2-8550-4867-953f-d309f20c0790
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflow.state.agreement_no
+id: agreement_no_no
+label: null
+module: workflow
+from_sid: agreement_no
+to_sid: agreement_no
+roles: {  }

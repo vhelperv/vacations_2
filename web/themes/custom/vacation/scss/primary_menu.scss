@@ -4,10 +4,12 @@ header {
   margin-bottom: 10px;
   box-shadow: gray 0 7px 5px;
 }
+.region-sticky {
+  z-index: 3!important;
+}
 .primary-menu {
   width: 100%;
 }
-
 .primary-menu {
   .region-primary-menu {
     display: flex;
@@ -42,7 +44,7 @@ header {
       & > a {
         text-decoration: none;
         color: #000;
-        font-size: 20px;
+        font-size: 21px;
         font-weight: 500;
         font-style: italic;
       }
@@ -138,4 +140,67 @@ header {
   font-size:24px;
   font-style: italic;
   font-weight: 500;
+}
+
+.form-save-default-button {
+  display: none;
+}
+
+.popup {
+  display: block;
+  height: auto;
+  width: auto;
+  text-align: center;
+  .form-actions {
+    display: flex;
+    margin-left: 50px;
+    margin-right: 172px;
+    .workflow-button-сancel {
+      &[value] {
+        font-size: 0;
+        width: 70px;
+      }
+    }
+    &:after {
+      position: absolute;
+      margin-top: 27px;
+      margin-left: 20px;
+      content: "Yes";
+      font-size: var(--gin-font-size);
+      font-weight: var(--gin-font-weight-semibold);
+      color: var(--gin-color-primary);
+      background-color: transparent;
+      box-shadow: none;
+      transition: var(--gin-transition);
+      pointer-events: none;
+    }
+    &:hover::after {
+      color: #fff;
+    }
+  }
+}
+.spv-popup-content {
+  z-index: 5;
+  right: 550%;
+  top: -45px;
+}
+
+.spv_close {
+  position: inherit;
+  top: 149px;
+  right: 50px;
+  z-index: 3;
+}
+body.lock {
+  overflow: hidden;
+}
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: 4;
 }

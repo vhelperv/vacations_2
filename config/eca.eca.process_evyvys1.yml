@@ -78,8 +78,20 @@ events:
       operation: ''
     successors:
       -
-        id: Activity_0wyll02
+        id: Activity_0tnv8lg
         condition: ''
+  Event_1jc8iib:
+    plugin: 'form:form_submit'
+    label: Event_1jc8iib
+    configuration:
+      form_id: agreement-form
+      entity_type_id: ''
+      bundle: ''
+      operation: ''
+    successors:
+      -
+        id: Activity_144eolz
+        condition: Flow_017fq2q
 conditions:
   Flow_1b7hrrh:
     plugin: eca_scalar
@@ -434,6 +446,45 @@ conditions:
       right: '60'
       operator: lessthan
       type: value
+  Flow_09qzfgq:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[rangeday]'
+      right: '31'
+      operator: greaterthan
+      type: value
+  Flow_0u90h8i:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[numbday]'
+      right: '14'
+      operator: greaterthan
+      type: value
+  Flow_03fyr39:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[partday]'
+      right: '2'
+      operator: equal
+      type: value
+  Flow_017fq2q:
+    plugin: eca_form_field_value
+    configuration:
+      negate: false
+      case: false
+      field_value: 'Yes'
+      field_name: op
+      strip_tags: true
+      trim: true
+      xss_filter: true
+      operator: equal
+      type: value
 gateways:
   Gateway_0riv56h:
     type: 0
@@ -575,7 +626,7 @@ actions:
         condition: ''
   Activity_1bchrvq:
     plugin: eca_form_field_get_value
-    label: 'Get value start date'
+    label: 'Get value start date [startdate]'
     configuration:
       token_name: startdate
       field_name: field_period_of_validity.0.value
@@ -585,6 +636,9 @@ actions:
     successors:
       -
         id: Activity_0id92iz
+        condition: ''
+      -
+        id: Activity_1oicczc
         condition: ''
   Activity_18sltp8:
     plugin: eca_form_field_set_error
@@ -1324,3 +1378,128 @@ actions:
       -
         id: Activity_1c33hf5
         condition: Flow_1at7p1q
+  Activity_1oicczc:
+    plugin: eca_form_field_get_value
+    label: 'Get value end date [enddate]'
+    configuration:
+      token_name: enddate
+      field_name: field_period_of_validity.0.end_value
+      strip_tags: true
+      trim: true
+      xss_filter: true
+    successors:
+      -
+        id: Activity_0vfuv8f
+        condition: ''
+      -
+        id: Activity_0ozh0nv
+        condition: ''
+  Activity_0wc5k78:
+    plugin: eca_form_field_set_error
+    label: 'ERROR: Max range certificate'
+    configuration:
+      message: 'The maximum duration of the bonus certificate is 1 month!'
+      field_name: op
+    successors: {  }
+  Activity_0vfuv8f:
+    plugin: 'eca_tamper:strtotime'
+    label: 'Convert to UNIX'
+    configuration:
+      eca_data: '[enddate]'
+      eca_token_name: '[unixenddate]'
+    successors:
+      -
+        id: Activity_1gjf4tq
+        condition: ''
+  Activity_1gjf4tq:
+    plugin: 'eca_tamper:math'
+    label: 'Sub end - start'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '[unixstartdate]'
+      eca_data: '[unixenddate]'
+      eca_token_name: range
+    successors:
+      -
+        id: Activity_1035ocv
+        condition: ''
+  Activity_1035ocv:
+    plugin: 'eca_tamper:math'
+    label: 'Range to minute'
+    configuration:
+      operation: division
+      flip: false
+      value: '60'
+      eca_data: '[range]'
+      eca_token_name: rangemin
+    successors:
+      -
+        id: Activity_1ndvqrn
+        condition: ''
+  Activity_1ndvqrn:
+    plugin: 'eca_tamper:math'
+    label: 'Range to hour'
+    configuration:
+      operation: division
+      flip: false
+      value: '60'
+      eca_data: '[rangemin]'
+      eca_token_name: rangehour
+    successors:
+      -
+        id: Activity_1vux1py
+        condition: ''
+  Activity_1vux1py:
+    plugin: 'eca_tamper:math'
+    label: 'Range to day'
+    configuration:
+      operation: division
+      flip: false
+      value: '24'
+      eca_data: '[rangehour]'
+      eca_token_name: rangeday
+    successors:
+      -
+        id: Activity_0wc5k78
+        condition: Flow_09qzfgq
+  Activity_0ozh0nv:
+    plugin: eca_form_field_get_value
+    label: 'Get number day [numbday]'
+    configuration:
+      token_name: numbday
+      field_name: field_issued_days.0.value
+      strip_tags: true
+      trim: true
+      xss_filter: true
+    successors:
+      -
+        id: Activity_1vz8toh
+        condition: Flow_0u90h8i
+  Activity_1vz8toh:
+    plugin: eca_form_field_set_error
+    label: 'ERROR: Max size bonus certificate'
+    configuration:
+      message: 'The maximum size of the bonus certificate is 14 days!'
+      field_name: op
+    successors: {  }
+  Activity_0tnv8lg:
+    plugin: eca_form_field_get_value
+    label: 'Get value part day [partday]'
+    configuration:
+      token_name: partday
+      field_name: field_part_day.0.target_id
+      strip_tags: true
+      trim: true
+      xss_filter: true
+    successors:
+      -
+        id: Activity_0wyll02
+        condition: Flow_03fyr39
+  Activity_144eolz:
+    plugin: eca_form_field_set_error
+    label: Activity_144eolz
+    configuration:
+      message: kl
+      field_name: op
+    successors: {  }

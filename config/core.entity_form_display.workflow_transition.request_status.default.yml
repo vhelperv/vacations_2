@@ -1,0 +1,12 @@
+uuid: 10aa1b3e-a5f8-4c29-939a-b1023b708fe3
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflow.workflow.request_status
+id: workflow_transition.request_status.default
+targetEntityType: workflow_transition
+bundle: request_status
+mode: default
+content: {  }
+hidden: {  }

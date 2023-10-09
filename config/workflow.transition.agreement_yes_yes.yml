@@ -1,0 +1,12 @@
+uuid: c2207dc3-4732-40a0-9aa7-9d374c382d0b
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflow.state.agreement_yes
+id: agreement_yes_yes
+label: null
+module: workflow
+from_sid: agreement_yes
+to_sid: agreement_yes
+roles: {  }
