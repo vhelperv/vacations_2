@@ -5,6 +5,7 @@ dependencies:
   config:
     - node.type.vacation
     - taxonomy.vocabulary.type_vacation
+    - user.role.administrator
   content:
     - 'taxonomy_term:type_vacation:47399f17-61d2-4ecb-a59f-11488aa342e3'
   module:
@@ -368,6 +369,13 @@ display:
     display_plugin: page
     position: 2
     display_options:
+      access:
+        type: role
+        options:
+          role:
+            administrator: administrator
+      defaults:
+        access: false
       display_extenders: {  }
       path: vacation
     cache_metadata:
@@ -378,5 +386,5 @@ display:
         - url
         - user
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags: {  }

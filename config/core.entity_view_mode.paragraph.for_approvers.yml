@@ -1,0 +1,10 @@
+uuid: fe3bd97e-89e9-4993-a950-efadb1feb5c6
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.for_approvers
+label: 'For approvers'
+targetEntityType: paragraph
+cache: true

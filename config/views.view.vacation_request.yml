@@ -373,7 +373,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: Approve
+          label: State
           exclude: false
           alter:
             alter_text: false
@@ -417,7 +417,7 @@ display:
           click_sort_column: target_id
           type: entity_reference_revisions_entity_view
           settings:
-            view_mode: default
+            view_mode: for_approvers
           group_column: ''
           group_columns: {  }
           group_rows: false

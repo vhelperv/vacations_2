@@ -169,8 +169,8 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
-                type: workflow_default
-                label: above
+                type: list_default
+                label: inline
                 settings: {  }
                 third_party_settings: {  }
             weight: 10
