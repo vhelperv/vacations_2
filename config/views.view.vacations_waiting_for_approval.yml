@@ -323,16 +323,7 @@ display:
           distinct: false
           replica: false
           query_tags: {  }
-      relationships:
-        field_vacation_s_employee_:
-          id: field_vacation_s_employee_
-          table: node__field_vacation_s_employee_
-          field: field_vacation_s_employee_
-          relationship: none
-          group_type: group
-          admin_label: 'field_vacation_s_employee_: User'
-          plugin_id: standard
-          required: false
+      relationships: {  }
       header: {  }
       footer: {  }
       display_extenders: {  }
