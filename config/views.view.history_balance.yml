@@ -482,19 +482,6 @@ display:
             field_identifier: ''
           exposed: false
           granularity: second
-        field_balance_value:
-          id: field_balance_value
-          table: node__field_balance
-          field: field_balance_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: standard
-          order: ASC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
       arguments:
         field_employee_vacation_target_id:
           id: field_employee_vacation_target_id

@@ -40,7 +40,7 @@ conditions:
       negate: false
       case: false
       expected_value: request_status_approved
-      field_name: field_state_vacation.value
+      field_name: field_state_vacation
       operator: equal
       type: value
       entity: ''
@@ -133,7 +133,7 @@ gateways:
         id: Activity_0dm0pr4
         condition: Flow_0ylwj1m
       -
-        id: Gateway_1a3hbxe
+        id: Activity_1ihip22
         condition: Flow_08x0jfm
   Gateway_1a3hbxe:
     type: 0
@@ -200,18 +200,11 @@ actions:
       arguments: ''
     successors:
       -
-        id: Activity_0dx25ar
-        condition: ''
-      -
         id: Activity_0q4ktp9
         condition: ''
-  Activity_0dx25ar:
-    plugin: action_message_action
-    label: Activity_0dx25ar
-    configuration:
-      replace_tokens: false
-      message: '[wforapproval] --- good 1'
-    successors: {  }
+      -
+        id: Activity_0jhlvii
+        condition: ''
   Activity_0q4ktp9:
     plugin: eca_count
     label: 'Count list [countwfa]'
@@ -227,7 +220,7 @@ actions:
     label: 'Token 0 [forapproval]'
     configuration:
       token_name: forapproval
-      token_value: o
+      token_value: '0'
       use_yaml: false
     successors:
       -
@@ -242,9 +235,6 @@ actions:
       display_id: block_1
       arguments: ''
     successors:
-      -
-        id: Activity_0mr3c1v
-        condition: ''
       -
         id: Activity_0k8td9j
         condition: ''
@@ -269,13 +259,6 @@ actions:
       -
         id: Gateway_0o0mfk7
         condition: ''
-  Activity_0mr3c1v:
-    plugin: action_message_action
-    label: Activity_0mr3c1v
-    configuration:
-      replace_tokens: false
-      message: '[balanceview] --- good 2'
-    successors: {  }
   Activity_0dm0pr4:
     plugin: 'eca_tamper:math'
     label: 'Add field_remainder to balance'
@@ -328,6 +311,9 @@ actions:
       -
         id: Activity_0xjxw3z
         condition: ''
+      -
+        id: Activity_1y64s3h
+        condition: ''
   Activity_0fbaaig:
     plugin: eca_list_add_entity
     label: 'Add to list [needreject]'
@@ -363,6 +349,9 @@ actions:
     successors:
       -
         id: Activity_1v0trck
+        condition: ''
+      -
+        id: Activity_1ih4qos
         condition: ''
   Activity_1v0trck:
     plugin: eca_list_remove_entity
@@ -412,22 +401,14 @@ actions:
       -
         id: Gateway_14y9au9
         condition: ''
-  Activity_0zvsj98:
-    plugin: eca_token_set_value
-    label: 'Set [needreject:0] into [reject]'
-    configuration:
-      token_name: reject
-      token_value: '[needreject:0]'
-      use_yaml: false
-    successors:
       -
-        id: Activity_1hs6sm8
+        id: Activity_0tcw6v2
         condition: ''
   Activity_1hs6sm8:
     plugin: eca_set_field_value
     label: 'Set Reject into vacation'
     configuration:
-      field_name: '[field_state_vacation:value]'
+      field_name: field_state_vacation.value
       field_value: request_status_rejected
       method: 'set:clear'
       strip_tags: false
@@ -437,6 +418,9 @@ actions:
     successors:
       -
         id: Activity_1kqramv
+        condition: ''
+      -
+        id: Activity_0ucju1y
         condition: ''
   Activity_1kqramv:
     plugin: 'eca_tamper:math'
@@ -451,6 +435,9 @@ actions:
       -
         id: Activity_1hxi129
         condition: ''
+      -
+        id: Activity_18zy5g5
+        condition: ''
   Activity_1hxi129:
     plugin: eca_list_remove_entity
     label: 'Drop first from [needreject]'
@@ -463,6 +450,9 @@ actions:
     successors:
       -
         id: Gateway_14y9au9
+        condition: ''
+      -
+        id: Activity_0kls0xv
         condition: ''
   Activity_02lazf9:
     plugin: action_message_action
@@ -478,15 +468,93 @@ actions:
       user_id: '[node:field_vacation_s_employee_:target_id]'
     successors:
       -
-        id: Activity_1m0x2j4
-        condition: ''
-      -
         id: Activity_01lfx1g
         condition: ''
-  Activity_1m0x2j4:
+  Activity_1ihip22:
+    plugin: eca_token_set_value
+    label: 'Token 0 [countwfa]'
+    configuration:
+      token_name: countwfa
+      token_value: '0'
+      use_yaml: false
+    successors:
+      -
+        id: Gateway_1a3hbxe
+        condition: ''
+  Activity_13r57id:
     plugin: action_message_action
-    label: Activity_1m0x2j4
+    label: Activity_13r57id
     configuration:
       replace_tokens: false
-      message: 'work - [node:field_vacation_s_employee_:target_id]'
+      message: '1'
+    successors: {  }
+  Activity_0ucju1y:
+    plugin: action_message_action
+    label: Activity_0ucju1y
+    configuration:
+      replace_tokens: false
+      message: '2'
+    successors: {  }
+  Activity_18zy5g5:
+    plugin: action_message_action
+    label: Activity_18zy5g5
+    configuration:
+      replace_tokens: false
+      message: '3'
+    successors: {  }
+  Activity_0kls0xv:
+    plugin: action_message_action
+    label: Activity_0kls0xv
+    configuration:
+      replace_tokens: false
+      message: '4'
+    successors: {  }
+  Activity_0zvsj98:
+    plugin: eca_token_load_entity
+    label: 'Set [needreject:0] into [reject]'
+    configuration:
+      token_name: reject
+      from: id
+      entity_type: node
+      entity_id: '[needreject:0:nid]'
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_1hs6sm8
+        condition: ''
+      -
+        id: Activity_13r57id
+        condition: ''
+  Activity_0tcw6v2:
+    plugin: action_message_action
+    label: Activity_0tcw6v2
+    configuration:
+      replace_tokens: false
+      message: 'start - [var]'
+    successors: {  }
+  Activity_1ih4qos:
+    plugin: action_message_action
+    label: Activity_1ih4qos
+    configuration:
+      replace_tokens: false
+      message: work1
+    successors: {  }
+  Activity_1y64s3h:
+    plugin: action_message_action
+    label: Activity_1y64s3h
+    configuration:
+      replace_tokens: false
+      message: work2
+    successors: {  }
+  Activity_0jhlvii:
+    plugin: action_message_action
+    label: Activity_0jhlvii
+    configuration:
+      replace_tokens: false
+      message: '[wforapproval]'
     successors: {  }

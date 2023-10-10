@@ -191,16 +191,7 @@ header {
   right: 50px;
   z-index: 3;
 }
-body.lock {
-  overflow: hidden;
-}
-.bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  opacity: 0.5;
-  z-index: 4;
+
+#block-vacation-addvacation {
+  float: none;
 }

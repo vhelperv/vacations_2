@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.transaction.field_refer_to_vacation_entity
     - field.field.node.vacation.field_approve
     - field.field.node.vacation.field_numb_day
+    - field.field.node.vacation.field_range
     - field.field.paragraph.person_who_approve.field_permission
     - field.field.paragraph.person_who_approve.field_person
     - field.storage.node.field__account_balance
@@ -22,6 +23,7 @@ dependencies:
     - field.storage.node.field_certificate
     - field.storage.node.field_employee_vacation
     - field.storage.node.field_numb_day
+    - field.storage.node.field_range
     - field.storage.node.field_refer_to_vacation_entity
     - field.storage.node.field_remainder
     - field.storage.paragraph.field_permission
@@ -139,25 +141,23 @@ conditions:
       type: value
       negate: true
   Flow_0x4k9f7:
-    plugin: eca_entity_field_value
+    plugin: eca_scalar
     configuration:
       case: false
-      expected_value: '[current-date:short]'
-      field_name: field_range.0.end_value
+      left: '[range]'
+      right: '[current-date:raw]'
       operator: lessthan
       type: value
       negate: true
-      entity: cert
   Flow_0tr2b7k:
-    plugin: eca_entity_field_value
+    plugin: eca_scalar
     configuration:
       negate: false
       case: false
-      expected_value: '[current-date:short]'
-      field_name: field_range.0.end_value
+      left: '[range]'
+      right: '[current-date:raw]'
       operator: lessthan
       type: value
-      entity: cert
 gateways:
   Gateway_16a8oev:
     type: 0
@@ -377,7 +377,7 @@ actions:
       object: ''
     successors:
       -
-        id: Gateway_0pvce2q
+        id: Activity_0aopsfl
         condition: ''
   Activity_1y9sal8:
     plugin: eca_views_query
@@ -749,4 +749,14 @@ actions:
     successors:
       -
         id: Activity_0rsag3i
+        condition: ''
+  Activity_0aopsfl:
+    plugin: 'eca_tamper:strtotime'
+    label: 'Convert to Unix range end [range]'
+    configuration:
+      eca_data: '[cert:field_range:end_value]'
+      eca_token_name: range
+    successors:
+      -
+        id: Gateway_0pvce2q
         condition: ''

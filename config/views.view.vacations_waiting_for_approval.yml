@@ -5,7 +5,22 @@ dependencies:
   config:
     - node.type.vacation
     - taxonomy.vocabulary.type_vacation
+    - user.role.accounting
+    - user.role.admin_staff
     - user.role.administrator
+    - user.role.ceo
+    - user.role.developer_junior
+    - user.role.developer_middle
+    - user.role.developer_senior
+    - user.role.head_of_department
+    - user.role.hr
+    - user.role.marketing
+    - user.role.om
+    - user.role.pm
+    - user.role.recruiting
+    - user.role.sales
+    - user.role.shief_pm
+    - user.role.teamlead
   content:
     - 'taxonomy_term:type_vacation:47399f17-61d2-4ecb-a59f-11488aa342e3'
   module:
@@ -13,6 +28,7 @@ dependencies:
     - node
     - taxonomy
     - user
+    - workflow
 id: vacations_waiting_for_approval
 label: 'Vacations Waiting For Approval'
 module: views
@@ -108,9 +124,25 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: perm
+        type: role
         options:
-          perm: 'access content'
+          role:
+            administrator: administrator
+            ceo: ceo
+            developer_junior: developer_junior
+            developer_middle: developer_middle
+            developer_senior: developer_senior
+            teamlead: teamlead
+            pm: pm
+            shief_pm: shief_pm
+            head_of_department: head_of_department
+            sales: sales
+            marketing: marketing
+            recruiting: recruiting
+            hr: hr
+            om: om
+            accounting: accounting
+            admin_staff: admin_staff
       cache:
         type: tag
         options: {  }
@@ -311,8 +343,70 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        field_state_vacation_value:
+          id: field_state_vacation_value
+          table: node__field_state_vacation
+          field: field_state_vacation_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: workflow_state
+          operator: or
+          value:
+            request_status_on_hold: request_status_on_hold
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
       style:
-        type: default
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            title: title
+          default: '-1'
+          info:
+            title:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+          caption: ''
+          description: ''
       row:
         type: fields
       query:
@@ -323,7 +417,19 @@ display:
           distinct: false
           replica: false
           query_tags: {  }
-      relationships: {  }
+      relationships:
+        uid:
+          id: uid
+          table: node_field_data
+          field: uid
+          relationship: none
+          group_type: group
+          admin_label: User
+          entity_type: node
+          entity_field: uid
+          plugin_id: standard
+          required: false
+      use_ajax: true
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -335,7 +441,7 @@ display:
         - url
         - user
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags: {  }
   block_1:
     id: block_1
@@ -352,7 +458,7 @@ display:
         - url
         - user
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags: {  }
   page_1:
     id: page_1
@@ -365,6 +471,9 @@ display:
         options:
           role:
             administrator: administrator
+            developer_junior: developer_junior
+            developer_middle: developer_middle
+            developer_senior: developer_senior
       defaults:
         access: false
       display_extenders: {  }
