@@ -80,18 +80,6 @@ events:
       -
         id: Activity_0tnv8lg
         condition: ''
-  Event_1jc8iib:
-    plugin: 'form:form_submit'
-    label: Event_1jc8iib
-    configuration:
-      form_id: agreement-form
-      entity_type_id: ''
-      bundle: ''
-      operation: ''
-    successors:
-      -
-        id: Activity_144eolz
-        condition: Flow_017fq2q
 conditions:
   Flow_1b7hrrh:
     plugin: eca_scalar
@@ -471,18 +459,6 @@ conditions:
       case: false
       left: '[partday]'
       right: '2'
-      operator: equal
-      type: value
-  Flow_017fq2q:
-    plugin: eca_form_field_value
-    configuration:
-      negate: false
-      case: false
-      field_value: 'Yes'
-      field_name: op
-      strip_tags: true
-      trim: true
-      xss_filter: true
       operator: equal
       type: value
 gateways:
@@ -1496,10 +1472,3 @@ actions:
       -
         id: Activity_0wyll02
         condition: Flow_03fyr39
-  Activity_144eolz:
-    plugin: eca_form_field_set_error
-    label: Activity_144eolz
-    configuration:
-      message: kl
-      field_name: op
-    successors: {  }

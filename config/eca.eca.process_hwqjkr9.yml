@@ -43,7 +43,7 @@ conditions:
       negate: false
       case: false
       left: '[datestart]'
-      right: '[startvac]'
+      right: '[unixstartvac]'
       operator: lessthan
       type: value
   Flow_0bsn6w8:
@@ -52,7 +52,7 @@ conditions:
       negate: false
       case: false
       left: '[dateend]'
-      right: '[endvac]'
+      right: '[unixendvac]'
       operator: greaterthan
       type: value
   Flow_0uiyce0:
@@ -60,7 +60,7 @@ conditions:
     configuration:
       negate: false
       case: false
-      left: '[startvac]'
+      left: '[unixstartvac]'
       right: '[datestart]'
       operator: lessthan
       type: value
@@ -69,7 +69,7 @@ conditions:
     configuration:
       negate: false
       case: false
-      left: '[endvac]'
+      left: '[unixendvac]'
       right: '[dateend]'
       operator: greaterthan
       type: value
@@ -78,7 +78,7 @@ conditions:
     configuration:
       negate: false
       case: false
-      left: '[startvac]'
+      left: '[unixstartvac]'
       right: '[datestart]'
       operator: greaterthan
       type: value
@@ -87,7 +87,7 @@ conditions:
     configuration:
       negate: false
       case: false
-      left: '[startvac]'
+      left: '[unixstartvac]'
       right: '[dateend]'
       operator: lessthan
       type: value
@@ -96,7 +96,7 @@ conditions:
     configuration:
       negate: false
       case: false
-      left: '[endvac]'
+      left: '[unixendvac]'
       right: '[datestart]'
       operator: greaterthan
       type: value
@@ -105,7 +105,7 @@ conditions:
     configuration:
       negate: false
       case: false
-      left: '[endvac]'
+      left: '[unixendvac]'
       right: '[dateend]'
       operator: lessthan
       type: value
@@ -114,7 +114,7 @@ conditions:
     configuration:
       negate: false
       case: false
-      left: '[startvac]'
+      left: '[unixstartvac]'
       right: '[datestart]'
       operator: equal
       type: value
@@ -123,7 +123,7 @@ conditions:
     configuration:
       negate: false
       case: false
-      left: '[startvac]'
+      left: '[unixstartvac]'
       right: '[dateend]'
       operator: equal
       type: value
@@ -132,7 +132,7 @@ conditions:
     configuration:
       negate: false
       case: false
-      left: '[endvac]'
+      left: '[unixendvac]'
       right: '[datestart]'
       operator: equal
       type: value
@@ -141,7 +141,7 @@ conditions:
     configuration:
       negate: false
       case: false
-      left: '[endvac]'
+      left: '[unixendvac]'
       right: '[dateend]'
       operator: equal
       type: value
@@ -188,7 +188,7 @@ actions:
       xss_filter: true
     successors:
       -
-        id: Activity_1vaxpz0
+        id: Activity_0e11ojt
         condition: ''
       -
         id: Activity_1r3e2mb
@@ -231,7 +231,7 @@ actions:
       use_yaml: false
     successors:
       -
-        id: Activity_02fgo03
+        id: Activity_1w572eh
         condition: ''
   Activity_02fgo03:
     plugin: eca_token_set_value
@@ -242,32 +242,8 @@ actions:
       use_yaml: false
     successors:
       -
-        id: Activity_0dgenov
+        id: Activity_13nkn2a
         condition: ''
-      -
-        id: Gateway_00c71gd
-        condition: Flow_0u0gpmx
-      -
-        id: Gateway_1p6p91i
-        condition: Flow_0uiyce0
-      -
-        id: Gateway_0g0jzts
-        condition: Flow_124b8mk
-      -
-        id: Gateway_0v1zl6b
-        condition: Flow_0qyju6b
-      -
-        id: Activity_0be0764
-        condition: Flow_18wra4c
-      -
-        id: Activity_0be0764
-        condition: Flow_178b9qy
-      -
-        id: Activity_0be0764
-        condition: Flow_04bobs1
-      -
-        id: Activity_0be0764
-        condition: Flow_0fdawgh
   Activity_0dgenov:
     plugin: eca_list_remove
     label: 'Drop first'
@@ -305,5 +281,69 @@ actions:
       xss_filter: true
     successors:
       -
+        id: Activity_0fdw880
+        condition: ''
+  Activity_0fdw880:
+    plugin: 'eca_tamper:strtotime'
+    label: 'Start date in UNIX [unixendvac]'
+    configuration:
+      eca_data: '[endvac]'
+      eca_token_name: unixendvac
+    successors:
+      -
         id: Activity_1vaxpz0
         condition: ''
+  Activity_0e11ojt:
+    plugin: 'eca_tamper:strtotime'
+    label: 'Start date in UNIX [unixstartvac]'
+    configuration:
+      eca_data: '[startvac]'
+      eca_token_name: unixstartvac
+    successors:
+      -
+        id: Activity_1vaxpz0
+        condition: ''
+  Activity_1w572eh:
+    plugin: 'eca_tamper:strtotime'
+    label: 'Date start in UNIX [unixdatestart]'
+    configuration:
+      eca_data: '[datestart]'
+      eca_token_name: unixdatestart
+    successors:
+      -
+        id: Activity_02fgo03
+        condition: ''
+  Activity_13nkn2a:
+    plugin: 'eca_tamper:strtotime'
+    label: 'Date end in UNIX [unixdateend]'
+    configuration:
+      eca_data: '[dateend]'
+      eca_token_name: unixdateend
+    successors:
+      -
+        id: Activity_0dgenov
+        condition: ''
+      -
+        id: Gateway_00c71gd
+        condition: Flow_0u0gpmx
+      -
+        id: Gateway_1p6p91i
+        condition: Flow_0uiyce0
+      -
+        id: Gateway_0g0jzts
+        condition: Flow_124b8mk
+      -
+        id: Gateway_0v1zl6b
+        condition: Flow_0qyju6b
+      -
+        id: Activity_0be0764
+        condition: Flow_18wra4c
+      -
+        id: Activity_0be0764
+        condition: Flow_178b9qy
+      -
+        id: Activity_0be0764
+        condition: Flow_04bobs1
+      -
+        id: Activity_0be0764
+        condition: Flow_0fdawgh

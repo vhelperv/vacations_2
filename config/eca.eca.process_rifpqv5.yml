@@ -12,11 +12,8 @@ dependencies:
     - field.field.node.transaction.field_refer_to_vacation_entity
     - field.field.node.vacation.field_approve
     - field.field.node.vacation.field_numb_day
-    - field.field.node.vacation.field_part_day
     - field.field.node.vacation.field_range
     - field.field.node.vacation.field_state_vacation
-    - field.field.node.vacation.field_time_vacation
-    - field.field.node.vacation.field_type_vacation
     - field.field.node.vacation.field_vacation_s_employee_
     - field.field.paragraph.person_who_approve.field_permission
     - field.field.paragraph.person_who_approve.field_person
@@ -26,13 +23,10 @@ dependencies:
     - field.storage.node.field_certificate
     - field.storage.node.field_employee_vacation
     - field.storage.node.field_numb_day
-    - field.storage.node.field_part_day
     - field.storage.node.field_range
     - field.storage.node.field_refer_to_vacation_entity
     - field.storage.node.field_remainder
     - field.storage.node.field_state_vacation
-    - field.storage.node.field_time_vacation
-    - field.storage.node.field_type_vacation
     - field.storage.node.field_vacation_s_employee_
     - field.storage.paragraph.field_permission
     - field.storage.paragraph.field_person
@@ -106,10 +100,7 @@ events:
       entity_type_id: ''
       bundle: ''
       operation: ''
-    successors:
-      -
-        id: Activity_059cyvn
-        condition: ''
+    successors: {  }
 conditions:
   Flow_1880gj1:
     plugin: eca_scalar

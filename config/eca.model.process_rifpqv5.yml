@@ -2561,7 +2561,6 @@ modeldata: |
             <camunda:string>yes</camunda:string>
           </camunda:field>
         </bpmn2:extensionElements>
-        <bpmn2:incoming>Flow_0ltgksz</bpmn2:incoming>
         <bpmn2:outgoing>Flow_1u37tk7</bpmn2:outgoing>
       </bpmn2:task>
       <bpmn2:task id="Activity_0hgakll" name="Disable field" camunda:modelerTemplate="org.drupal.action.eca_form_field_disable">
@@ -2672,7 +2671,6 @@ modeldata: |
         <bpmn2:incoming>Flow_0htyt2c</bpmn2:incoming>
         <bpmn2:outgoing>Flow_0l86f8h</bpmn2:outgoing>
       </bpmn2:task>
-      <bpmn2:sequenceFlow id="Flow_0ltgksz" sourceRef="Event_19acke4" targetRef="Activity_059cyvn" />
       <bpmn2:sequenceFlow id="Flow_0xych3p" sourceRef="Activity_1bylo0x" targetRef="Activity_05i205h" />
       <bpmn2:task id="Activity_1twif9y" name="Use Ajax" camunda:modelerTemplate="org.drupal.action.eca_form_add_ajax">
         <bpmn2:extensionElements>
@@ -2717,7 +2715,6 @@ modeldata: |
             <camunda:string></camunda:string>
           </camunda:field>
         </bpmn2:extensionElements>
-        <bpmn2:outgoing>Flow_0ltgksz</bpmn2:outgoing>
       </bpmn2:startEvent>
       <bpmn2:sequenceFlow id="Flow_04uf13i" sourceRef="Activity_1sih0b9" targetRef="Activity_01bbszy" />
       <bpmn2:sequenceFlow id="Flow_0htyt2c" sourceRef="Activity_1twif9y" targetRef="Activity_0pz9y06" />
@@ -3493,10 +3490,6 @@ modeldata: |
           <di:waypoint x="1420" y="525" />
           <di:waypoint x="1420" y="600" />
           <di:waypoint x="1470" y="600" />
-        </bpmndi:BPMNEdge>
-        <bpmndi:BPMNEdge id="Flow_0ltgksz_di" bpmnElement="Flow_0ltgksz">
-          <di:waypoint x="298" y="400" />
-          <di:waypoint x="330" y="400" />
         </bpmndi:BPMNEdge>
         <bpmndi:BPMNEdge id="Flow_0xych3p_di" bpmnElement="Flow_0xych3p">
           <di:waypoint x="1570" y="600" />

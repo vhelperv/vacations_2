@@ -2822,74 +2822,6 @@ modeldata: |
           </camunda:field>
         </bpmn2:extensionElements>
       </bpmn2:sequenceFlow>
-      <bpmn2:startEvent id="Event_1jc8iib" camunda:modelerTemplate="org.drupal.event.form:form_submit">
-        <bpmn2:extensionElements>
-          <camunda:properties>
-            <camunda:property name="pluginid" value="form:form_submit" />
-          </camunda:properties>
-          <camunda:field name="form_id">
-            <camunda:string>agreement-form</camunda:string>
-          </camunda:field>
-          <camunda:field name="entity_type_id">
-            <camunda:string></camunda:string>
-          </camunda:field>
-          <camunda:field name="bundle">
-            <camunda:string></camunda:string>
-          </camunda:field>
-          <camunda:field name="operation">
-            <camunda:string></camunda:string>
-          </camunda:field>
-        </bpmn2:extensionElements>
-        <bpmn2:outgoing>Flow_017fq2q</bpmn2:outgoing>
-      </bpmn2:startEvent>
-      <bpmn2:task id="Activity_144eolz" camunda:modelerTemplate="org.drupal.action.eca_form_field_set_error">
-        <bpmn2:extensionElements>
-          <camunda:properties>
-            <camunda:property name="pluginid" value="eca_form_field_set_error" />
-          </camunda:properties>
-          <camunda:field name="field_name">
-            <camunda:string>op</camunda:string>
-          </camunda:field>
-          <camunda:field name="message">
-            <camunda:string>kl</camunda:string>
-          </camunda:field>
-        </bpmn2:extensionElements>
-        <bpmn2:incoming>Flow_017fq2q</bpmn2:incoming>
-      </bpmn2:task>
-      <bpmn2:sequenceFlow id="Flow_017fq2q" camunda:modelerTemplate="org.drupal.condition.eca_form_field_value" sourceRef="Event_1jc8iib" targetRef="Activity_144eolz">
-        <bpmn2:extensionElements>
-          <camunda:properties>
-            <camunda:property name="pluginid" value="eca_form_field_value" />
-          </camunda:properties>
-          <camunda:field name="operator">
-            <camunda:string>equal</camunda:string>
-          </camunda:field>
-          <camunda:field name="field_value">
-            <camunda:string>Yes</camunda:string>
-          </camunda:field>
-          <camunda:field name="type">
-            <camunda:string>value</camunda:string>
-          </camunda:field>
-          <camunda:field name="case">
-            <camunda:string>no</camunda:string>
-          </camunda:field>
-          <camunda:field name="field_name">
-            <camunda:string>op</camunda:string>
-          </camunda:field>
-          <camunda:field name="strip_tags">
-            <camunda:string>yes</camunda:string>
-          </camunda:field>
-          <camunda:field name="trim">
-            <camunda:string>yes</camunda:string>
-          </camunda:field>
-          <camunda:field name="xss_filter">
-            <camunda:string>yes</camunda:string>
-          </camunda:field>
-          <camunda:field name="negate">
-            <camunda:string>no</camunda:string>
-          </camunda:field>
-        </bpmn2:extensionElements>
-      </bpmn2:sequenceFlow>
       <bpmn2:textAnnotation id="TextAnnotation_0px04cb">
         <bpmn2:text>Past days</bpmn2:text>
       </bpmn2:textAnnotation>
@@ -3374,12 +3306,6 @@ modeldata: |
         <bpmndi:BPMNShape id="TextAnnotation_1ke6qx8_di" bpmnElement="TextAnnotation_1ke6qx8">
           <dc:Bounds x="1010" y="-1770" width="99.98924268502583" height="40.44750430292599" />
           <bpmndi:BPMNLabel />
-        </bpmndi:BPMNShape>
-        <bpmndi:BPMNShape id="Event_1jc8iib_di" bpmnElement="Event_1jc8iib">
-          <dc:Bounds x="322" y="-1068" width="36" height="36" />
-        </bpmndi:BPMNShape>
-        <bpmndi:BPMNShape id="Activity_144eolz_di" bpmnElement="Activity_144eolz">
-          <dc:Bounds x="390" y="-1090" width="100" height="80" />
         </bpmndi:BPMNShape>
         <bpmndi:BPMNEdge id="Flow_0op3yyr_di" bpmnElement="Flow_0op3yyr">
           <di:waypoint x="668" y="-2070" />
@@ -3894,10 +3820,6 @@ modeldata: |
         <bpmndi:BPMNEdge id="Association_1jt33xv_di" bpmnElement="Association_1jt33xv">
           <di:waypoint x="950" y="-1724" />
           <di:waypoint x="1010" y="-1741" />
-        </bpmndi:BPMNEdge>
-        <bpmndi:BPMNEdge id="Flow_017fq2q_di" bpmnElement="Flow_017fq2q">
-          <di:waypoint x="358" y="-1050" />
-          <di:waypoint x="390" y="-1050" />
         </bpmndi:BPMNEdge>
       </bpmndi:BPMNPlane>
     </bpmndi:BPMNDiagram>
