@@ -190,7 +190,7 @@ third_party_settings:
                 type: time_range_formatter
                 label: inline
                 settings:
-                  time_format: 'h:i a'
+                  time_format: 'H:i:s'
                   timerange_format: 'start ~ end'
                 third_party_settings: {  }
             weight: 4

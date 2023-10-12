@@ -58,7 +58,29 @@ content:
     settings: {  }
     third_party_settings:
       conditional_fields:
-        b8c6e2ef-5721-4829-b142-6cd57a052df6:
+        1aac07cb-4474-44eb-b3ee-b59816d0c7cb:
+          entity_type: node
+          bundle: vacation
+          dependee: field_type_vacation
+          settings:
+            state: visible
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '2'
+            effect: slide
+            effect_options:
+              fade:
+                speed: '400'
+              slide:
+                speed: '400'
+            selector: ''
+        9231b1e6-1480-49ff-b60e-5c1d53b9bbda:
           entity_type: node
           bundle: vacation
           dependee: field_type_vacation
@@ -73,20 +95,38 @@ content:
             value_form:
               -
                 target_id: '1'
-            effect: fade
+            effect: slide
             effect_options:
               fade:
                 speed: '400'
               slide:
                 speed: '400'
             selector: ''
-        6b6cff42-0b89-4eff-a213-71d9e9121b27:
+        6761cb9d-456c-4c66-b4c6-aeeb0160781f:
           entity_type: node
           bundle: vacation
           dependee: field_type_vacation
           settings:
-            state: visible
-            reset: true
+            state: disabled
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '1'
+            effect: show
+            effect_options: {  }
+            selector: ''
+        c39723c8-b4f0-49d3-8b8f-0b3449e194cf:
+          entity_type: node
+          bundle: vacation
+          dependee: field_type_vacation
+          settings:
+            state: '!disabled'
+            reset: false
             condition: value
             grouping: AND
             values_set: 1
@@ -95,12 +135,29 @@ content:
             value_form:
               -
                 target_id: '2'
-            effect: fade
+            effect: show
+            effect_options: {  }
+            selector: ''
+        6e1b6ee9-10b7-490b-a0ec-6dfeb8eef840:
+          entity_type: node
+          bundle: vacation
+          dependee: field_type_vacation
+          settings:
+            state: empty
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '1'
+            effect: empty
             effect_options:
-              fade:
-                speed: '300'
-              slide:
-                speed: '400'
+              empty:
+                value: ''
+                reset: 1
             selector: ''
   field_range:
     type: daterange_default
@@ -125,32 +182,10 @@ content:
       step: 5
     third_party_settings:
       conditional_fields:
-        5d8b2ebe-2b35-4440-a03b-5acdfaa32e69:
+        b71f7e4a-2ddf-4169-b0be-0130f9193c2f:
           entity_type: node
           bundle: vacation
-          dependee: field_part_day
-          settings:
-            state: '!visible'
-            reset: false
-            condition: value
-            grouping: AND
-            values_set: 1
-            value: ''
-            values: {  }
-            value_form:
-              -
-                target_id: '5'
-            effect: fade
-            effect_options:
-              fade:
-                speed: '400'
-              slide:
-                speed: '400'
-            selector: ''
-        159e4786-61da-424a-a99e-461e38662ccd:
-          entity_type: node
-          bundle: vacation
-          dependee: field_part_day
+          dependee: field_type_vacation
           settings:
             state: visible
             reset: false
@@ -161,20 +196,136 @@ content:
             values: {  }
             value_form:
               -
-                target_id: '6'
-            effect: fade
+                target_id: '2'
+            effect: slide
             effect_options:
               fade:
                 speed: '400'
               slide:
                 speed: '400'
             selector: ''
+        f1a43cc6-8b6e-4bbd-b572-895d40f89c8e:
+          entity_type: node
+          bundle: vacation
+          dependee: field_type_vacation
+          settings:
+            state: '!visible'
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '1'
+            effect: slide
+            effect_options:
+              fade:
+                speed: '400'
+              slide:
+                speed: '400'
+            selector: ''
+        5ea51982-dd71-4507-b36a-7f3e86c47e0c:
+          entity_type: node
+          bundle: vacation
+          dependee: field_part_day
+          settings:
+            state: '!disabled'
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '6'
+            effect: show
+            effect_options: {  }
+            selector: ''
+        9ea1318d-7e23-4593-93f6-beea1c21e662:
+          entity_type: node
+          bundle: vacation
+          dependee: field_part_day
+          settings:
+            state: disabled
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '5'
+            effect: show
+            effect_options: {  }
+            selector: ''
+        30484ac3-b64b-4162-98a1-c08e3d29f4f1:
+          entity_type: node
+          bundle: vacation
+          dependee: field_part_day
+          settings:
+            state: required
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '6'
+            effect: show
+            effect_options: {  }
+            selector: ''
+        6c6030d4-6936-4d52-9a4c-b8d51695c166:
+          entity_type: node
+          bundle: vacation
+          dependee: field_part_day
+          settings:
+            state: '!required'
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '5'
+            effect: show
+            effect_options: {  }
+            selector: ''
+        90cc0621-8926-458e-a710-069e0b9d8954:
+          entity_type: node
+          bundle: vacation
+          dependee: field_part_day
+          settings:
+            state: empty
+            reset: false
+            condition: value
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              -
+                target_id: '5'
+            effect: empty
+            effect_options:
+              empty:
+                value: ''
+                reset: 0
+            selector: ''
   field_type_vacation:
     type: options_buttons
     weight: 0
     region: content
     settings: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      conditional_fields: {  }
   path:
     type: path
     weight: 8

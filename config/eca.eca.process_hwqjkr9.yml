@@ -25,7 +25,7 @@ events:
       operation: ''
     successors:
       -
-        id: Activity_0v1a405
+        id: Activity_13b5j3h
         condition: ''
 conditions:
   Flow_0p8qasf:
@@ -42,7 +42,7 @@ conditions:
     configuration:
       negate: false
       case: false
-      left: '[datestart]'
+      left: '[unixdatestart]'
       right: '[unixstartvac]'
       operator: lessthan
       type: value
@@ -51,7 +51,7 @@ conditions:
     configuration:
       negate: false
       case: false
-      left: '[dateend]'
+      left: '[unixdateend]'
       right: '[unixendvac]'
       operator: greaterthan
       type: value
@@ -61,7 +61,7 @@ conditions:
       negate: false
       case: false
       left: '[unixstartvac]'
-      right: '[datestart]'
+      right: '[unixdatestart]'
       operator: lessthan
       type: value
   Flow_0veebn2:
@@ -70,7 +70,7 @@ conditions:
       negate: false
       case: false
       left: '[unixendvac]'
-      right: '[dateend]'
+      right: '[unixdateend]'
       operator: greaterthan
       type: value
   Flow_124b8mk:
@@ -79,7 +79,7 @@ conditions:
       negate: false
       case: false
       left: '[unixstartvac]'
-      right: '[datestart]'
+      right: '[unixdatestart]'
       operator: greaterthan
       type: value
   Flow_1kstgvk:
@@ -88,7 +88,7 @@ conditions:
       negate: false
       case: false
       left: '[unixstartvac]'
-      right: '[dateend]'
+      right: '[unixdateend]'
       operator: lessthan
       type: value
   Flow_0qyju6b:
@@ -97,7 +97,7 @@ conditions:
       negate: false
       case: false
       left: '[unixendvac]'
-      right: '[datestart]'
+      right: '[unixdatestart]'
       operator: greaterthan
       type: value
   Flow_16o8nan:
@@ -106,7 +106,7 @@ conditions:
       negate: false
       case: false
       left: '[unixendvac]'
-      right: '[dateend]'
+      right: '[unixdateend]'
       operator: lessthan
       type: value
   Flow_18wra4c:
@@ -115,7 +115,7 @@ conditions:
       negate: false
       case: false
       left: '[unixstartvac]'
-      right: '[datestart]'
+      right: '[unixdatestart]'
       operator: equal
       type: value
   Flow_178b9qy:
@@ -124,7 +124,7 @@ conditions:
       negate: false
       case: false
       left: '[unixstartvac]'
-      right: '[dateend]'
+      right: '[unixdateend]'
       operator: equal
       type: value
   Flow_04bobs1:
@@ -133,7 +133,7 @@ conditions:
       negate: false
       case: false
       left: '[unixendvac]'
-      right: '[datestart]'
+      right: '[unixdatestart]'
       operator: equal
       type: value
   Flow_0fdawgh:
@@ -142,7 +142,43 @@ conditions:
       negate: false
       case: false
       left: '[unixendvac]'
-      right: '[dateend]'
+      right: '[unixdateend]'
+      operator: equal
+      type: value
+  Flow_0vpl72b:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[typevac]'
+      right: '2'
+      operator: equal
+      type: value
+  Flow_0n33u7q:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[partday]'
+      right: '5'
+      operator: equal
+      type: value
+  Flow_0uqp6iu:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[partday]'
+      right: '6'
+      operator: equal
+      type: value
+  Flow_0ika4jl:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[typevac]'
+      right: '1'
       operator: equal
       type: value
 gateways:
@@ -176,22 +212,28 @@ gateways:
       -
         id: Activity_0be0764
         condition: Flow_16o8nan
+  Gateway_14kcaok:
+    type: 0
+    successors:
+      -
+        id: Activity_0v1a405
+        condition: Flow_0n33u7q
+      -
+        id: Activity_1yryqj9
+        condition: Flow_0uqp6iu
 actions:
   Activity_0v1a405:
     plugin: eca_form_field_get_value
     label: 'Get start date vacation [startvac]'
     configuration:
       token_name: startvac
-      field_name: field_range.0.value
+      field_name: 'field_range[0][value][date]'
       strip_tags: true
       trim: true
       xss_filter: true
     successors:
       -
         id: Activity_0e11ojt
-        condition: ''
-      -
-        id: Activity_1r3e2mb
         condition: ''
   Activity_1vaxpz0:
     plugin: eca_views_query
@@ -275,7 +317,7 @@ actions:
     label: 'Get start date vacation [endvac]'
     configuration:
       token_name: endvac
-      field_name: field_range.0.value
+      field_name: 'field_range[0][end_value][date]'
       strip_tags: true
       trim: true
       xss_filter: true
@@ -301,7 +343,7 @@ actions:
       eca_token_name: unixstartvac
     successors:
       -
-        id: Activity_1vaxpz0
+        id: Activity_1r3e2mb
         condition: ''
   Activity_1w572eh:
     plugin: 'eca_tamper:strtotime'
@@ -347,3 +389,75 @@ actions:
       -
         id: Activity_0be0764
         condition: Flow_0fdawgh
+  Activity_0gta1f9:
+    plugin: eca_form_field_get_value
+    label: 'Get value part day [partday]'
+    configuration:
+      token_name: partday
+      field_name: field_part_day.0.target_id
+      strip_tags: true
+      trim: true
+      xss_filter: true
+    successors:
+      -
+        id: Gateway_14kcaok
+        condition: ''
+  Activity_13b5j3h:
+    plugin: eca_form_field_get_value
+    label: 'Get value type vacation [typevac]'
+    configuration:
+      token_name: typevac
+      field_name: field_type_vacation.0.target_id
+      strip_tags: true
+      trim: true
+      xss_filter: true
+    successors:
+      -
+        id: Activity_0gta1f9
+        condition: Flow_0vpl72b
+      -
+        id: Activity_0v1a405
+        condition: Flow_0ika4jl
+  Activity_1yryqj9:
+    plugin: eca_form_field_get_value
+    label: 'Get value time start [timestart]'
+    configuration:
+      token_name: timestart
+      field_name: 'field_time_vacation[0][from]'
+      strip_tags: true
+      trim: true
+      xss_filter: true
+    successors:
+      -
+        id: Activity_10sdqsj
+        condition: ''
+  Activity_10sdqsj:
+    plugin: 'eca_tamper:strtotime'
+    label: 'Start time in UNIX [unixtimestart]'
+    configuration:
+      eca_data: '[timestart]'
+      eca_token_name: unixtimestart
+    successors:
+      -
+        id: Activity_12dbr66
+        condition: ''
+  Activity_12dbr66:
+    plugin: eca_form_field_get_value
+    label: 'Get value time end [timeend]'
+    configuration:
+      token_name: timeend
+      field_name: 'field_time_vacation[0][to]'
+      strip_tags: true
+      trim: true
+      xss_filter: true
+    successors:
+      -
+        id: Activity_00mggyp
+        condition: ''
+  Activity_00mggyp:
+    plugin: 'eca_tamper:strtotime'
+    label: 'End time in UNIX [unixtimeend]'
+    configuration:
+      eca_data: '[timeend]'
+      eca_token_name: unixtimeend
+    successors: {  }
