@@ -10,8 +10,6 @@ dependencies:
     - field.storage.node.field_timestamp
     - field.storage.node.field_type_vacation
     - node.type.vacation
-    - system.menu.admin
-    - system.menu.vacation-user-menu
     - user.role.accounting
     - user.role.admin_staff
     - user.role.administrator
@@ -51,7 +49,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'My Vacation'
+      title: 'My Vacation(Full Day)'
       fields:
         title:
           id: title
@@ -796,15 +794,15 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-        field_range_end_value:
-          id: field_range_end_value
+        field_range_value:
+          id: field_range_value
           table: node__field_range
-          field: field_range_end_value
+          field: field_range_value
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: datetime
-          operator: '>'
+          operator: '>='
           value:
             min: ''
             max: ''
@@ -881,13 +879,513 @@ display:
     display_plugin: page
     position: 1
     display_options:
+      fields:
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+          label: Title
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: false
+            ellipsis: false
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_timestamp:
+          id: field_timestamp
+          table: node__field_timestamp
+          field: field_timestamp
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: TimeStamp
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: datetime_default
+          settings:
+            timezone_override: ''
+            format_type: short
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_range:
+          id: field_range
+          table: node__field_range
+          field: field_range
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Vacation Date'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: daterange_custom
+          settings:
+            timezone_override: ''
+            date_format: d/m/Y
+            separator: '~'
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_type_vacation:
+          id: field_type_vacation
+          table: node__field_type_vacation
+          field: field_type_vacation
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Type Vacation'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_numb_day:
+          id: field_numb_day
+          table: node__field_numb_day
+          field: field_numb_day
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Numb Day'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_state_vacation_1:
+          id: field_state_vacation_1
+          table: node__field_state_vacation
+          field: field_state_vacation
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Current State Vacation'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_state_vacation:
+          id: field_state_vacation
+          table: node__field_state_vacation
+          field: field_state_vacation
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'State Vacation'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: workflow_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        simple_popup_views_field:
+          id: simple_popup_views_field
+          table: simple_popup_views
+          field: simple_popup_views_field
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: simple_popup_views_field
+          label: 'Change State'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          trigger_method: '1'
+          position: '3'
+          source_field: '{{ field_state_vacation }}'
+          popup_field: "<div class=\"popup\">\r\n<h2>Confirmation</h2></br>\r\n<p>You want to cancel your vacation?</p>\r\n<div id=\"popup-state\">\r\n{{ field_state_vacation }}\r\n</div>\r\n</div>"
       defaults:
+        fields: false
         filters: true
         filter_groups: true
       display_extenders: {  }
       path: my-vacation
       menu:
-        type: normal
+        type: 'default tab'
         title: 'My Vacation'
         description: ''
         weight: -48
@@ -895,6 +1393,11 @@ display:
         menu_name: admin
         parent: system.admin
         context: '0'
+      tab_options:
+        type: none
+        title: ''
+        description: ''
+        weight: 0
     cache_metadata:
       max-age: -1
       contexts:
@@ -909,7 +1412,6 @@ display:
         - 'config:field.storage.node.field_numb_day'
         - 'config:field.storage.node.field_range'
         - 'config:field.storage.node.field_state_vacation'
-        - 'config:field.storage.node.field_time_vacation'
         - 'config:field.storage.node.field_timestamp'
         - 'config:field.storage.node.field_type_vacation'
   page_2:
@@ -1114,6 +1616,70 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        field_time_vacation:
+          id: field_time_vacation
+          table: node__field_time_vacation
+          field: field_time_vacation
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Time Vacation'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: from
+          type: time_range_formatter
+          settings:
+            time_format: 'H:i:s'
+            timerange_format: 'start ~ end'
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         field_type_vacation:
           id: field_type_vacation
           table: node__field_type_vacation
@@ -1304,15 +1870,15 @@ display:
           separator: ', '
           field_api_classes: false
       sorts:
-        created:
-          id: created
+        changed:
+          id: changed
           table: node_field_data
-          field: created
+          field: changed
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
-          entity_field: created
+          entity_field: changed
           plugin_id: date
           order: DESC
           expose:
@@ -1455,20 +2021,200 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-        field_range_end_value:
-          id: field_range_end_value
-          table: node__field_range
-          field: field_range_end_value
+        field_state_vacation_value_1:
+          id: field_state_vacation_value_1
+          table: node__field_state_vacation
+          field: field_state_vacation_value
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: datetime
-          operator: '<'
+          plugin_id: workflow_state
+          operator: or
+          value:
+            request_status_sancel: request_status_sancel
+            request_status_rejected: request_status_rejected
+            request_status_approved: request_status_approved
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_state_vacation_value_1_op
+            label: 'State Vacation'
+            description: ''
+            use_operator: false
+            operator: field_state_vacation_value_1_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_state_vacation_value_1
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              ceo: '0'
+              developer_junior: '0'
+              developer_middle: '0'
+              developer_senior: '0'
+              teamlead: '0'
+              pm: '0'
+              shief_pm: '0'
+              head_of_department: '0'
+              sales: '0'
+              marketing: '0'
+              recruiting: '0'
+              hr: '0'
+              om: '0'
+              accounting: '0'
+              admin_staff: '0'
+              client: '0'
+            reduce: true
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        title: false
+        fields: false
+        sorts: false
+        filters: false
+        filter_groups: false
+      display_extenders: {  }
+      path: my-vacation/old
+      menu:
+        type: tab
+        title: 'Old Vacations'
+        description: ''
+        weight: -48
+        expanded: false
+        menu_name: vacation-user-menu
+        parent: 'menu_link_content:809217e7-aebb-4d13-b805-973f78c6d51a'
+        context: '0'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - 'user.node_grants:view'
+        - user.roles
+      tags:
+        - 'config:field.storage.node.field_numb_day'
+        - 'config:field.storage.node.field_range'
+        - 'config:field.storage.node.field_state_vacation'
+        - 'config:field.storage.node.field_time_vacation'
+        - 'config:field.storage.node.field_timestamp'
+        - 'config:field.storage.node.field_type_vacation'
+  page_3:
+    id: page_3
+    display_title: Page
+    display_plugin: page
+    position: 1
+    display_options:
+      title: 'My Vacation(Not Full Day)'
+      filters:
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            vacation: vacation
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_state_vacation_value:
+          id: field_state_vacation_value
+          table: node__field_state_vacation
+          field: field_state_vacation_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: workflow_state
+          operator: not
+          value:
+            all: all
+            request_status_creation: request_status_creation
+            request_status_sancel: request_status_sancel
+            request_status_rejected: request_status_rejected
+          group: 1
+          exposed: false
+          expose:
+            operator_id: field_state_vacation_value_op
+            label: 'State Vacation'
+            description: ''
+            use_operator: false
+            operator: field_state_vacation_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_state_vacation_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              ceo: '0'
+              developer_junior: '0'
+              developer_middle: '0'
+              developer_senior: '0'
+              teamlead: '0'
+              pm: '0'
+              shief_pm: '0'
+              head_of_department: '0'
+              sales: '0'
+              marketing: '0'
+              recruiting: '0'
+              hr: '0'
+              om: '0'
+              accounting: '0'
+              admin_staff: '0'
+              client: '0'
+            reduce: true
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        field_time_vacation_from:
+          id: field_time_vacation_from
+          table: node__field_time_vacation
+          field: field_time_vacation_from
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: numeric
+          operator: '>'
           value:
             min: ''
             max: ''
-            value: '+ 0 day'
-            type: offset
+            value: '+ 0 second'
           group: 1
           exposed: false
           expose:
@@ -1506,21 +2252,24 @@ display:
           1: AND
       defaults:
         title: false
-        fields: false
-        sorts: false
         filters: false
         filter_groups: false
       display_extenders: {  }
-      path: my-vacation/old
+      path: my-vacation/not-full-day
       menu:
-        type: normal
-        title: 'Old Vacations'
+        type: tab
+        title: 'My Vacation'
         description: ''
         weight: -48
         expanded: false
         menu_name: vacation-user-menu
         parent: 'menu_link_content:809217e7-aebb-4d13-b805-973f78c6d51a'
         context: '0'
+      tab_options:
+        type: none
+        title: ''
+        description: ''
+        weight: 0
     cache_metadata:
       max-age: -1
       contexts:
@@ -1535,5 +2284,6 @@ display:
         - 'config:field.storage.node.field_numb_day'
         - 'config:field.storage.node.field_range'
         - 'config:field.storage.node.field_state_vacation'
+        - 'config:field.storage.node.field_time_vacation'
         - 'config:field.storage.node.field_timestamp'
         - 'config:field.storage.node.field_type_vacation'

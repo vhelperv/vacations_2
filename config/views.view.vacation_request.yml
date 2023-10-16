@@ -696,8 +696,8 @@ display:
         description: ''
         weight: 0
         expanded: false
-        menu_name: admin
-        parent: system.admin
+        menu_name: vacation-user-menu
+        parent: ''
         context: '0'
       tab_options:
         type: none
@@ -833,9 +833,9 @@ display:
         title: Approved
         description: ''
         weight: 0
-        expanded: true
+        expanded: false
         menu_name: admin
-        parent: 'views_view:views.vacation_request.page_1'
+        parent: ''
         context: '0'
       tab_options:
         type: none
@@ -971,9 +971,9 @@ display:
         title: Rejected
         description: ''
         weight: 0
-        expanded: true
+        expanded: false
         menu_name: admin
-        parent: 'views_view:views.vacation_request.page_1'
+        parent: ''
         context: '0'
     cache_metadata:
       max-age: -1
@@ -1104,7 +1104,7 @@ display:
         title: Canceled
         description: ''
         weight: 0
-        expanded: true
+        expanded: false
         menu_name: admin
         parent: ''
         context: '0'
@@ -1546,7 +1546,7 @@ display:
         title: 'Total Vacation State'
         description: ''
         weight: 0
-        expanded: true
+        expanded: false
         menu_name: admin
         parent: ''
         context: '0'

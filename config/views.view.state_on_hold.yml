@@ -1,37 +1,17 @@
-uuid: d0b18eb7-2a63-46ef-9d0e-b9364bafe4de
+uuid: 291c2080-cee6-4098-b698-ae52f233bfec
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_range
+    - core.entity_view_mode.node.teaser
     - node.type.vacation
-    - taxonomy.vocabulary.part_day
-    - user.role.accounting
-    - user.role.admin_staff
-    - user.role.ceo
-    - user.role.developer_junior
-    - user.role.developer_middle
-    - user.role.developer_senior
-    - user.role.head_of_department
-    - user.role.hr
-    - user.role.marketing
-    - user.role.om
-    - user.role.pm
-    - user.role.recruiting
-    - user.role.sales
-    - user.role.shief_pm
-    - user.role.teamlead
-  content:
-    - 'taxonomy_term:part_day:de88af79-4e3e-409b-a61f-5f83d8c6c37c'
+    - user.role.authenticated
   module:
-    - datetime
-    - datetime_range
     - node
-    - taxonomy
     - user
     - workflow
-id: vacation_range
-label: 'Vacation Range'
+id: state_on_hold
+label: 'State On-hold'
 module: views
 description: ''
 tag: ''
@@ -44,73 +24,8 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Vacation Range'
+      title: 'State On-hold'
       fields:
-        field_range:
-          id: field_range
-          table: node__field_range
-          field: field_range
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: daterange_custom
-          settings:
-            timezone_override: ''
-            date_format: U
-            separator: '-'
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
         title:
           id: title
           table: node_field_data
@@ -125,36 +40,18 @@ display:
           exclude: false
           alter:
             alter_text: false
-            text: ''
             make_link: false
-            path: ''
             absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
+            word_boundary: false
+            ellipsis: false
             strip_tags: false
             trim: false
-            preserve_tags: ''
             html: false
           element_type: ''
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -177,10 +74,23 @@ display:
           separator: ', '
           field_api_classes: false
       pager:
-        type: none
+        type: mini
         options:
           offset: 0
-          items_per_page: null
+          items_per_page: 10
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
       exposed_form:
         type: basic
         options:
@@ -195,50 +105,36 @@ display:
         type: role
         options:
           role:
-            ceo: ceo
-            developer_junior: developer_junior
-            developer_middle: developer_middle
-            developer_senior: developer_senior
-            teamlead: teamlead
-            pm: pm
-            shief_pm: shief_pm
-            head_of_department: head_of_department
-            sales: sales
-            marketing: marketing
-            recruiting: recruiting
-            hr: hr
-            om: om
-            accounting: accounting
-            admin_staff: admin_staff
+            authenticated: authenticated
       cache:
         type: tag
         options: {  }
       empty: {  }
       sorts:
-        field_range_value:
-          id: field_range_value
-          table: node__field_range
-          field: field_range_value
+        created:
+          id: created
+          table: node_field_data
+          field: created
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: datetime
-          order: ASC
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
           expose:
             label: ''
             field_identifier: ''
           exposed: false
           granularity: second
       arguments:
-        uid:
-          id: uid
-          table: node_field_data
-          field: uid
+        field_vacation_s_employee__target_id:
+          id: field_vacation_s_employee__target_id
+          table: node__field_vacation_s_employee_
+          field: field_vacation_s_employee__target_id
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: uid
           plugin_id: numeric
           default_action: default
           exception:
@@ -290,7 +186,6 @@ display:
           operator: or
           value:
             request_status_on_hold: request_status_on_hold
-            request_status_approved: request_status_approved
           group: 1
           exposed: false
           expose:
@@ -321,55 +216,12 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-        field_range_end_value:
-          id: field_range_end_value
-          table: node__field_range
-          field: field_range_end_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: datetime
-          operator: '>='
-          value:
-            min: ''
-            max: ''
-            value: '+ 0 day'
-            type: offset
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
       style:
         type: default
       row:
-        type: fields
+        type: 'entity:node'
+        options:
+          view_mode: teaser
       query:
         type: views_query
         options:
@@ -378,18 +230,7 @@ display:
           distinct: false
           replica: false
           query_tags: {  }
-      relationships:
-        uid:
-          id: uid
-          table: node_field_data
-          field: uid
-          relationship: none
-          group_type: group
-          admin_label: User
-          entity_type: node
-          entity_field: uid
-          plugin_id: standard
-          required: false
+      relationships: {  }
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -399,17 +240,95 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
+        - url.query_args
         - user
         - 'user.node_grants:view'
         - user.roles
-      tags:
-        - 'config:field.storage.node.field_range'
+      tags: {  }
   block_1:
     id: block_1
     display_title: Block
     display_plugin: block
-    position: 1
+    position: 2
     display_options:
+      fields:
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+      pager:
+        type: none
+        options:
+          offset: 0
+          items_per_page: null
+      style:
+        type: default
+      row:
+        type: fields
+      defaults:
+        pager: false
+        style: false
+        row: false
+        fields: false
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -420,24 +339,23 @@ display:
         - user
         - 'user.node_grants:view'
         - user.roles
-      tags:
-        - 'config:field.storage.node.field_range'
+      tags: {  }
   page_1:
     id: page_1
     display_title: Page
     display_plugin: page
-    position: 2
+    position: 1
     display_options:
       display_extenders: {  }
-      path: vacation-range
+      path: state-on-hold
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
+        - url.query_args
         - user
         - 'user.node_grants:view'
         - user.roles
-      tags:
-        - 'config:field.storage.node.field_range'
+      tags: {  }

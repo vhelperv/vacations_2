@@ -224,15 +224,6 @@ conditions:
       right: '1'
       operator: equal
       type: value
-  Flow_1wc1xma:
-    plugin: eca_scalar
-    configuration:
-      negate: false
-      case: false
-      left: '[rest]'
-      right: '0'
-      operator: equal
-      type: value
   Flow_1rnyhnv:
     plugin: eca_scalar
     configuration:
@@ -1015,9 +1006,6 @@ actions:
       -
         id: Activity_010wb3q
         condition: ''
-      -
-        id: Activity_0jhr6au
-        condition: Flow_1wc1xma
   Activity_0n3g0xi:
     plugin: 'eca_tamper:math'
     label: 'Set need subtraction from other certificate [needsubtract]'
@@ -1044,7 +1032,7 @@ actions:
       object: certsubtract
     successors:
       -
-        id: Activity_16vrahd
+        id: Activity_044go7i
         condition: ''
   Activity_0i3yonk:
     plugin: eca_set_field_value
@@ -1060,21 +1048,6 @@ actions:
     successors:
       -
         id: Activity_1llcixo
-        condition: ''
-  Activity_16vrahd:
-    plugin: eca_set_field_value
-    label: 'Unpublish certificate'
-    configuration:
-      field_name: '[status:value]'
-      field_value: '0'
-      method: 'set:clear'
-      strip_tags: false
-      trim: false
-      save_entity: true
-      object: certsubtract
-    successors:
-      -
-        id: Activity_044go7i
         condition: ''
   Activity_0zkvs1o:
     plugin: eca_token_set_value
@@ -1174,18 +1147,6 @@ actions:
       -
         id: Activity_1ecvcvi
         condition: ''
-  Activity_0jhr6au:
-    plugin: eca_set_field_value
-    label: 'Unpublish certificate'
-    configuration:
-      field_name: '[status:value]'
-      field_value: '0'
-      method: 'set:clear'
-      strip_tags: false
-      trim: false
-      save_entity: true
-      object: certsubtract
-    successors: {  }
   Activity_0lw7qtz:
     plugin: eca_switch_account
     label: 'Switch to admin'

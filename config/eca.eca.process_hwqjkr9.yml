@@ -3,10 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.vacation.field_range
-    - field.field.node.vacation.field_time_vacation
-    - field.storage.node.field_range
-    - field.storage.node.field_time_vacation
     - views.view.vacation_range
   module:
     - eca_base
@@ -150,11 +146,6 @@ conditions:
       right: '[unixdateend]'
       operator: equal
       type: value
-  Flow_16l20sn:
-    plugin: eca_token_exists
-    configuration:
-      token_name: 'true'
-      negate: true
   Flow_0vpl72b:
     plugin: eca_scalar
     configuration:
@@ -360,25 +351,25 @@ gateways:
     type: 0
     successors:
       -
-        id: Activity_0be0764
+        id: Gateway_0xi8wac
         condition: Flow_0bsn6w8
   Gateway_1p6p91i:
     type: 0
     successors:
       -
-        id: Activity_0be0764
+        id: Gateway_0xi8wac
         condition: Flow_0veebn2
   Gateway_0g0jzts:
     type: 0
     successors:
       -
-        id: Activity_0be0764
+        id: Gateway_0xi8wac
         condition: Flow_1kstgvk
   Gateway_0v1zl6b:
     type: 0
     successors:
       -
-        id: Activity_0be0764
+        id: Gateway_0xi8wac
         condition: Flow_16o8nan
   Gateway_14kcaok:
     type: 0
@@ -458,6 +449,39 @@ gateways:
       -
         id: Activity_0lpev2g
         condition: Flow_014h2uo
+  Gateway_1604i7r:
+    type: 0
+    successors:
+      -
+        id: Gateway_00c71gd
+        condition: Flow_0u0gpmx
+      -
+        id: Gateway_1p6p91i
+        condition: Flow_0uiyce0
+      -
+        id: Gateway_0g0jzts
+        condition: Flow_124b8mk
+      -
+        id: Gateway_0v1zl6b
+        condition: Flow_0qyju6b
+      -
+        id: Gateway_0xi8wac
+        condition: Flow_18wra4c
+      -
+        id: Gateway_0xi8wac
+        condition: Flow_178b9qy
+      -
+        id: Gateway_0xi8wac
+        condition: Flow_04bobs1
+      -
+        id: Gateway_0xi8wac
+        condition: Flow_0fdawgh
+  Gateway_0xi8wac:
+    type: 0
+    successors:
+      -
+        id: Activity_0be0764
+        condition: ''
 actions:
   Activity_0v1a405:
     plugin: eca_form_field_get_value
@@ -560,10 +584,7 @@ actions:
     successors:
       -
         id: Activity_1vaxpz0
-        condition: Flow_16l20sn
-      -
-        id: Activity_1yryqj9
-        condition: Flow_02lopti
+        condition: ''
   Activity_0e11ojt:
     plugin: 'eca_tamper:strtotime'
     label: 'Start date in UNIX [unixstartvac]'
@@ -595,29 +616,8 @@ actions:
         id: Activity_0dgenov
         condition: ''
       -
-        id: Gateway_00c71gd
-        condition: Flow_0u0gpmx
-      -
-        id: Gateway_1p6p91i
-        condition: Flow_0uiyce0
-      -
-        id: Gateway_0g0jzts
-        condition: Flow_124b8mk
-      -
-        id: Gateway_0v1zl6b
-        condition: Flow_0qyju6b
-      -
-        id: Activity_0be0764
-        condition: Flow_18wra4c
-      -
-        id: Activity_0be0764
-        condition: Flow_178b9qy
-      -
-        id: Activity_0be0764
-        condition: Flow_04bobs1
-      -
-        id: Activity_0be0764
-        condition: Flow_0fdawgh
+        id: Gateway_1604i7r
+        condition: ''
   Activity_0gta1f9:
     plugin: eca_form_field_get_value
     label: 'Get value part day [partday]'
@@ -660,6 +660,9 @@ actions:
       -
         id: Activity_12dbr66
         condition: ''
+      -
+        id: Activity_1yryqj9
+        condition: Flow_02lopti
   Activity_12dbr66:
     plugin: eca_form_field_get_value
     label: 'Get value time end [unixtimeend]'
@@ -671,30 +674,8 @@ actions:
       xss_filter: true
     successors:
       -
-        id: Activity_1hj1x9i
-        condition: ''
-      -
         id: Activity_1rphamv
         condition: Flow_1pvrvm5
-  Activity_1hj1x9i:
-    plugin: eca_views_query
-    label: 'Load Vaction Ranges [rangestime]'
-    configuration:
-      token_name: rangestime
-      view_id: vacation_range
-      display_id: block_2
-      arguments: ''
-    successors:
-      -
-        id: Activity_14z6ymb
-        condition: ''
-  Activity_14z6ymb:
-    plugin: eca_count
-    label: 'Count Ranges [countrangtime]'
-    configuration:
-      token_name: countrangtime
-      list_token: rangestime
-    successors:
       -
         id: Gateway_113j21p
         condition: ''
@@ -760,51 +741,9 @@ actions:
       -
         id: Activity_1w572eh
         condition: ''
-  Activity_14xbb7z:
-    plugin: 'eca_tamper:strtotime'
-    label: 'Date end in UNIX [unixdateend]'
-    configuration:
-      eca_data: '[dateend]'
-      eca_token_name: unixdateend
-    successors:
-      -
-        id: Activity_0kcviyf
-        condition: ''
-  Activity_1g3iryu:
-    plugin: eca_token_set_value
-    label: 'Get first date end [dateend]'
-    configuration:
-      token_name: dateend
-      token_value: '[rangestime:0:field_range:end_value]'
-      use_yaml: false
-    successors:
-      -
-        id: Activity_14xbb7z
-        condition: ''
-  Activity_1amujk1:
-    plugin: 'eca_tamper:strtotime'
-    label: 'Date start in UNIX [unixdatestart]'
-    configuration:
-      eca_data: '[datestart]'
-      eca_token_name: unixdatestart
-    successors:
-      -
-        id: Activity_1g3iryu
-        condition: ''
-  Activity_0lhk264:
-    plugin: eca_token_set_value
-    label: 'Get first date start [datestart]'
-    configuration:
-      token_name: datestart
-      token_value: '[rangestime:0:field_range:value]'
-      use_yaml: false
-    successors:
-      -
-        id: Activity_1amujk1
-        condition: ''
   Activity_0fxxv6v:
     plugin: eca_token_set_value
-    label: 'Create true'
+    label: 'Create [true]'
     configuration:
       token_name: 'true'
       token_value: '1'
@@ -827,7 +766,7 @@ actions:
       token_name: exvac
       from: id
       entity_type: node
-      entity_id: '[rangestime:0:nid]'
+      entity_id: '[ranges:0:nid]'
       revision_id: ''
       properties: ''
       langcode: _interface
@@ -836,7 +775,7 @@ actions:
       object: ''
     successors:
       -
-        id: Activity_0lhk264
+        id: Activity_0kcviyf
         condition: ''
   Activity_1rphamv:
     plugin: eca_form_field_set_error

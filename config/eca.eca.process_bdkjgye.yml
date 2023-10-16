@@ -1,0 +1,377 @@
+uuid: 7fb4b697-40ae-4738-8c02-977cbfd051f6
+langcode: en
+status: false
+dependencies:
+  config:
+    - field.field.node.vacation.field_range
+    - field.field.node.vacation.field_time_vacation
+    - field.storage.node.field_range
+    - field.storage.node.field_time_vacation
+    - node.type.vacation
+    - views.view.state_on_hold
+  module:
+    - eca_base
+    - eca_content
+    - eca_tamper
+    - eca_user
+    - eca_views
+id: process_bdkjgye
+modeller: bpmn_io
+label: 'Automatic rejection'
+version: v1
+weight: null
+events:
+  Event_0uvb6eg:
+    plugin: 'content_entity:load'
+    label: 'Load Vacation'
+    configuration:
+      type: 'node vacation'
+    successors:
+      -
+        id: Activity_0mlf0pq
+        condition: ''
+conditions:
+  Flow_10r2hyd:
+    plugin: eca_scalar
+    configuration:
+      case: false
+      left: '[countvac]'
+      right: '0'
+      operator: equal
+      type: value
+      negate: true
+  Flow_1pedwx3:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[startvacunix]'
+      right: '[current-date:raw]'
+      operator: greaterthan
+      type: value
+  Flow_1ipfyon:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[startvacunix]'
+      right: '[current-date:raw]'
+      operator: lessthan
+      type: value
+  Flow_1n6k5xr:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[vacitem:field_type_vacation:target_id]'
+      right: '1'
+      operator: equal
+      type: value
+  Flow_00h9npc:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[vacitem:field_type_vacation:target_id]'
+      right: '2'
+      operator: equal
+      type: value
+gateways:
+  Gateway_0uof0dn:
+    type: 0
+    successors:
+      -
+        id: Activity_1ib01pk
+        condition: Flow_10r2hyd
+  Gateway_0ngetwh:
+    type: 0
+    successors:
+      -
+        id: Activity_1guzxto
+        condition: Flow_1pedwx3
+      -
+        id: Activity_1o532tr
+        condition: Flow_1ipfyon
+  Gateway_0c98v35:
+    type: 0
+    successors:
+      -
+        id: Activity_1wpll9r
+        condition: Flow_1n6k5xr
+      -
+        id: Activity_0oimqd9
+        condition: Flow_00h9npc
+  Gateway_1h5znom:
+    type: 0
+    successors: {  }
+actions:
+  Activity_0mlf0pq:
+    plugin: eca_token_load_user_current
+    label: 'Save current user [user]'
+    configuration:
+      token_name: user
+    successors:
+      -
+        id: Activity_0knhtsu
+        condition: ''
+      -
+        id: Activity_0wxl74v
+        condition: ''
+  Activity_0knhtsu:
+    plugin: eca_views_query
+    label: |-
+      View State 
+      On-hold [listvacation]
+    configuration:
+      token_name: listvacation
+      view_id: state_on_hold
+      display_id: block_1
+      arguments: ''
+    successors:
+      -
+        id: Activity_0sm9t2k
+        condition: ''
+      -
+        id: Activity_0fgj85h
+        condition: ''
+  Activity_0sm9t2k:
+    plugin: eca_count
+    label: 'Count Vacation [countvac]'
+    configuration:
+      token_name: countvac
+      list_token: listvacation
+    successors:
+      -
+        id: Activity_1h2skt0
+        condition: ''
+      -
+        id: Gateway_0uof0dn
+        condition: ''
+  Activity_0wxl74v:
+    plugin: action_message_action
+    label: Activity_0wxl74v
+    configuration:
+      replace_tokens: false
+      message: 'User: [user]'
+    successors: {  }
+  Activity_0fgj85h:
+    plugin: action_message_action
+    label: Activity_0fgj85h
+    configuration:
+      replace_tokens: false
+      message: 'List: [listvacation]'
+    successors: {  }
+  Activity_1h2skt0:
+    plugin: action_message_action
+    label: Activity_1h2skt0
+    configuration:
+      replace_tokens: false
+      message: 'Count: [countvac]'
+    successors: {  }
+  Activity_1ib01pk:
+    plugin: eca_token_load_entity
+    label: 'Load first vacation in list [vacitem]'
+    configuration:
+      token_name: vacitem
+      from: id
+      entity_type: node
+      entity_id: '[listvacation:0:nid]'
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Gateway_0c98v35
+        condition: ''
+      -
+        id: Activity_0ahj0hu
+        condition: ''
+  Activity_1guzxto:
+    plugin: 'eca_tamper:math'
+    label: 'countvac - 1'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '1'
+      eca_data: '[countvac]'
+      eca_token_name: countvac
+    successors:
+      -
+        id: Activity_1as4g2p
+        condition: ''
+      -
+        id: Activity_1mdei19
+        condition: ''
+  Activity_1o532tr:
+    plugin: eca_switch_account
+    label: 'Switch to admin'
+    configuration:
+      user_id: '1'
+    successors:
+      -
+        id: Activity_1gb9529
+        condition: ''
+      -
+        id: Activity_0t38stt
+        condition: ''
+  Activity_1wpll9r:
+    plugin: 'eca_tamper:strtotime'
+    label: 'Start vacation in UNIX [startvacunix]'
+    configuration:
+      eca_data: '[vacitem:field_range:value]'
+      eca_token_name: startvacunix
+    successors:
+      -
+        id: Gateway_1h5znom
+        condition: ''
+      -
+        id: Activity_0m983hv
+        condition: ''
+  Activity_0ahj0hu:
+    plugin: action_message_action
+    label: Activity_0ahj0hu
+    configuration:
+      replace_tokens: false
+      message: 'Item: [vacitem]'
+    successors: {  }
+  Activity_0m983hv:
+    plugin: action_message_action
+    label: Activity_0m983hv
+    configuration:
+      replace_tokens: false
+      message: |-
+        Start vac: [startvacunix]
+        Current: [current-date:raw]
+    successors: {  }
+  Activity_1gb9529:
+    plugin: eca_set_field_value
+    label: 'Set State Rejected'
+    configuration:
+      field_name: field_state_vacation
+      field_value: request_status_rejected
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: vacitem
+    successors:
+      -
+        id: Activity_02ja3kb
+        condition: ''
+      -
+        id: Activity_1m0hfqr
+        condition: ''
+  Activity_02ja3kb:
+    plugin: eca_switch_account
+    label: 'Switch to user'
+    configuration:
+      user_id: '[user]'
+    successors:
+      -
+        id: Activity_1q7a6pi
+        condition: ''
+      -
+        id: Activity_0s0offm
+        condition: ''
+  Activity_1q7a6pi:
+    plugin: 'eca_tamper:math'
+    label: 'countvac - 1'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '1'
+      eca_data: '[countvac]'
+      eca_token_name: countvac
+    successors:
+      -
+        id: Activity_0q1jfo6
+        condition: ''
+      -
+        id: Activity_0w9qvrx
+        condition: ''
+  Activity_0q1jfo6:
+    plugin: eca_list_remove_entity
+    label: 'Drop first'
+    configuration:
+      token_name: ''
+      method: first
+      index: ''
+      list_token: listvacation
+      object: ''
+    successors:
+      -
+        id: Gateway_0uof0dn
+        condition: ''
+  Activity_1mdei19:
+    plugin: action_message_action
+    label: Activity_1mdei19
+    configuration:
+      replace_tokens: false
+      message: 'Count1: [countvac]'
+    successors: {  }
+  Activity_0t38stt:
+    plugin: action_message_action
+    label: Activity_0t38stt
+    configuration:
+      replace_tokens: false
+      message: 'switch good'
+    successors: {  }
+  Activity_1m0hfqr:
+    plugin: action_message_action
+    label: Activity_1m0hfqr
+    configuration:
+      replace_tokens: false
+      message: 'set good'
+    successors: {  }
+  Activity_0s0offm:
+    plugin: action_message_action
+    label: Activity_0s0offm
+    configuration:
+      replace_tokens: false
+      message: 'revert switch good'
+    successors: {  }
+  Activity_0w9qvrx:
+    plugin: action_message_action
+    label: Activity_0w9qvrx
+    configuration:
+      replace_tokens: false
+      message: 'Count2: [countvac]'
+    successors: {  }
+  Activity_1as4g2p:
+    plugin: eca_list_remove_entity
+    label: 'Drop first'
+    configuration:
+      token_name: ''
+      method: first
+      index: ''
+      list_token: listvacation
+      object: ''
+    successors:
+      -
+        id: Gateway_0uof0dn
+        condition: ''
+  Activity_0oimqd9:
+    plugin: 'eca_tamper:strtotime'
+    label: 'Start vacation in UNIX [startvacunix]'
+    configuration:
+      eca_data: '[vacitem:field_time_vacation:from]'
+      eca_token_name: startvacunix
+    successors:
+      -
+        id: Gateway_1h5znom
+        condition: ''
+      -
+        id: Activity_0i5j90x
+        condition: ''
+  Activity_0i5j90x:
+    plugin: action_message_action
+    label: Activity_0i5j90x
+    configuration:
+      replace_tokens: false
+      message: |-
+        Start vac: [startvacunix]
+        Current: [current-date:raw]
+    successors: {  }

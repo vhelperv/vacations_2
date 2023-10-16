@@ -4,14 +4,18 @@ status: true
 dependencies:
   config:
     - field.field.node.certificate.field_remainder
-    - field.field.node.vacation.field_state_vacation
+    - field.field.node.vacation.field_approve
     - field.field.node.vacation.field_vacation_s_employee_
+    - field.field.paragraph.person_who_approve.field_permission
+    - field.field.paragraph.person_who_approve.field_person
+    - field.storage.node.field_approve
     - field.storage.node.field_remainder
-    - field.storage.node.field_state_vacation
     - field.storage.node.field_vacation_s_employee_
+    - field.storage.paragraph.field_permission
+    - field.storage.paragraph.field_person
     - node.type.vacation
     - views.view.balance
-    - views.view.vacations_waiting_for_approval
+    - views.view.to_approve
   module:
     - eca_base
     - eca_content
@@ -25,7 +29,7 @@ version: v1
 weight: null
 events:
   Event_1z02hz8:
-    plugin: 'content_entity:update'
+    plugin: 'content_entity:load'
     label: 'Update Vacation'
     configuration:
       type: 'node vacation'
@@ -43,7 +47,7 @@ conditions:
       field_name: field_state_vacation
       operator: equal
       type: value
-      entity: ''
+      entity: vacat
   Flow_0ylwj1m:
     plugin: eca_scalar
     configuration:
@@ -133,8 +137,11 @@ gateways:
         id: Activity_0dm0pr4
         condition: Flow_0ylwj1m
       -
-        id: Activity_1ihip22
+        id: Gateway_1a3hbxe
         condition: Flow_08x0jfm
+      -
+        id: Activity_15dz14m
+        condition: ''
   Gateway_1a3hbxe:
     type: 0
     successors:
@@ -166,7 +173,7 @@ gateways:
     type: 0
     successors:
       -
-        id: Activity_0zvsj98
+        id: Activity_1lqoddb
         condition: Flow_1d4kbua
       -
         id: Activity_02lazf9
@@ -188,22 +195,19 @@ actions:
       object: ''
     successors:
       -
-        id: Activity_16soxuz
+        id: Activity_04uojju
         condition: Flow_05qs4ag
   Activity_01lfx1g:
     plugin: eca_views_query
     label: 'Load view Waiting For Approval [wforapproval]'
     configuration:
       token_name: wforapproval
-      view_id: vacations_waiting_for_approval
+      view_id: to_approve
       display_id: block_1
-      arguments: ''
+      arguments: '[user]'
     successors:
       -
         id: Activity_0q4ktp9
-        condition: ''
-      -
-        id: Activity_0jhlvii
         condition: ''
   Activity_0q4ktp9:
     plugin: eca_count
@@ -408,13 +412,13 @@ actions:
     plugin: eca_set_field_value
     label: 'Set Reject into vacation'
     configuration:
-      field_name: field_state_vacation.value
+      field_name: '[field_permission:value]'
       field_value: request_status_rejected
       method: 'set:clear'
       strip_tags: false
       trim: false
       save_entity: true
-      object: reject
+      object: par
     successors:
       -
         id: Activity_1kqramv
@@ -461,32 +465,12 @@ actions:
       replace_tokens: false
       message: 'Good job'
     successors: {  }
-  Activity_16soxuz:
-    plugin: eca_switch_account
-    label: 'Switch to employee'
-    configuration:
-      user_id: '[node:field_vacation_s_employee_:target_id]'
-    successors:
-      -
-        id: Activity_01lfx1g
-        condition: ''
-  Activity_1ihip22:
-    plugin: eca_token_set_value
-    label: 'Token 0 [countwfa]'
-    configuration:
-      token_name: countwfa
-      token_value: '0'
-      use_yaml: false
-    successors:
-      -
-        id: Gateway_1a3hbxe
-        condition: ''
   Activity_13r57id:
     plugin: action_message_action
     label: Activity_13r57id
     configuration:
       replace_tokens: false
-      message: '1'
+      message: '1 - [getpar]'
     successors: {  }
   Activity_0ucju1y:
     plugin: action_message_action
@@ -509,27 +493,6 @@ actions:
       replace_tokens: false
       message: '4'
     successors: {  }
-  Activity_0zvsj98:
-    plugin: eca_token_load_entity
-    label: 'Set [needreject:0] into [reject]'
-    configuration:
-      token_name: reject
-      from: id
-      entity_type: node
-      entity_id: '[needreject:0:nid]'
-      revision_id: ''
-      properties: ''
-      langcode: _interface
-      latest_revision: false
-      unchanged: false
-      object: ''
-    successors:
-      -
-        id: Activity_1hs6sm8
-        condition: ''
-      -
-        id: Activity_13r57id
-        condition: ''
   Activity_0tcw6v2:
     plugin: action_message_action
     label: Activity_0tcw6v2
@@ -556,5 +519,202 @@ actions:
     label: Activity_0jhlvii
     configuration:
       replace_tokens: false
-      message: '[wforapproval]'
+      message: '[wforapproval]----[vacat:field_vacation_s_employee_:target_id]'
+    successors: {  }
+  Activity_043ydr1:
+    plugin: action_message_action
+    label: Activity_043ydr1
+    configuration:
+      replace_tokens: false
+      message: '[countwfa] - countwfa'
+    successors: {  }
+  Activity_04uojju:
+    plugin: eca_token_set_value
+    label: 'Get author [user]'
+    configuration:
+      token_name: user
+      token_value: '[vacat:field_vacation_s_employee_:target_id]'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_01lfx1g
+        condition: ''
+  Activity_1vlfp3z:
+    plugin: eca_token_load_entity
+    label: Activity_1vlfp3z
+    configuration:
+      token_name: vacat
+      from: current
+      entity_type: _none
+      entity_id: ''
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_08hej1t
+        condition: ''
+      -
+        id: Activity_1ypcidm
+        condition: ''
+  Activity_1bdkfnp:
+    plugin: action_message_action
+    label: Activity_1bdkfnp
+    configuration:
+      replace_tokens: false
+      message: '[reject:2:field_person] ----done'
+    successors: {  }
+  Activity_08hej1t:
+    plugin: action_message_action
+    label: Activity_08hej1t
+    configuration:
+      replace_tokens: false
+      message: '[vacat:nid]'
+    successors: {  }
+  Activity_1ypcidm:
+    plugin: eca_list_add_entity
+    label: Activity_1ypcidm
+    configuration:
+      method: append
+      index: ''
+      list_token: reject
+      object: vacat.field_approve
+    successors:
+      -
+        id: Activity_1bdkfnp
+        condition: ''
+  Activity_0zvsj98:
+    plugin: eca_list_add_entity
+    label: 'Get list field_approve [getpar]'
+    configuration:
+      method: append
+      index: ''
+      list_token: getpar
+      object: firstinrej.field_approve
+    successors:
+      -
+        id: Activity_1t5sko6
+        condition: ''
+      -
+        id: Activity_13r57id
+        condition: ''
+  Activity_1t5sko6:
+    plugin: eca_token_set_value
+    label: 'Get first from getpar [first]'
+    configuration:
+      token_name: first
+      token_value: '[getpar:0]'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_0k74abw
+        condition: ''
+      -
+        id: Activity_1um7rit
+        condition: ''
+  Activity_0k74abw:
+    plugin: eca_token_load_entity
+    label: 'Load entity first [par]'
+    configuration:
+      token_name: par
+      from: id
+      entity_type: paragraph
+      entity_id: '[first]'
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_1tfo393
+        condition: ''
+      -
+        id: Activity_0dwcceu
+        condition: ''
+  Activity_1tfo393:
+    plugin: eca_token_set_value
+    label: 'Get person to approve [parperson]'
+    configuration:
+      token_name: parperson
+      token_value: '[par:field_person:target_id]'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_1yc6n6p
+        condition: ''
+      -
+        id: Activity_1bsgoxk
+        condition: ''
+  Activity_1yc6n6p:
+    plugin: eca_switch_account
+    label: 'Switch to user [parperson]'
+    configuration:
+      user_id: '[parperson]'
+    successors:
+      -
+        id: Activity_1hs6sm8
+        condition: ''
+      -
+        id: Activity_0pmplge
+        condition: ''
+  Activity_1um7rit:
+    plugin: action_message_action
+    label: Activity_1um7rit
+    configuration:
+      replace_tokens: false
+      message: '[first] -- first'
+    successors: {  }
+  Activity_0dwcceu:
+    plugin: action_message_action
+    label: Activity_0dwcceu
+    configuration:
+      replace_tokens: false
+      message: '[par] --- par'
+    successors: {  }
+  Activity_1bsgoxk:
+    plugin: action_message_action
+    label: Activity_1bsgoxk
+    configuration:
+      replace_tokens: false
+      message: '[parperson] --- parperson'
+    successors: {  }
+  Activity_0pmplge:
+    plugin: action_message_action
+    label: Activity_0pmplge
+    configuration:
+      replace_tokens: false
+      message: switch
+    successors: {  }
+  Activity_15dz14m:
+    plugin: action_message_action
+    label: Activity_15dz14m
+    configuration:
+      replace_tokens: false
+      message: '[balance]---balance'
+    successors: {  }
+  Activity_1lqoddb:
+    plugin: eca_token_set_value
+    label: 'Get first from list to reject [firstinrej]'
+    configuration:
+      token_name: firstinrej
+      token_value: '[needreject:0]'
+      use_yaml: false
+    successors:
+      -
+        id: Activity_0zvsj98
+        condition: ''
+      -
+        id: Activity_1v5mv15
+        condition: ''
+  Activity_1v5mv15:
+    plugin: action_message_action
+    label: Activity_1v5mv15
+    configuration:
+      replace_tokens: false
+      message: '[firstinrej] --- firstinrej'
     successors: {  }

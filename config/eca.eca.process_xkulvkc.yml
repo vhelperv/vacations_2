@@ -170,16 +170,6 @@ conditions:
     configuration:
       negate: false
       token_name: check
-  Flow_0bwnbl2:
-    plugin: eca_entity_field_value
-    configuration:
-      negate: false
-      case: false
-      expected_value: '1'
-      field_name: status.value
-      operator: equal
-      type: value
-      entity: certend
 gateways:
   Gateway_1d27b5v:
     type: 0
@@ -501,7 +491,7 @@ actions:
         condition: ''
       -
         id: Activity_15ltp1w
-        condition: Flow_0bwnbl2
+        condition: ''
   Activity_09wvu70:
     plugin: action_message_action
     label: Activity_09wvu70
@@ -809,14 +799,14 @@ actions:
     label: 'Load cert by ID loadcert [certend]'
     configuration:
       token_name: certend
-      from: properties
+      from: id
       entity_type: node
-      entity_id: ''
+      entity_id: '[loadcert:nid]'
       revision_id: ''
-      properties: 'nid: "[loadcert:nid]"'
+      properties: ''
       langcode: _interface
       latest_revision: true
-      unchanged: false
+      unchanged: true
       object: ''
     successors:
       -
