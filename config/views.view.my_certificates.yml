@@ -26,6 +26,7 @@ dependencies:
     - user.role.shief_pm
     - user.role.teamlead
   module:
+    - datetime
     - datetime_range
     - node
     - user
@@ -417,6 +418,73 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: status
+          plugin_id: field
+          label: Status
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: custom
+            format_custom_false: Used/Outdated
+            format_custom_true: Active
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
       pager:
         type: mini
         options:
@@ -468,24 +536,36 @@ display:
       cache:
         type: tag
         options: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: 'You do not have any certificates available for use.'
+            format: basic_html
+          tokenize: false
       sorts:
-        created:
-          id: created
+        status:
+          id: status
           table: node_field_data
-          field: created
+          field: status
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
-          entity_field: created
-          plugin_id: date
+          entity_field: status
+          plugin_id: standard
           order: DESC
           expose:
             label: ''
             field_identifier: ''
           exposed: false
-          granularity: second
       arguments:
         field_employee_target_id:
           id: field_employee_target_id
@@ -534,52 +614,39 @@ display:
           expose:
             operator_limit_selection: false
             operator_list: {  }
-        status:
-          id: status
-          table: node_field_data
-          field: status
+        field_period_of_validity_end_value:
+          id: field_period_of_validity_end_value
+          table: node__field_period_of_validity
+          field: field_period_of_validity_end_value
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: status
-          plugin_id: boolean
-          operator: '='
-          value: '1'
+          plugin_id: datetime
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: '+ 0 day'
+            type: offset
           group: 1
-          exposed: true
+          exposed: false
           expose:
             operator_id: ''
-            label: 'Published status'
+            label: ''
             description: ''
             use_operator: false
-            operator: status_op
+            operator: ''
             operator_limit_selection: false
             operator_list: {  }
-            identifier: status
-            required: true
+            identifier: ''
+            required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              ceo: '0'
-              developer_junior: '0'
-              developer_middle: '0'
-              developer_senior: '0'
-              teamlead: '0'
-              pm: '0'
-              shief_pm: '0'
-              head_of_department: '0'
-              sales: '0'
-              marketing: '0'
-              recruiting: '0'
-              hr: '0'
-              om: '0'
-              accounting: '0'
-              admin_staff: '0'
-              client: '0'
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''

@@ -480,17 +480,15 @@ display:
             field_identifier: ''
           exposed: false
           granularity: second
-        type:
-          id: type
-          table: node_field_data
-          field: type
+        field__account_balance_value:
+          id: field__account_balance_value
+          table: node__field__account_balance
+          field: field__account_balance_value
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: type
           plugin_id: standard
-          order: ASC
+          order: DESC
           expose:
             label: ''
             field_identifier: ''

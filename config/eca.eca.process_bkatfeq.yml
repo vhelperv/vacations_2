@@ -93,6 +93,15 @@ conditions:
       right: '[countfield]'
       operator: lessthan
       type: value
+  Flow_1i6kxwn:
+    plugin: eca_scalar
+    configuration:
+      case: false
+      left: '[num]'
+      right: '0'
+      operator: equal
+      type: value
+      negate: true
   Flow_1rzprws:
     plugin: eca_entity_field_value
     configuration:
@@ -378,7 +387,7 @@ actions:
     successors:
       -
         id: Activity_0aopsfl
-        condition: ''
+        condition: Flow_1i6kxwn
   Activity_1y9sal8:
     plugin: eca_views_query
     label: 'Create list transaction [listtransact]'
@@ -389,7 +398,7 @@ actions:
       arguments: '[vac:nid]'
     successors:
       -
-        id: Activity_0rsag3i
+        id: Activity_15zqu9t
         condition: ''
   Activity_1ghodu5:
     plugin: 'eca_tamper:math'
@@ -648,7 +657,7 @@ actions:
       user_id: '[author]'
     successors:
       -
-        id: Activity_0yihpro
+        id: Activity_09q3kp0
         condition: ''
   Activity_01zw8vr:
     plugin: eca_count
@@ -748,7 +757,7 @@ actions:
       object: ''
     successors:
       -
-        id: Activity_0rsag3i
+        id: Activity_1pxfm15
         condition: ''
   Activity_0aopsfl:
     plugin: 'eca_tamper:strtotime'
@@ -759,4 +768,40 @@ actions:
     successors:
       -
         id: Gateway_0pvce2q
+        condition: ''
+  Activity_15zqu9t:
+    plugin: eca_count
+    label: 'Get count list [num]'
+    configuration:
+      token_name: num
+      list_token: listtransact
+    successors:
+      -
+        id: Activity_0rsag3i
+        condition: ''
+  Activity_1pxfm15:
+    plugin: 'eca_tamper:math'
+    label: 'num - 1'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '1'
+      eca_data: '[num]'
+      eca_token_name: num
+    successors:
+      -
+        id: Activity_0rsag3i
+        condition: ''
+  Activity_09q3kp0:
+    plugin: 'eca_tamper:math'
+    label: 'num - 1'
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '1'
+      eca_data: '[num]'
+      eca_token_name: num
+    successors:
+      -
+        id: Activity_0yihpro
         condition: ''
