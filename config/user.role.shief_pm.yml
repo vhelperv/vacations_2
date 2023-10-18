@@ -10,6 +10,7 @@ dependencies:
     - node
     - paragraphs
     - paragraphs_type_permissions
+    - system
     - update
     - view_unpublished
     - workflow
@@ -19,6 +20,7 @@ weight: 10
 is_admin: null
 permissions:
   - 'access any request_status workflow_transion overview'
+  - 'access content'
   - 'access request_status workflow_transition form'
   - 'create agreement workflow_transition'
   - 'create certificate content'

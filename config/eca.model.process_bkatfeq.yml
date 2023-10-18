@@ -518,7 +518,7 @@ modeldata: |
             <camunda:string>dayret</camunda:string>
           </camunda:field>
         </bpmn2:extensionElements>
-        <bpmn2:incoming>Flow_02j9lh9</bpmn2:incoming>
+        <bpmn2:incoming>Flow_0q01the</bpmn2:incoming>
         <bpmn2:outgoing>Flow_1cgs2d7</bpmn2:outgoing>
       </bpmn2:task>
       <bpmn2:exclusiveGateway id="Gateway_05xa1rw">
@@ -647,22 +647,8 @@ modeldata: |
           </camunda:field>
         </bpmn2:extensionElements>
         <bpmn2:incoming>Flow_1rzprws</bpmn2:incoming>
-        <bpmn2:outgoing>Flow_16h4ke9</bpmn2:outgoing>
+        <bpmn2:outgoing>Flow_1yjfy0b</bpmn2:outgoing>
       </bpmn2:task>
-      <bpmn2:sequenceFlow id="Flow_16h4ke9" sourceRef="Activity_1l2259o" targetRef="Activity_1d7knfv" />
-      <bpmn2:task id="Activity_1d7knfv" name="Publish certificate" camunda:modelerTemplate="org.drupal.action.entity:publish_action:node">
-        <bpmn2:extensionElements>
-          <camunda:properties>
-            <camunda:property name="pluginid" value="entity:publish_action:node" />
-          </camunda:properties>
-          <camunda:field name="object">
-            <camunda:string>cert</camunda:string>
-          </camunda:field>
-        </bpmn2:extensionElements>
-        <bpmn2:incoming>Flow_16h4ke9</bpmn2:incoming>
-        <bpmn2:outgoing>Flow_02j9lh9</bpmn2:outgoing>
-      </bpmn2:task>
-      <bpmn2:sequenceFlow id="Flow_02j9lh9" sourceRef="Activity_1d7knfv" targetRef="Activity_1ghodu5" />
       <bpmn2:task id="Activity_06b5en4" name="Set new cert remainder" camunda:modelerTemplate="org.drupal.action.eca_set_field_value">
         <bpmn2:extensionElements>
           <camunda:properties>
@@ -1468,6 +1454,38 @@ modeldata: |
         <bpmn2:outgoing>Flow_0xjnhhk</bpmn2:outgoing>
       </bpmn2:task>
       <bpmn2:sequenceFlow id="Flow_0xjnhhk" sourceRef="Activity_09q3kp0" targetRef="Activity_0yihpro" />
+      <bpmn2:task id="Activity_1d7knfv" name="Publish certificate" camunda:modelerTemplate="org.drupal.action.eca_set_field_value">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_set_field_value" />
+          </camunda:properties>
+          <camunda:field name="method">
+            <camunda:string>set:clear</camunda:string>
+          </camunda:field>
+          <camunda:field name="strip_tags">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="trim">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="field_name">
+            <camunda:string>[status:value]</camunda:string>
+          </camunda:field>
+          <camunda:field name="save_entity">
+            <camunda:string>yes</camunda:string>
+          </camunda:field>
+          <camunda:field name="field_value">
+            <camunda:string>1</camunda:string>
+          </camunda:field>
+          <camunda:field name="object">
+            <camunda:string>cert</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1yjfy0b</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_0q01the</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:sequenceFlow id="Flow_1yjfy0b" sourceRef="Activity_1l2259o" targetRef="Activity_1d7knfv" />
+      <bpmn2:sequenceFlow id="Flow_0q01the" sourceRef="Activity_1d7knfv" targetRef="Activity_1ghodu5" />
     </bpmn2:process>
     <bpmndi:BPMNDiagram id="sid-05b04859-73dd-48dd-8418-c4f02245ef48">
       <bpmndi:BPMNPlane id="sid-19e99bdc-8b68-4814-8119-eeffcb4ed5b4" bpmnElement="Process_bkATfeq">
@@ -1567,10 +1585,6 @@ modeldata: |
         </bpmndi:BPMNShape>
         <bpmndi:BPMNShape id="Activity_1l2259o_di" bpmnElement="Activity_1l2259o">
           <dc:Bounds x="2440" y="190" width="100" height="80" />
-          <bpmndi:BPMNLabel />
-        </bpmndi:BPMNShape>
-        <bpmndi:BPMNShape id="Activity_1d7knfv_di" bpmnElement="Activity_1d7knfv">
-          <dc:Bounds x="2570" y="190" width="100" height="80" />
           <bpmndi:BPMNLabel />
         </bpmndi:BPMNShape>
         <bpmndi:BPMNShape id="Activity_06b5en4_di" bpmnElement="Activity_06b5en4">
@@ -1683,6 +1697,10 @@ modeldata: |
           <dc:Bounds x="4390" y="420" width="100" height="80" />
           <bpmndi:BPMNLabel />
         </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_1kk6721_di" bpmnElement="Activity_1d7knfv">
+          <dc:Bounds x="2570" y="190" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
         <bpmndi:BPMNEdge id="Flow_0w6exzz_di" bpmnElement="Flow_0w6exzz">
           <di:waypoint x="690" y="210" />
           <di:waypoint x="730" y="210" />
@@ -1779,10 +1797,6 @@ modeldata: |
           <di:waypoint x="1570" y="450" />
           <di:waypoint x="1630" y="450" />
         </bpmndi:BPMNEdge>
-        <bpmndi:BPMNEdge id="Flow_02j9lh9_di" bpmnElement="Flow_02j9lh9">
-          <di:waypoint x="2670" y="230" />
-          <di:waypoint x="2700" y="230" />
-        </bpmndi:BPMNEdge>
         <bpmndi:BPMNEdge id="Flow_1cgs2d7_di" bpmnElement="Flow_1cgs2d7">
           <di:waypoint x="2800" y="230" />
           <di:waypoint x="2960" y="230" />
@@ -1812,10 +1826,6 @@ modeldata: |
         <bpmndi:BPMNEdge id="Flow_197e4nt_di" bpmnElement="Flow_197e4nt">
           <di:waypoint x="2800" y="460" />
           <di:waypoint x="2830" y="460" />
-        </bpmndi:BPMNEdge>
-        <bpmndi:BPMNEdge id="Flow_16h4ke9_di" bpmnElement="Flow_16h4ke9">
-          <di:waypoint x="2540" y="230" />
-          <di:waypoint x="2570" y="230" />
         </bpmndi:BPMNEdge>
         <bpmndi:BPMNEdge id="Flow_0fqzetn_di" bpmnElement="Flow_0fqzetn">
           <di:waypoint x="3010" y="270" />
@@ -1922,6 +1932,14 @@ modeldata: |
         <bpmndi:BPMNEdge id="Flow_0xjnhhk_di" bpmnElement="Flow_0xjnhhk">
           <di:waypoint x="4490" y="460" />
           <di:waypoint x="4520" y="460" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1yjfy0b_di" bpmnElement="Flow_1yjfy0b">
+          <di:waypoint x="2540" y="230" />
+          <di:waypoint x="2570" y="230" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0q01the_di" bpmnElement="Flow_0q01the">
+          <di:waypoint x="2670" y="230" />
+          <di:waypoint x="2700" y="230" />
         </bpmndi:BPMNEdge>
       </bpmndi:BPMNPlane>
     </bpmndi:BPMNDiagram>

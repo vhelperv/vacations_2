@@ -2152,7 +2152,7 @@ modeldata: |
             <camunda:string>op</camunda:string>
           </camunda:field>
           <camunda:field name="message">
-            <camunda:string>You cannot take a vacation for more than 14 days! [number] ---</camunda:string>
+            <camunda:string>You cannot take a vacation for more than 14 days!</camunda:string>
           </camunda:field>
         </bpmn2:extensionElements>
         <bpmn2:incoming>Flow_13a76zy</bpmn2:incoming>

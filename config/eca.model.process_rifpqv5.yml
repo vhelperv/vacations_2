@@ -2634,7 +2634,6 @@ modeldata: |
       <bpmn2:sequenceFlow id="Flow_04uf13i" sourceRef="Activity_1sih0b9" targetRef="Activity_01bbszy" />
       <bpmn2:sequenceFlow id="Flow_0htyt2c" sourceRef="Activity_1twif9y" targetRef="Activity_0pz9y06" />
       <bpmn2:sequenceFlow id="Flow_17skvb7" sourceRef="Activity_1ae0sj3" targetRef="Activity_1sih0b9" />
-      <bpmn2:task id="Activity_0lmnju2" />
       <bpmn2:task id="Activity_066zv03" name="Unpublish certificate" camunda:modelerTemplate="org.drupal.action.eca_set_field_value">
         <bpmn2:extensionElements>
           <camunda:properties>
@@ -2999,6 +2998,10 @@ modeldata: |
           <dc:Bounds x="1850" y="-360" width="100" height="80" />
           <bpmndi:BPMNLabel />
         </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_044go7i_di" bpmnElement="Activity_044go7i">
+          <dc:Bounds x="4580" y="-690" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
         <bpmndi:BPMNShape id="Event_1smsc0f_di" bpmnElement="Event_1smsc0f">
           <dc:Bounds x="442" y="-848" width="36" height="36" />
           <bpmndi:BPMNLabel>
@@ -3106,15 +3109,8 @@ modeldata: |
             <dc:Bounds x="254" y="425" width="54" height="27" />
           </bpmndi:BPMNLabel>
         </bpmndi:BPMNShape>
-        <bpmndi:BPMNShape id="Activity_0lmnju2_di" bpmnElement="Activity_0lmnju2">
-          <dc:Bounds x="2920" y="-700" width="100" height="80" />
-        </bpmndi:BPMNShape>
         <bpmndi:BPMNShape id="Activity_066zv03_di" bpmnElement="Activity_066zv03">
           <dc:Bounds x="3740" y="-590" width="100" height="80" />
-          <bpmndi:BPMNLabel />
-        </bpmndi:BPMNShape>
-        <bpmndi:BPMNShape id="Activity_044go7i_di" bpmnElement="Activity_044go7i">
-          <dc:Bounds x="4580" y="-690" width="100" height="80" />
           <bpmndi:BPMNLabel />
         </bpmndi:BPMNShape>
         <bpmndi:BPMNShape id="Activity_1cqg8bk_di" bpmnElement="Activity_1cqg8bk">

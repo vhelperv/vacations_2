@@ -1,7 +1,9 @@
 uuid: b0afaba1-c3dd-492b-b15e-02340a363209
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - eca_form
 id: process_qwdi87l
 modeller: bpmn_io
 label: 'Validation for TeamLead'
@@ -10,4 +12,11 @@ weight: null
 events: {  }
 conditions: {  }
 gateways: {  }
-actions: {  }
+actions:
+  Activity_026uaq9:
+    plugin: eca_form_field_set_error
+    label: Activity_026uaq9
+    configuration:
+      message: f
+      field_name: op
+    successors: {  }

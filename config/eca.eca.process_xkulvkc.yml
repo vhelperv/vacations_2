@@ -34,6 +34,7 @@ dependencies:
     - eca_tamper
     - eca_user
     - eca_views
+    - node
     - user
 id: process_xkulvkc
 modeller: bpmn_io
@@ -170,6 +171,26 @@ conditions:
     configuration:
       negate: false
       token_name: check
+  Flow_1lxlkdb:
+    plugin: eca_entity_field_value
+    configuration:
+      negate: false
+      case: false
+      expected_value: '0'
+      field_name: status.value
+      operator: equal
+      type: value
+      entity: certend
+  Flow_1uda97z:
+    plugin: eca_entity_field_value
+    configuration:
+      negate: false
+      case: false
+      expected_value: '1'
+      field_name: status.value
+      operator: equal
+      type: value
+      entity: certend
 gateways:
   Gateway_1d27b5v:
     type: 0
@@ -466,31 +487,6 @@ actions:
     successors:
       -
         id: Activity_0swx7iv
-        condition: ''
-  Activity_1vqgas0:
-    plugin: action_message_action
-    label: Activity_1vqgas0
-    configuration:
-      replace_tokens: false
-      message: 'done - 4 ---- [loadcert:nid]'
-    successors: {  }
-  Activity_0rhxso6:
-    plugin: eca_set_field_value
-    label: 'Unpublish certificate'
-    configuration:
-      field_name: '[status:value]'
-      field_value: '0'
-      method: 'set:clear'
-      strip_tags: false
-      trim: false
-      save_entity: true
-      object: loadcert
-    successors:
-      -
-        id: Activity_1vqgas0
-        condition: ''
-      -
-        id: Activity_15ltp1w
         condition: ''
   Activity_09wvu70:
     plugin: action_message_action
@@ -810,8 +806,11 @@ actions:
       object: ''
     successors:
       -
+        id: Activity_15ltp1w
+        condition: Flow_1lxlkdb
+      -
         id: Activity_0rhxso6
-        condition: ''
+        condition: Flow_1uda97z
   Activity_0bjbj7s:
     plugin: eca_set_field_value
     label: 'Set certificate ref'
@@ -880,3 +879,12 @@ actions:
       save_entity: true
       object: exptransact
     successors: {  }
+  Activity_0rhxso6:
+    plugin: 'entity:unpublish_action:node'
+    label: 'Unpublish certificate'
+    configuration:
+      object: loadcert
+    successors:
+      -
+        id: Activity_15ltp1w
+        condition: ''

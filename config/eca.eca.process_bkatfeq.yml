@@ -450,15 +450,6 @@ actions:
       -
         id: Activity_1d7knfv
         condition: ''
-  Activity_1d7knfv:
-    plugin: 'entity:publish_action:node'
-    label: 'Publish certificate'
-    configuration:
-      object: cert
-    successors:
-      -
-        id: Activity_1ghodu5
-        condition: ''
   Activity_06b5en4:
     plugin: eca_set_field_value
     label: 'Set new cert remainder'
@@ -804,4 +795,19 @@ actions:
     successors:
       -
         id: Activity_0yihpro
+        condition: ''
+  Activity_1d7knfv:
+    plugin: eca_set_field_value
+    label: 'Publish certificate'
+    configuration:
+      field_name: '[status:value]'
+      field_value: '1'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: cert
+    successors:
+      -
+        id: Activity_1ghodu5
         condition: ''

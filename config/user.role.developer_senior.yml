@@ -5,9 +5,11 @@ dependencies:
   config:
     - node.type.vacation
   module:
+    - content_moderation
     - node
     - paragraphs
     - paragraphs_type_permissions
+    - system
     - update
     - workflow
 id: developer_senior
@@ -15,6 +17,7 @@ label: Developer-Senior
 weight: 7
 is_admin: null
 permissions:
+  - 'access content'
   - 'access request_status workflow_transition form'
   - 'create agreement workflow_transition'
   - 'create paragraph content person_who_approve'
@@ -23,6 +26,7 @@ permissions:
   - 'create vacation content'
   - 'delete paragraph content person_who_approve'
   - 'update paragraph content person_who_approve'
+  - 'view any unpublished content'
   - 'view own unpublished content'
   - 'view paragraph content person_who_approve'
   - 'view unpublished paragraphs'

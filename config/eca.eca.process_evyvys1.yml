@@ -1259,7 +1259,7 @@ actions:
     plugin: eca_form_field_set_error
     label: 'ERROR: Number days greater than 14'
     configuration:
-      message: 'You cannot take a vacation for more than 14 days! [number] ---'
+      message: 'You cannot take a vacation for more than 14 days!'
       field_name: op
     successors: {  }
   Activity_1fl3rhl:
