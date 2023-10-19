@@ -49,7 +49,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'My Vacation(Full Day)'
+      title: 'My Vacation'
       fields:
         title:
           id: title
@@ -815,7 +815,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: datetime
-          operator: '>'
+          operator: '>='
           value:
             min: ''
             max: ''

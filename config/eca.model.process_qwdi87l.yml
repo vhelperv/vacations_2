@@ -1,38 +1,30 @@
-uuid: ba9452c1-fdd5-4ccd-b1b8-649a070ef621
+uuid: b0afaba1-c3dd-492b-b15e-02340a363209
 langcode: en
 status: true
 dependencies:
   config:
-    - eca.eca.process_qwdi87l
+    - field.field.node.certificate.field_remainder
+    - field.field.node.vacation.field_approve
+    - field.field.node.vacation.field_vacation_s_employee_
+    - field.field.paragraph.person_who_approve.field_permission
+    - field.field.paragraph.person_who_approve.field_person
+    - field.storage.node.field_approve
+    - field.storage.node.field_remainder
+    - field.storage.node.field_vacation_s_employee_
+    - field.storage.paragraph.field_permission
+    - field.storage.paragraph.field_person
+    - node.type.vacation
+    - views.view.balance
+    - views.view.to_approve
+  module:
+    - eca_base
+    - eca_content
+    - eca_tamper
+    - eca_user
+    - eca_views
 id: process_qwdi87l
 label: 'Validation for TeamLead'
-tags:
-  - untagged
-documentation: ''
-filename: ''
-modeldata: |
-  <?xml version="1.0" encoding="UTF-8"?>
-  <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:qa="http://some-company/schema/bpmn/qa" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
-    <bpmn2:process id="Process_qWDI87l" name="Validation for TeamLead" isExecutable="true" camunda:versionTag="v1">
-      <bpmn2:task id="Activity_026uaq9" camunda:modelerTemplate="org.drupal.action.eca_form_field_set_error">
-        <bpmn2:extensionElements>
-          <camunda:properties>
-            <camunda:property name="pluginid" value="eca_form_field_set_error" />
-          </camunda:properties>
-          <camunda:field name="field_name">
-            <camunda:string>op</camunda:string>
-          </camunda:field>
-          <camunda:field name="message">
-            <camunda:string>f</camunda:string>
-          </camunda:field>
-        </bpmn2:extensionElements>
-      </bpmn2:task>
-    </bpmn2:process>
-    <bpmndi:BPMNDiagram id="sid-22cdb1df-e4be-4cbe-996e-4444bbfe4515">
-      <bpmndi:BPMNPlane id="sid-044ad181-441f-43dd-90e4-7f7787286126" bpmnElement="Process_qWDI87l">
-        <bpmndi:BPMNShape id="Activity_026uaq9_di" bpmnElement="Activity_026uaq9">
-          <dc:Bounds x="-140" y="100" width="100" height="80" />
-        </bpmndi:BPMNShape>
-      </bpmndi:BPMNPlane>
-    </bpmndi:BPMNDiagram>
-  </bpmn2:definitions>
+tags: null
+documentation: null
+filename: null
+modeldata: null

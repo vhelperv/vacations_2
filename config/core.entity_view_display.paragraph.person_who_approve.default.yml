@@ -7,14 +7,14 @@ dependencies:
     - field.field.paragraph.person_who_approve.field_person
     - paragraphs.paragraphs_type.person_who_approve
   module:
-    - workflow
+    - options
 id: paragraph.person_who_approve.default
 targetEntityType: paragraph
 bundle: person_who_approve
 mode: default
 content:
   field_permission:
-    type: workflow_default
+    type: list_default
     label: inline
     settings: {  }
     third_party_settings: {  }

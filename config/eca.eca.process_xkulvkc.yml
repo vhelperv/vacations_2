@@ -883,7 +883,7 @@ actions:
     plugin: 'entity:unpublish_action:node'
     label: 'Unpublish certificate'
     configuration:
-      object: loadcert
+      object: certend
     successors:
       -
         id: Activity_15ltp1w

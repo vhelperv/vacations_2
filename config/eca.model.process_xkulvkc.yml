@@ -1640,7 +1640,7 @@ modeldata: |
             <camunda:property name="pluginid" value="entity:unpublish_action:node" />
           </camunda:properties>
           <camunda:field name="object">
-            <camunda:string>loadcert</camunda:string>
+            <camunda:string>certend</camunda:string>
           </camunda:field>
         </bpmn2:extensionElements>
         <bpmn2:incoming>Flow_1uda97z</bpmn2:incoming>
