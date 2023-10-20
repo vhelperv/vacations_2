@@ -4,8 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.node.certificate.field_remainder
+    - field.field.node.transaction.field_numb_day
+    - field.field.node.vacation.field_numb_day
     - field.field.node.vacation.field_state_vacation
     - field.field.node.vacation.field_vacation_s_employee_
+    - field.storage.node.field_numb_day
     - field.storage.node.field_remainder
     - field.storage.node.field_state_vacation
     - field.storage.node.field_vacation_s_employee_
@@ -25,8 +28,8 @@ version: v1
 weight: null
 events:
   Event_1z02hz8:
-    plugin: 'content_entity:update'
-    label: 'Update Vacation'
+    plugin: 'content_entity:presave'
+    label: 'Preapprove Vacation'
     configuration:
       type: 'node vacation'
     successors:
@@ -98,6 +101,24 @@ conditions:
       right: '[balance]'
       operator: greaterthan
       type: value
+  Flow_0flaxl6:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[vacat:field_numb_day:value]'
+      right: '10'
+      operator: lessthan
+      type: value
+  Flow_1m9hokn:
+    plugin: eca_scalar
+    configuration:
+      case: false
+      left: '[vacat:field_numb_day:value]'
+      right: '10'
+      operator: lessthan
+      type: value
+      negate: true
 gateways:
   Gateway_0o0mfk7:
     type: 0
@@ -106,7 +127,7 @@ gateways:
         id: Activity_0dm0pr4
         condition: Flow_0ylwj1m
       -
-        id: Gateway_1a3hbxe
+        id: Gateway_1ex4qcw
         condition: Flow_08x0jfm
   Gateway_1a3hbxe:
     type: 0
@@ -132,6 +153,15 @@ gateways:
       -
         id: Gateway_1a3hbxe
         condition: ''
+  Gateway_1ex4qcw:
+    type: 0
+    successors:
+      -
+        id: Activity_1jppr5o
+        condition: Flow_0flaxl6
+      -
+        id: Gateway_1a3hbxe
+        condition: Flow_1m9hokn
 actions:
   Activity_1veccyk:
     plugin: eca_token_load_entity
@@ -368,4 +398,19 @@ actions:
     successors:
       -
         id: Gateway_04lwx7p
+        condition: ''
+  Activity_1jppr5o:
+    plugin: 'eca_tamper:math'
+    label: |-
+      Balance - numb 
+      day vacation
+    configuration:
+      operation: subtraction
+      flip: false
+      value: '[vacat:field_numb_day:value]'
+      eca_data: '[balance]'
+      eca_token_name: balance
+    successors:
+      -
+        id: Gateway_1a3hbxe
         condition: ''

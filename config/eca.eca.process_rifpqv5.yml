@@ -67,7 +67,7 @@ events:
         condition: ''
   Event_1mkjlbs:
     plugin: 'content_entity:update'
-    label: 'Load Vacation'
+    label: 'Update paragraph entity'
     configuration:
       type: 'paragraph person_who_approve'
     successors:

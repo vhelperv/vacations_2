@@ -1209,7 +1209,7 @@ modeldata: |
         <bpmn2:incoming>Flow_1hnk3m4</bpmn2:incoming>
         <bpmn2:outgoing>Flow_0fd358p</bpmn2:outgoing>
       </bpmn2:task>
-      <bpmn2:startEvent id="Event_1mkjlbs" name="Load Vacation" camunda:modelerTemplate="org.drupal.event.content_entity:update">
+      <bpmn2:startEvent id="Event_1mkjlbs" name="Update paragraph entity" camunda:modelerTemplate="org.drupal.event.content_entity:update">
         <bpmn2:extensionElements>
           <camunda:properties>
             <camunda:property name="pluginid" value="content_entity:update" />
@@ -2888,6 +2888,9 @@ modeldata: |
         </bpmndi:BPMNShape>
         <bpmndi:BPMNShape id="Event_1gkm9zh_di" bpmnElement="Event_1mkjlbs">
           <dc:Bounds x="442" y="22" width="36" height="36" />
+          <bpmndi:BPMNLabel>
+            <dc:Bounds x="420" y="58" width="89" height="27" />
+          </bpmndi:BPMNLabel>
         </bpmndi:BPMNShape>
         <bpmndi:BPMNShape id="Activity_0mv2u7z_di" bpmnElement="Activity_0mv2u7z">
           <dc:Bounds x="510" y="0" width="100" height="80" />
