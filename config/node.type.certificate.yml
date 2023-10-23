@@ -28,6 +28,6 @@ name: Certificate
 type: certificate
 description: 'Leave certificate. Automatic creation uses this CT. You can also create this as a reward for good work if you have access.'
 help: ''
-new_revision: true
+new_revision: false
 preview_mode: 0
 display_submitted: false

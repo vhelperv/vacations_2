@@ -107,7 +107,7 @@ conditions:
       negate: false
       case: false
       left: '[vacat:field_numb_day:value]'
-      right: '10'
+      right: '[balanceview1:0:field_issued_days:value]'
       operator: lessthan
       type: value
   Flow_1m9hokn:
@@ -115,7 +115,7 @@ conditions:
     configuration:
       case: false
       left: '[vacat:field_numb_day:value]'
-      right: '10'
+      right: '[balanceview1:0:field_issued_days:value]'
       operator: lessthan
       type: value
       negate: true
@@ -127,7 +127,7 @@ gateways:
         id: Activity_0dm0pr4
         condition: Flow_0ylwj1m
       -
-        id: Gateway_1ex4qcw
+        id: Activity_11sv201
         condition: Flow_08x0jfm
   Gateway_1a3hbxe:
     type: 0
@@ -413,4 +413,16 @@ actions:
     successors:
       -
         id: Gateway_1a3hbxe
+        condition: ''
+  Activity_11sv201:
+    plugin: eca_views_query
+    label: 'Load Balance [balanceview1]'
+    configuration:
+      token_name: balanceview1
+      view_id: balance
+      display_id: block_1
+      arguments: ''
+    successors:
+      -
+        id: Gateway_1ex4qcw
         condition: ''

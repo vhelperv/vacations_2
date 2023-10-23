@@ -28,6 +28,6 @@ name: Vacation
 type: vacation
 description: 'This CT can be created by anyone who is authenticated and has a role.'
 help: ''
-new_revision: true
+new_revision: false
 preview_mode: 0
 display_submitted: false
