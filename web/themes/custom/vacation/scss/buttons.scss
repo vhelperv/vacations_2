@@ -1,0 +1,16 @@
+#block-vacation-addvacation {
+  display: flex;
+  & > div {
+    & > p {
+      margin: 0;
+      padding-bottom: 30px;
+      & > a {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.form-save-default-button {
+  display: none;
+}

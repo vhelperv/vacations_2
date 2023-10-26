@@ -1,0 +1,120 @@
+@media (max-width: 1612px) {
+  #block-vacationusermenu {
+    & > ul {
+      & > li {
+        padding: 2px 10px;
+        & > a {
+          font-size: 15px;
+        }
+        &:hover {
+          & > ul {
+            box-shadow: gray 0 10px 3px -2px;
+            border-radius: 10px;
+            & > li {
+              &:hover {
+              }
+            }
+          }
+        }
+        & > ul {
+          & > li {
+            & > a {
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #block-vacation-views-block-balance-block-2 {
+    padding-left: 13px;
+    & > h2 {
+      font-size: 15px;
+      &:after {
+        content: ":";
+      }
+    }
+    & > div {
+      & > .view-id-balance {
+        & > .gin-layer-wrapper {
+          & > div {
+            & > table {
+              & > thead {
+              }
+              & > tbody {
+                font-size: 15px;
+                & > tr {
+                  & > td {
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1524px) {
+  #block-vacationusermenu {
+    & > ul {
+      flex-wrap: wrap;
+      & > li {
+        padding: 2px 10px;
+        & > a {
+          font-size: 15px;
+        }
+        &:hover {
+          & > ul {
+            box-shadow: gray 0 10px 3px -2px;
+            border-radius: 10px;
+            & > li {
+              &:hover {
+              }
+            }
+          }
+        }
+        & > ul {
+          & > li {
+            & > a {
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #block-vacation-views-block-balance-block-2 {
+    padding-left: 13px;
+    & > h2 {
+      font-size: 0;
+      &:after {
+        content: "UB:";
+        font-size: 17px;
+      }
+    }
+    & > div {
+      & > .view-id-balance {
+        & > .gin-layer-wrapper {
+          & > div {
+            & > table {
+              & > thead {
+
+              }
+              & > tbody {
+                font-size: 15px;
+                & > tr {
+                  & > td {
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

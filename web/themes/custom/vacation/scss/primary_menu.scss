@@ -1,36 +1,41 @@
+// For field-time-vacation when not full day
+.form-disabled {
+    display: none !important;
+}
+a:focus {
+  box-shadow: none!important;
+  border: none!important;
+}
+// Header vacation user menu
 header {
-  height: auto!important;
-  margin-top: 20px;
+  z-index: 3!important;
+  height: auto;
   margin-bottom: 10px;
   box-shadow: gray 0 7px 5px;
+  position: fixed!important;
+  top: 0!important;
+  flex-wrap: nowrap;
 }
-.region-sticky {
-  z-index: 3!important;
+.region-sticky__items__inner {
+  flex-wrap: nowrap;
+}
+.gin--edit-form .region-sticky {
+  top: 0!important;
+}
+.page-content {
+  padding-top:  100px;
 }
 .primary-menu {
   width: 100%;
-}
-.primary-menu {
   .region-primary-menu {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
   }
 }
-
-#block-vacation-addvacation {
-  float: left;
-  & > div {
-    & > p {
-      margin: 0;
-      padding-bottom: 30px;
-      & > a {
-        margin: 0;
-      }
-    }
-  }
+.sticky-shadow {
+  display: none;
 }
-
 #block-vacationusermenu {
   & > ul {
     display: flex;
@@ -40,32 +45,33 @@ header {
     & > li {
       list-style-type: none;
       text-transform: uppercase;
-      padding: 0 14px;
+      padding: 2px 14px;
       & > a {
         text-decoration: none;
         color: #000;
-        font-size: 21px;
+        font-size: 17px;
         font-weight: 500;
         font-style: italic;
       }
       &:hover {
-        text-decoration: underline;
-        text-decoration-thickness: 3px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: inset 0 0 10px rgba( 0, 0, 0, 0.8);
         position: relative;
         & > ul {
           position: absolute;
           display: block;
           z-index: 102;
-          padding-top: 5px;
-          padding-bottom: 10px;
           text-align: center;
           background-color: var(--gin-bg-app);
           width: 100%;
           box-shadow: gray 0 10px 3px -2px;
+          border-radius: 10px;
           & > li {
             &:hover {
-              text-decoration: underline;
-              text-decoration-thickness: 2px;
+              background-color: #fff;
+              border-radius: 10px;
+              box-shadow: inset 0 0 10px rgba( 0, 0, 0, 0.8);
             }
           }
         }
@@ -92,12 +98,17 @@ header {
 }
 
 #block-vacation-views-block-balance-block-2 {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: inset 0 0 10px rgba( 0, 0, 0, 0.8);
+  padding-left: 13px;
   display: flex;
   & > h2 {
+    cursor: default;
     margin: auto auto;
     text-transform: uppercase;
     font-style: italic;
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 500;
     color: #000;
     &:after {
@@ -128,6 +139,11 @@ header {
               color: #000;
               font-style: italic;
               font-size: 20px;
+              & > tr {
+                & > td {
+                  cursor: default;
+                }
+              }
             }
           }
         }
@@ -142,56 +158,4 @@ header {
   font-weight: 500;
 }
 
-.form-save-default-button {
-  display: none;
-}
-
-.popup {
-  display: block;
-  height: auto;
-  width: auto;
-  text-align: center;
-  .form-actions {
-    display: flex;
-    margin-left: 50px;
-    margin-right: 172px;
-    .workflow-button-сancel {
-      &[value] {
-        font-size: 0;
-        width: 70px;
-      }
-    }
-    &:after {
-      position: absolute;
-      margin-top: 27px;
-      margin-left: 20px;
-      content: "Yes";
-      font-size: var(--gin-font-size);
-      font-weight: var(--gin-font-weight-semibold);
-      color: var(--gin-color-primary);
-      background-color: transparent;
-      box-shadow: none;
-      transition: var(--gin-transition);
-      pointer-events: none;
-    }
-    &:hover::after {
-      color: #fff;
-    }
-  }
-}
-.spv-popup-content {
-  z-index: 5;
-  right: 550%;
-  top: -45px;
-}
-
-.spv_close {
-  position: inherit;
-  top: 149px;
-  right: 50px;
-  z-index: 3;
-}
-
-#block-vacation-addvacation {
-  float: none;
-}
+@import "primary_menu-media";

@@ -1,0 +1,45 @@
+.popup {
+  display: block;
+  height: auto;
+  width: auto;
+  text-align: center;
+  .form-actions {
+    display: flex;
+    margin-left: 50px;
+    margin-right: 172px;
+    .workflow-button-сancel {
+      &[value] {
+        font-size: 0;
+        width: 70px;
+      }
+    }
+    &:after {
+      position: absolute;
+      margin-top: 27px;
+      margin-left: 20px;
+      content: "Yes";
+      font-size: var(--gin-font-size);
+      font-weight: var(--gin-font-weight-semibold);
+      color: var(--gin-color-primary);
+      background-color: transparent;
+      box-shadow: none;
+      transition: var(--gin-transition);
+      pointer-events: none;
+    }
+    &:hover::after {
+      color: #fff;
+    }
+  }
+}
+.spv-popup-content {
+  z-index: 5;
+  right: 35vw;
+  top: -45px;
+}
+
+.spv_close {
+  position: inherit;
+  top: 149px;
+  right: 50px;
+  z-index: 3;
+}
