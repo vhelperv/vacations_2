@@ -113,11 +113,11 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
-                type: datetime_default
+                type: datetime_custom
                 label: inline
                 settings:
                   timezone_override: ''
-                  format_type: short
+                  date_format: 'd/m/Y - H:i'
                 third_party_settings: {  }
             weight: 1
             additional: {  }

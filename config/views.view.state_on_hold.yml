@@ -346,6 +346,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
+      enabled: false
       display_extenders: {  }
       path: state-on-hold
     cache_metadata:

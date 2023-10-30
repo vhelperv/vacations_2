@@ -19,7 +19,7 @@ id: process_bdkjgye
 modeller: bpmn_io
 label: 'Automatic rejection'
 version: v1
-weight: null
+weight: -4
 events:
   Event_0uvb6eg:
     plugin: 'content_entity:load'

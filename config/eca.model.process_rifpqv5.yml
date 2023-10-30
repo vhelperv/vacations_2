@@ -2719,6 +2719,112 @@ modeldata: |
         <bpmn2:outgoing>Flow_13vcqxg</bpmn2:outgoing>
       </bpmn2:task>
       <bpmn2:sequenceFlow id="Flow_13vcqxg" sourceRef="Activity_1cqg8bk" targetRef="Activity_044go7i" />
+      <bpmn2:startEvent id="Event_1vu0t44" name="Update paragraph " camunda:modelerTemplate="org.drupal.event.content_entity:update">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="content_entity:update" />
+          </camunda:properties>
+          <camunda:field name="type">
+            <camunda:string>paragraph person_who_approve</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>Flow_0peiohe</bpmn2:outgoing>
+      </bpmn2:startEvent>
+      <bpmn2:task id="Activity_12y7o2e" name="Load paragraph [paragr]" camunda:modelerTemplate="org.drupal.action.eca_token_load_entity">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_token_load_entity" />
+          </camunda:properties>
+          <camunda:field name="token_name">
+            <camunda:string>paragr</camunda:string>
+          </camunda:field>
+          <camunda:field name="from">
+            <camunda:string>current</camunda:string>
+          </camunda:field>
+          <camunda:field name="entity_type">
+            <camunda:string>_none</camunda:string>
+          </camunda:field>
+          <camunda:field name="entity_id">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="revision_id">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="langcode">
+            <camunda:string>_interface</camunda:string>
+          </camunda:field>
+          <camunda:field name="latest_revision">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="unchanged">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="properties">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="object">
+            <camunda:string></camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0peiohe</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1k1x1np</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:sequenceFlow id="Flow_0peiohe" sourceRef="Event_1vu0t44" targetRef="Activity_12y7o2e" />
+      <bpmn2:task id="Activity_02ll27b" name="Massage: State changed" camunda:modelerTemplate="org.drupal.action.action_message_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="action_message_action" />
+          </camunda:properties>
+          <camunda:field name="message">
+            <camunda:string>State "[perentpar:title]" of [perentpar:author:display-name] been changed to "[paragr:field_permission]"</camunda:string>
+          </camunda:field>
+          <camunda:field name="replace_tokens">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1cnuc15</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:sequenceFlow id="Flow_1k1x1np" sourceRef="Activity_12y7o2e" targetRef="Activity_1q180r7" />
+      <bpmn2:task id="Activity_1q180r7" name="Load perent paragraph [perentpar]" camunda:modelerTemplate="org.drupal.action.eca_token_load_entity">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_token_load_entity" />
+          </camunda:properties>
+          <camunda:field name="token_name">
+            <camunda:string>perentpar</camunda:string>
+          </camunda:field>
+          <camunda:field name="from">
+            <camunda:string>id</camunda:string>
+          </camunda:field>
+          <camunda:field name="entity_type">
+            <camunda:string>node</camunda:string>
+          </camunda:field>
+          <camunda:field name="entity_id">
+            <camunda:string>[paragr:parent_id:value]</camunda:string>
+          </camunda:field>
+          <camunda:field name="revision_id">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="langcode">
+            <camunda:string>_interface</camunda:string>
+          </camunda:field>
+          <camunda:field name="latest_revision">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="unchanged">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="properties">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="object">
+            <camunda:string></camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1k1x1np</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1cnuc15</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:sequenceFlow id="Flow_1cnuc15" sourceRef="Activity_1q180r7" targetRef="Activity_02ll27b" />
     </bpmn2:process>
     <bpmndi:BPMNDiagram id="sid-b24b1293-f9c5-4037-a8b4-bf719f2d6886">
       <bpmndi:BPMNPlane id="sid-4d9f0a7c-6db5-42cc-9b52-049bdc2f02a3" bpmnElement="Process_rifPQV5">
@@ -3118,6 +3224,24 @@ modeldata: |
         </bpmndi:BPMNShape>
         <bpmndi:BPMNShape id="Activity_1cqg8bk_di" bpmnElement="Activity_1cqg8bk">
           <dc:Bounds x="4440" y="-690" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Event_1vu0t44_di" bpmnElement="Event_1vu0t44">
+          <dc:Bounds x="442" y="-338" width="36" height="36" />
+          <bpmndi:BPMNLabel>
+            <dc:Bounds x="418" y="-295" width="89" height="14" />
+          </bpmndi:BPMNLabel>
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_12y7o2e_di" bpmnElement="Activity_12y7o2e">
+          <dc:Bounds x="510" y="-360" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_02ll27b_di" bpmnElement="Activity_02ll27b">
+          <dc:Bounds x="770" y="-360" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_1q180r7_di" bpmnElement="Activity_1q180r7">
+          <dc:Bounds x="640" y="-360" width="100" height="80" />
           <bpmndi:BPMNLabel />
         </bpmndi:BPMNShape>
         <bpmndi:BPMNEdge id="Flow_07ig27a_di" bpmnElement="Flow_07ig27a">
@@ -3527,6 +3651,18 @@ modeldata: |
         <bpmndi:BPMNEdge id="Flow_13vcqxg_di" bpmnElement="Flow_13vcqxg">
           <di:waypoint x="4540" y="-650" />
           <di:waypoint x="4580" y="-650" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0peiohe_di" bpmnElement="Flow_0peiohe">
+          <di:waypoint x="478" y="-320" />
+          <di:waypoint x="510" y="-320" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1k1x1np_di" bpmnElement="Flow_1k1x1np">
+          <di:waypoint x="610" y="-320" />
+          <di:waypoint x="640" y="-320" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1cnuc15_di" bpmnElement="Flow_1cnuc15">
+          <di:waypoint x="740" y="-320" />
+          <di:waypoint x="770" y="-320" />
         </bpmndi:BPMNEdge>
       </bpmndi:BPMNPlane>
     </bpmndi:BPMNDiagram>

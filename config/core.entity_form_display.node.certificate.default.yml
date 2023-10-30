@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.certificate.field_issued_days
     - field.field.node.certificate.field_period_of_validity
     - field.field.node.certificate.field_remainder
+    - field.field.node.certificate.field_timestamp_certificate
     - node.type.certificate
   module:
     - datetime_range
@@ -39,6 +40,12 @@ content:
   field_period_of_validity:
     type: daterange_default
     weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_timestamp_certificate:
+    type: datetime_timestamp
+    weight: 26
     region: content
     settings: {  }
     third_party_settings: {  }

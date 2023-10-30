@@ -9,7 +9,7 @@ id: node.certificate.field_issued_days
 field_name: field_issued_days
 entity_type: node
 bundle: certificate
-label: 'Issued Days'
+label: 'Given Days'
 description: ''
 required: true
 translatable: false

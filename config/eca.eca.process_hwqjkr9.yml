@@ -14,7 +14,7 @@ id: process_hwqjkr9
 modeller: bpmn_io
 label: 'Range Validation'
 version: v1
-weight: null
+weight: -7
 events:
   Event_1jhande:
     plugin: 'form:form_validate'
@@ -536,19 +536,6 @@ actions:
       -
         id: Activity_13nkn2a
         condition: ''
-  Activity_0dgenov:
-    plugin: eca_list_remove
-    label: 'Drop first'
-    configuration:
-      value: ''
-      token_name: ''
-      method: first
-      index: ''
-      list_token: ranges
-    successors:
-      -
-        id: Activity_06uuk4l
-        condition: ''
   Activity_06uuk4l:
     plugin: 'eca_tamper:math'
     label: 'countranges - 1'
@@ -784,3 +771,23 @@ actions:
       message: 'The Range end time cannot be before the start time'
       field_name: op
     successors: {  }
+  Activity_0ooe5sd:
+    plugin: action_message_action
+    label: Activity_0ooe5sd
+    configuration:
+      replace_tokens: false
+      message: 'Exvac: [unixdatestart] - [unixdateend]    Newvac: [unixstartvac] - [unixendvac]'
+    successors: {  }
+  Activity_0dgenov:
+    plugin: eca_list_remove_entity
+    label: 'Drop first'
+    configuration:
+      token_name: ''
+      method: first
+      index: ''
+      list_token: ranges
+      object: ''
+    successors:
+      -
+        id: Activity_06uuk4l
+        condition: ''

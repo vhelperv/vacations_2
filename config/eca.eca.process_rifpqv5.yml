@@ -45,7 +45,7 @@ id: process_rifpqv5
 modeller: bpmn_io
 label: 'Approval system & Subtracting days'
 version: v1
-weight: -10
+weight: -8
 events:
   Event_1cytdr3:
     plugin: 'content_entity:insert'
@@ -101,6 +101,15 @@ events:
       bundle: ''
       operation: ''
     successors: {  }
+  Event_1vu0t44:
+    plugin: 'content_entity:update'
+    label: 'Update paragraph '
+    configuration:
+      type: 'paragraph person_who_approve'
+    successors:
+      -
+        id: Activity_12y7o2e
+        condition: ''
 conditions:
   Flow_1880gj1:
     plugin: eca_scalar
@@ -1430,4 +1439,47 @@ actions:
     successors:
       -
         id: Activity_044go7i
+        condition: ''
+  Activity_12y7o2e:
+    plugin: eca_token_load_entity
+    label: 'Load paragraph [paragr]'
+    configuration:
+      token_name: paragr
+      from: current
+      entity_type: _none
+      entity_id: ''
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_1q180r7
+        condition: ''
+  Activity_02ll27b:
+    plugin: action_message_action
+    label: 'Massage: State changed'
+    configuration:
+      replace_tokens: false
+      message: 'State "[perentpar:title]" of [perentpar:author:display-name] been changed to "[paragr:field_permission]"'
+    successors: {  }
+  Activity_1q180r7:
+    plugin: eca_token_load_entity
+    label: 'Load perent paragraph [perentpar]'
+    configuration:
+      token_name: perentpar
+      from: id
+      entity_type: node
+      entity_id: '[paragr:parent_id:value]'
+      revision_id: ''
+      properties: ''
+      langcode: _interface
+      latest_revision: false
+      unchanged: false
+      object: ''
+    successors:
+      -
+        id: Activity_02ll27b
         condition: ''

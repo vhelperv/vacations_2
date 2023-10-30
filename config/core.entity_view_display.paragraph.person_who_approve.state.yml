@@ -1,0 +1,30 @@
+uuid: 145970ee-3fad-40b4-a16b-8ec72f2417bd
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.state
+    - field.field.paragraph.person_who_approve.field_permission
+    - field.field.paragraph.person_who_approve.field_person
+    - paragraphs.paragraphs_type.person_who_approve
+  module:
+    - layout_builder
+    - options
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: paragraph.person_who_approve.state
+targetEntityType: paragraph
+bundle: person_who_approve
+mode: state
+content:
+  field_permission:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_person: true

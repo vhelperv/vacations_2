@@ -9,7 +9,7 @@ id: paragraph.person_who_approve.field_person
 field_name: field_person
 entity_type: paragraph
 bundle: person_who_approve
-label: Person
+label: 'Person who approve'
 description: ''
 required: true
 translatable: false

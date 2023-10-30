@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.certificate.field_issued_days
     - field.field.node.certificate.field_period_of_validity
     - field.field.node.certificate.field_remainder
+    - field.field.node.certificate.field_timestamp_certificate
     - node.type.certificate
   module:
     - user
@@ -28,3 +29,4 @@ hidden:
   field_issued_days: true
   field_period_of_validity: true
   field_remainder: true
+  field_timestamp_certificate: true

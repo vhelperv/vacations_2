@@ -19,7 +19,7 @@ id: process_evyvys1
 modeller: bpmn_io
 label: 'Validation Vacation & Certificate'
 version: v1
-weight: -10
+weight: -9
 events:
   Event_1x6jxwe:
     plugin: 'form:form_validate'
@@ -458,7 +458,61 @@ conditions:
       negate: false
       case: false
       left: '[partday]'
-      right: '2'
+      right: '6'
+      operator: equal
+      type: value
+  Flow_0t7ua1y:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[datestartvac]'
+      right: '[current-date:html_date]'
+      operator: equal
+      type: value
+  Flow_10nneh5:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[typevacat]'
+      right: '1'
+      operator: equal
+      type: value
+  Flow_1la1vb0:
+    plugin: eca_scalar
+    configuration:
+      case: false
+      left: '[typevacat]'
+      right: '1'
+      operator: equal
+      type: value
+      negate: true
+  Flow_1n2zyki:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[partday]'
+      right: '5'
+      operator: equal
+      type: value
+  Flow_0xxal9w:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[timevac]'
+      right: '[current-date:html_time]'
+      operator: lessthan
+      type: value
+  Flow_05oab52:
+    plugin: eca_scalar
+    configuration:
+      negate: false
+      case: false
+      left: '[datestartvac]'
+      right: '[current-date:html_date]'
       operator: equal
       type: value
 gateways:
@@ -576,6 +630,12 @@ gateways:
       -
         id: Activity_0932pmb
         condition: Flow_19zun93
+  Gateway_1hhirny:
+    type: 0
+    successors:
+      -
+        id: Activity_078ds4e
+        condition: ''
 actions:
   Activity_191wffh:
     plugin: eca_form_field_set_error
@@ -841,6 +901,9 @@ actions:
     successors:
       -
         id: Activity_0mk4hr8
+        condition: ''
+      -
+        id: Activity_12rud9s
         condition: ''
   Activity_0klc9j7:
     plugin: eca_views_query
@@ -1327,9 +1390,12 @@ actions:
       -
         id: Activity_16c82k4
         condition: ''
+      -
+        id: Activity_1yjnull
+        condition: ''
   Activity_0us6moy:
     plugin: eca_form_field_set_error
-    label: Activity_0us6moy
+    label: 'ERROR: Start date cannot be later than the end date.'
     configuration:
       message: 'The vacation start date cannot be later than the end date.'
       field_name: op
@@ -1472,3 +1538,108 @@ actions:
       -
         id: Activity_0wyll02
         condition: Flow_03fyr39
+  Activity_078ds4e:
+    plugin: 'eca_tamper:timetodate'
+    label: |-
+      Convert to 
+      Y-m-d
+    configuration:
+      date_format: Y-m-d
+      eca_data: '[startvacunix]'
+      eca_token_name: datestartvac
+    successors:
+      -
+        id: Activity_11irnhj
+        condition: Flow_0t7ua1y
+  Activity_12rud9s:
+    plugin: eca_form_field_get_value
+    label: 'Get type vacation'
+    configuration:
+      token_name: typevacat
+      field_name: field_type_vacation.0.target_id
+      strip_tags: true
+      trim: true
+      xss_filter: true
+    successors:
+      -
+        id: Gateway_1hhirny
+        condition: Flow_10nneh5
+      -
+        id: Activity_1e6lu0d
+        condition: Flow_1la1vb0
+  Activity_11irnhj:
+    plugin: eca_form_field_set_error
+    label: |-
+      ERROR: 
+      Full-day vacation for today
+    configuration:
+      message: 'You cannot take a full-day vacation for today!'
+      field_name: op
+    successors: {  }
+  Activity_1e6lu0d:
+    plugin: eca_form_field_get_value
+    label: 'Get part day'
+    configuration:
+      token_name: partday
+      field_name: field_part_day.0.target_id
+      strip_tags: true
+      trim: true
+      xss_filter: true
+    successors:
+      -
+        id: Gateway_1hhirny
+        condition: Flow_1n2zyki
+  Activity_0goghne:
+    plugin: eca_form_field_set_error
+    label: 'ERROR: The specified time has already passed'
+    configuration:
+      message: 'The specified time has already passed!'
+      field_name: op
+    successors: {  }
+  Activity_02qtxnv:
+    plugin: 'eca_tamper:timetodate'
+    label: 'Vacation time convert H:i:s [timevac]'
+    configuration:
+      date_format: 'H:i:s'
+      eca_data: '[vactimestart]'
+      eca_token_name: timevac
+    successors:
+      -
+        id: Activity_0goghne
+        condition: Flow_0xxal9w
+  Activity_1yjnull:
+    plugin: eca_form_field_get_value
+    label: 'Get date start vacations [startvacdate]'
+    configuration:
+      token_name: startvacdate
+      field_name: field_range.0.value
+      strip_tags: true
+      trim: true
+      xss_filter: true
+    successors:
+      -
+        id: Activity_1gn7118
+        condition: ''
+  Activity_08pu3xk:
+    plugin: 'eca_tamper:timetodate'
+    label: |-
+      Convert to 
+      Y-m-d [datestartvac]
+    configuration:
+      date_format: Y-m-d
+      eca_data: '[unixstartvacdate]'
+      eca_token_name: datestartvac
+    successors:
+      -
+        id: Activity_02qtxnv
+        condition: Flow_05oab52
+  Activity_1gn7118:
+    plugin: 'eca_tamper:strtotime'
+    label: 'Conver to UNIX [unixstartvacdate]'
+    configuration:
+      eca_data: '[startvacdate]'
+      eca_token_name: unixstartvacdate
+    successors:
+      -
+        id: Activity_08pu3xk
+        condition: ''

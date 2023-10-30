@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.certificate.field_issued_days
     - field.field.node.certificate.field_period_of_validity
     - field.field.node.certificate.field_remainder
+    - field.field.node.certificate.field_timestamp_certificate
     - node.type.certificate
     - views.view._certificate_transaction
   module:
@@ -57,7 +58,7 @@ third_party_settings:
                   thousand_separator: ''
                   prefix_suffix: true
                 third_party_settings: {  }
-            weight: 5
+            weight: 9
             additional: {  }
           ca319a0c-c388-4b43-913b-e7838b3dc763:
             uuid: ca319a0c-c388-4b43-913b-e7838b3dc763
@@ -74,7 +75,7 @@ third_party_settings:
                   thousand_separator: ''
                   prefix_suffix: true
                 third_party_settings: {  }
-            weight: 6
+            weight: 10
             additional: {  }
           e514ddb2-893d-4df3-a16e-02f2344fbeb7:
             uuid: e514ddb2-893d-4df3-a16e-02f2344fbeb7
@@ -87,7 +88,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 7
+            weight: 11
             additional: {  }
           ca594102-44ed-4aba-93ca-ea0e24c78c97:
             uuid: ca594102-44ed-4aba-93ca-ea0e24c78c97
@@ -129,7 +130,7 @@ third_party_settings:
                   date_format: d/m/Y
                   separator: to
                 third_party_settings: {  }
-            weight: 4
+            weight: 5
             additional: {  }
         third_party_settings: {  }
 id: node.certificate.default
@@ -172,6 +173,16 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     weight: 4
+    region: content
+  field_timestamp_certificate:
+    type: timestamp
+    label: above
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+    weight: 6
     region: content
 hidden:
   field_bonus: true

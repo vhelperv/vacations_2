@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.certificate.field_remainder
+    - field.field.node.certificate.field_timestamp_certificate
     - field.field.node.transaction.field__account_balance
     - field.field.node.transaction.field_add_day
     - field.field.node.transaction.field_balance
@@ -13,7 +14,6 @@ dependencies:
     - field.field.node.transaction.field_refer_to_vacation_entity
     - field.field.node.vacation.field_approve
     - field.field.node.vacation.field_numb_day
-    - field.field.node.vacation.field_range
     - field.field.paragraph.person_who_approve.field_permission
     - field.field.paragraph.person_who_approve.field_person
     - field.storage.node.field__account_balance
@@ -23,9 +23,9 @@ dependencies:
     - field.storage.node.field_certificate
     - field.storage.node.field_employee_vacation
     - field.storage.node.field_numb_day
-    - field.storage.node.field_range
     - field.storage.node.field_refer_to_vacation_entity
     - field.storage.node.field_remainder
+    - field.storage.node.field_timestamp_certificate
     - field.storage.paragraph.field_permission
     - field.storage.paragraph.field_person
     - node.type.transaction
@@ -43,7 +43,7 @@ id: process_bkatfeq
 modeller: bpmn_io
 label: 'Сancel Vacation'
 version: v1
-weight: null
+weight: -5
 events:
   Event_15ffmew:
     plugin: 'content_entity:update'
@@ -93,15 +93,6 @@ conditions:
       right: '[countfield]'
       operator: lessthan
       type: value
-  Flow_1i6kxwn:
-    plugin: eca_scalar
-    configuration:
-      case: false
-      left: '[num]'
-      right: '0'
-      operator: equal
-      type: value
-      negate: true
   Flow_1rzprws:
     plugin: eca_entity_field_value
     configuration:
@@ -153,7 +144,7 @@ conditions:
     plugin: eca_scalar
     configuration:
       case: false
-      left: '[range]'
+      left: '[compend]'
       right: '[current-date:raw]'
       operator: lessthan
       type: value
@@ -163,7 +154,7 @@ conditions:
     configuration:
       negate: false
       case: false
-      left: '[range]'
+      left: '[compend]'
       right: '[current-date:raw]'
       operator: lessthan
       type: value
@@ -386,8 +377,8 @@ actions:
       object: ''
     successors:
       -
-        id: Activity_0aopsfl
-        condition: Flow_1i6kxwn
+        id: Activity_09vmc9e
+        condition: ''
   Activity_1y9sal8:
     plugin: eca_views_query
     label: 'Create list transaction [listtransact]'
@@ -516,7 +507,7 @@ actions:
     label: 'Set title'
     configuration:
       field_name: title
-      field_value: 'Cencel Vacation Transaction "[vac:title]"'
+      field_value: 'Cancel Vacation Transaction "[vac:title]"'
       method: 'set:clear'
       strip_tags: false
       trim: false
@@ -756,10 +747,7 @@ actions:
     configuration:
       eca_data: '[cert:field_range:end_value]'
       eca_token_name: range
-    successors:
-      -
-        id: Gateway_0pvce2q
-        condition: ''
+    successors: {  }
   Activity_15zqu9t:
     plugin: eca_count
     label: 'Get count list [num]'
@@ -810,4 +798,17 @@ actions:
     successors:
       -
         id: Activity_1ghodu5
+        condition: ''
+  Activity_09vmc9e:
+    plugin: 'eca_tamper:math'
+    label: Math
+    configuration:
+      operation: addition
+      flip: false
+      value: '1200'
+      eca_data: '[cert:field_timestamp_certificate:date:raw]'
+      eca_token_name: compend
+    successors:
+      -
+        id: Gateway_0pvce2q
         condition: ''

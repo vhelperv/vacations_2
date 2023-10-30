@@ -293,12 +293,25 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: datetime
-          order: ASC
+          order: DESC
           expose:
             label: ''
             field_identifier: ''
           exposed: false
           granularity: second
+        field_timestamp_certificate_value:
+          id: field_timestamp_certificate_value
+          table: node__field_timestamp_certificate
+          field: field_timestamp_certificate_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       defaults:
         sorts: false
       display_extenders: {  }

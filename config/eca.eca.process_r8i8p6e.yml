@@ -25,7 +25,7 @@ id: process_r8i8p6e
 modeller: bpmn_io
 label: 'Validation for TeamLead'
 version: v1
-weight: null
+weight: -6
 events:
   Event_1z02hz8:
     plugin: 'content_entity:presave'

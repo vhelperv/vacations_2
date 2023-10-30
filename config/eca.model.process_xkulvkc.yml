@@ -193,10 +193,9 @@ modeldata: |
           </camunda:field>
           <camunda:field name="object" />
         </bpmn2:extensionElements>
-        <bpmn2:incoming>Flow_09zd5nm</bpmn2:incoming>
+        <bpmn2:incoming>Flow_0ldosag</bpmn2:incoming>
         <bpmn2:outgoing>Flow_1jyk5nx</bpmn2:outgoing>
       </bpmn2:task>
-      <bpmn2:sequenceFlow id="Flow_09zd5nm" sourceRef="Event_1umtqxz" targetRef="Activity_0daw65u" />
       <bpmn2:startEvent id="Event_1umtqxz" name="Insert User" camunda:modelerTemplate="org.drupal.event.content_entity:insert">
         <bpmn2:extensionElements>
           <camunda:properties>
@@ -206,7 +205,7 @@ modeldata: |
             <camunda:string>user user</camunda:string>
           </camunda:field>
         </bpmn2:extensionElements>
-        <bpmn2:outgoing>Flow_09zd5nm</bpmn2:outgoing>
+        <bpmn2:outgoing>Flow_0ldosag</bpmn2:outgoing>
       </bpmn2:startEvent>
       <bpmn2:task id="Activity_0rnccp2" name="Set field_remainder" camunda:modelerTemplate="org.drupal.action.eca_set_field_value">
         <bpmn2:extensionElements>
@@ -600,6 +599,7 @@ modeldata: |
         </bpmn2:extensionElements>
         <bpmn2:incoming>Flow_1gcpuif</bpmn2:incoming>
         <bpmn2:outgoing>Flow_0ahmtd7</bpmn2:outgoing>
+        <bpmn2:outgoing>Flow_11ofcwi</bpmn2:outgoing>
       </bpmn2:task>
       <bpmn2:sequenceFlow id="Flow_0ahmtd7" sourceRef="Activity_1co706p" targetRef="Activity_0rnccp2" />
       <bpmn2:task id="Activity_1vo7lfn" camunda:modelerTemplate="org.drupal.action.action_message_action">
@@ -1646,6 +1646,71 @@ modeldata: |
         <bpmn2:incoming>Flow_1uda97z</bpmn2:incoming>
         <bpmn2:outgoing>Flow_0zipsvl</bpmn2:outgoing>
       </bpmn2:task>
+      <bpmn2:sequenceFlow id="Flow_11ofcwi" sourceRef="Activity_1co706p" targetRef="Activity_1mmht5g">
+        <bpmn2:extensionElements>
+          <camunda:field name="left">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="operator">
+            <camunda:string>equal</camunda:string>
+          </camunda:field>
+          <camunda:field name="type">
+            <camunda:string>value</camunda:string>
+          </camunda:field>
+          <camunda:field name="case">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="right">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="negate">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:sequenceFlow>
+      <bpmn2:task id="Activity_1mmht5g" name="Change to admin" camunda:modelerTemplate="org.drupal.action.eca_switch_account">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_switch_account" />
+          </camunda:properties>
+          <camunda:field name="user_id">
+            <camunda:string>1</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_11ofcwi</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_1y3ypq3</bpmn2:outgoing>
+      </bpmn2:task>
+      <bpmn2:task id="Activity_1cfy28z" name="Set timestamp certificate" camunda:modelerTemplate="org.drupal.action.eca_set_field_value">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_set_field_value" />
+          </camunda:properties>
+          <camunda:field name="method">
+            <camunda:string>set:clear</camunda:string>
+          </camunda:field>
+          <camunda:field name="strip_tags">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="trim">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+          <camunda:field name="field_name">
+            <camunda:string>field_timestamp_certificate</camunda:string>
+          </camunda:field>
+          <camunda:field name="save_entity">
+            <camunda:string>yes</camunda:string>
+          </camunda:field>
+          <camunda:field name="field_value">
+            <camunda:string>[current-date:raw]</camunda:string>
+          </camunda:field>
+          <camunda:field name="object">
+            <camunda:string>loadcert</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_1y3ypq3</bpmn2:incoming>
+      </bpmn2:task>
+      <bpmn2:sequenceFlow id="Flow_1y3ypq3" sourceRef="Activity_1mmht5g" targetRef="Activity_1cfy28z" />
+      <bpmn2:sequenceFlow id="Flow_0ldosag" sourceRef="Event_1umtqxz" targetRef="Activity_0daw65u" />
     </bpmn2:process>
     <bpmndi:BPMNDiagram id="sid-9973d2f1-3fca-4263-9a09-7743970618ce">
       <bpmndi:BPMNPlane id="sid-632e0986-b2c8-44e2-998a-4903302307be" bpmnElement="Process_xKulvKc">
@@ -1682,7 +1747,7 @@ modeldata: |
         <bpmndi:BPMNShape id="Event_0sd36gl_di" bpmnElement="Event_1umtqxz">
           <dc:Bounds x="562" y="-88" width="36" height="36" />
           <bpmndi:BPMNLabel>
-            <dc:Bounds x="555" y="-45" width="54" height="14" />
+            <dc:Bounds x="553" y="-45" width="55" height="14" />
           </bpmndi:BPMNLabel>
         </bpmndi:BPMNShape>
         <bpmndi:BPMNShape id="Activity_0rnccp2_di" bpmnElement="Activity_0rnccp2">
@@ -1888,6 +1953,14 @@ modeldata: |
         <bpmndi:BPMNShape id="Activity_0n48e7l_di" bpmnElement="Activity_0rhxso6">
           <dc:Bounds x="950" y="430" width="100" height="80" />
         </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_1mmht5g_di" bpmnElement="Activity_1mmht5g">
+          <dc:Bounds x="650" y="220" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_1cfy28z_di" bpmnElement="Activity_1cfy28z">
+          <dc:Bounds x="510" y="220" width="100" height="80" />
+          <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
         <bpmndi:BPMNEdge id="Flow_0tum2y9_di" bpmnElement="Flow_0tum2y9">
           <di:waypoint x="598" y="30" />
           <di:waypoint x="650" y="30" />
@@ -1895,10 +1968,6 @@ modeldata: |
         <bpmndi:BPMNEdge id="Flow_00rrwr9_di" bpmnElement="Flow_00rrwr9">
           <di:waypoint x="900" y="30" />
           <di:waypoint x="950" y="30" />
-        </bpmndi:BPMNEdge>
-        <bpmndi:BPMNEdge id="Flow_09zd5nm_di" bpmnElement="Flow_09zd5nm">
-          <di:waypoint x="598" y="-70" />
-          <di:waypoint x="650" y="-70" />
         </bpmndi:BPMNEdge>
         <bpmndi:BPMNEdge id="Flow_1a4k4be_di" bpmnElement="Flow_1a4k4be">
           <di:waypoint x="1200" y="30" />
@@ -2141,6 +2210,18 @@ modeldata: |
         <bpmndi:BPMNEdge id="Flow_0zipsvl_di" bpmnElement="Flow_0zipsvl">
           <di:waypoint x="1050" y="470" />
           <di:waypoint x="1100" y="470" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_11ofcwi_di" bpmnElement="Flow_11ofcwi">
+          <di:waypoint x="700" y="330" />
+          <di:waypoint x="700" y="300" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_1y3ypq3_di" bpmnElement="Flow_1y3ypq3">
+          <di:waypoint x="650" y="260" />
+          <di:waypoint x="610" y="260" />
+        </bpmndi:BPMNEdge>
+        <bpmndi:BPMNEdge id="Flow_0ldosag_di" bpmnElement="Flow_0ldosag">
+          <di:waypoint x="598" y="-70" />
+          <di:waypoint x="650" y="-70" />
         </bpmndi:BPMNEdge>
       </bpmndi:BPMNPlane>
     </bpmndi:BPMNDiagram>

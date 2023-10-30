@@ -464,7 +464,20 @@ display:
       cache:
         type: tag
         options: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: 'Your balance hasn''t changed yet.'
+            format: basic_html
+          tokenize: false
       sorts:
         field_timestamp_value:
           id: field_timestamp_value
@@ -567,6 +580,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
+      use_ajax: true
       header: {  }
       footer: {  }
       display_extenders: {  }

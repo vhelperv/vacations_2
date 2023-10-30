@@ -77,9 +77,7 @@ modeldata: |
           <camunda:field name="display_id">
             <camunda:string>block_1</camunda:string>
           </camunda:field>
-          <camunda:field name="arguments">
-            <camunda:string></camunda:string>
-          </camunda:field>
+          <camunda:field name="arguments" />
         </bpmn2:extensionElements>
         <bpmn2:incoming>Flow_1khz1re</bpmn2:incoming>
         <bpmn2:outgoing>Flow_1h5quc5</bpmn2:outgoing>
@@ -161,30 +159,6 @@ modeldata: |
         </bpmn2:extensionElements>
         <bpmn2:incoming>Flow_0s1qd4t</bpmn2:incoming>
         <bpmn2:outgoing>Flow_1ns0r9q</bpmn2:outgoing>
-      </bpmn2:task>
-      <bpmn2:task id="Activity_0dgenov" name="Drop first" camunda:modelerTemplate="org.drupal.action.eca_list_remove">
-        <bpmn2:extensionElements>
-          <camunda:properties>
-            <camunda:property name="pluginid" value="eca_list_remove" />
-          </camunda:properties>
-          <camunda:field name="list_token">
-            <camunda:string>ranges</camunda:string>
-          </camunda:field>
-          <camunda:field name="method">
-            <camunda:string>first</camunda:string>
-          </camunda:field>
-          <camunda:field name="index">
-            <camunda:string></camunda:string>
-          </camunda:field>
-          <camunda:field name="value">
-            <camunda:string></camunda:string>
-          </camunda:field>
-          <camunda:field name="token_name">
-            <camunda:string></camunda:string>
-          </camunda:field>
-        </bpmn2:extensionElements>
-        <bpmn2:incoming>Flow_0wdsray</bpmn2:incoming>
-        <bpmn2:outgoing>Flow_0f9kzpj</bpmn2:outgoing>
       </bpmn2:task>
       <bpmn2:task id="Activity_06uuk4l" name="countranges - 1" camunda:modelerTemplate="org.drupal.action.eca_tamper:math">
         <bpmn2:extensionElements>
@@ -1552,6 +1526,43 @@ modeldata: |
       </bpmn2:exclusiveGateway>
       <bpmn2:sequenceFlow id="Flow_0s1i0rt" sourceRef="Gateway_0xi8wac" targetRef="Activity_0be0764" />
       <bpmn2:sequenceFlow id="Flow_06x8xmb" sourceRef="Activity_13nkn2a" targetRef="Gateway_1604i7r" />
+      <bpmn2:task id="Activity_0ooe5sd" camunda:modelerTemplate="org.drupal.action.action_message_action">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="action_message_action" />
+          </camunda:properties>
+          <camunda:field name="message">
+            <camunda:string>Exvac: [unixdatestart] - [unixdateend]    Newvac: [unixstartvac] - [unixendvac]</camunda:string>
+          </camunda:field>
+          <camunda:field name="replace_tokens">
+            <camunda:string>no</camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+      </bpmn2:task>
+      <bpmn2:task id="Activity_0dgenov" name="Drop first" camunda:modelerTemplate="org.drupal.action.eca_list_remove_entity">
+        <bpmn2:extensionElements>
+          <camunda:properties>
+            <camunda:property name="pluginid" value="eca_list_remove_entity" />
+          </camunda:properties>
+          <camunda:field name="list_token">
+            <camunda:string>ranges</camunda:string>
+          </camunda:field>
+          <camunda:field name="method">
+            <camunda:string>first</camunda:string>
+          </camunda:field>
+          <camunda:field name="object">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="index">
+            <camunda:string></camunda:string>
+          </camunda:field>
+          <camunda:field name="token_name">
+            <camunda:string></camunda:string>
+          </camunda:field>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>Flow_0wdsray</bpmn2:incoming>
+        <bpmn2:outgoing>Flow_0f9kzpj</bpmn2:outgoing>
+      </bpmn2:task>
       <bpmn2:textAnnotation id="TextAnnotation_0msqukk">
         <bpmn2:text>ERROR: Start time &gt; end time</bpmn2:text>
       </bpmn2:textAnnotation>
@@ -1594,10 +1605,6 @@ modeldata: |
         </bpmndi:BPMNShape>
         <bpmndi:BPMNShape id="Activity_02fgo03_di" bpmnElement="Activity_02fgo03">
           <dc:Bounds x="400" y="40" width="100" height="80" />
-          <bpmndi:BPMNLabel />
-        </bpmndi:BPMNShape>
-        <bpmndi:BPMNShape id="Activity_0dgenov_di" bpmnElement="Activity_0dgenov">
-          <dc:Bounds x="530" y="-170" width="100" height="80" />
           <bpmndi:BPMNLabel />
         </bpmndi:BPMNShape>
         <bpmndi:BPMNShape id="Activity_06uuk4l_di" bpmnElement="Activity_06uuk4l">
@@ -1732,6 +1739,12 @@ modeldata: |
         <bpmndi:BPMNShape id="TextAnnotation_04wo4ts_di" bpmnElement="TextAnnotation_04wo4ts">
           <dc:Bounds x="1170" y="-40" width="100" height="30" />
           <bpmndi:BPMNLabel />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_0ooe5sd_di" bpmnElement="Activity_0ooe5sd">
+          <dc:Bounds x="530" y="160" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        <bpmndi:BPMNShape id="Activity_0fh7tih_di" bpmnElement="Activity_0dgenov">
+          <dc:Bounds x="530" y="-170" width="100" height="80" />
         </bpmndi:BPMNShape>
         <bpmndi:BPMNEdge id="Flow_1l27p4w_di" bpmnElement="Flow_1l27p4w">
           <di:waypoint x="-1222" y="160" />

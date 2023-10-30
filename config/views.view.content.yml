@@ -473,6 +473,65 @@ display:
           expose:
             operator_limit_selection: false
             operator_list: {  }
+        uid:
+          id: uid
+          table: node_field_data
+          field: uid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: uid
+          plugin_id: user_name
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: uid_op
+            label: 'Authored by'
+            description: ''
+            use_operator: false
+            operator: uid_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: uid
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              ceo: '0'
+              developer_junior: '0'
+              developer_middle: '0'
+              developer_senior: '0'
+              teamlead: '0'
+              pm: '0'
+              shief_pm: '0'
+              head_of_department: '0'
+              sales: '0'
+              marketing: '0'
+              recruiting: '0'
+              hr: '0'
+              om: '0'
+              accounting: '0'
+              admin_staff: '0'
+              client: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:

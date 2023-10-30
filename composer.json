@@ -19,7 +19,9 @@
         "drupal/admin_toolbar": "^3.4",
         "drupal/bpmn_io": "^1.1",
         "drupal/conditional_fields": "^4.0@alpha",
+        "drupal/core": "^9.5",
         "drupal/core-composer-scaffold": "^9",
+        "drupal/core-dev": "^9.5",
         "drupal/core-project-message": "^9",
         "drupal/core-recommended": "^9",
         "drupal/devel": "^5.1",
@@ -38,7 +40,7 @@
         "drupal/view_unpublished": "^1.1",
         "drupal/webform": "^6.1",
         "drupal/workflow": "^1.7",
-        "drush/drush": "^10.2"
+        "drush/drush": "^11.6"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -50,7 +52,8 @@
         "allow-plugins": {
             "composer/installers": true,
             "drupal/core-composer-scaffold": true,
-            "drupal/core-project-message": true
+            "drupal/core-project-message": true,
+            "dealerdirect/phpcodesniffer-composer-installer": false
         }
     },
     "extra": {
@@ -104,6 +107,11 @@
                 "      https://www.drupal.org/getting-involved",
                 "  * Remove the plugin that prints this message:",
                 "      composer remove drupal/core-project-message"
+            ]
+        },
+        "merge-plugin": {
+            "include": [
+                "web/modules/contrib/webform/composer.libraries.json"
             ]
         }
     }

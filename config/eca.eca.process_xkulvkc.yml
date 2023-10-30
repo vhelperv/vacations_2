@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.certificate.field_employee
     - field.field.node.certificate.field_issued_days
     - field.field.node.certificate.field_remainder
+    - field.field.node.certificate.field_timestamp_certificate
     - field.field.node.transaction.field__account_balance
     - field.field.node.transaction.field_add_day
     - field.field.node.transaction.field_balance
@@ -24,6 +25,7 @@ dependencies:
     - field.storage.node.field_issued_days
     - field.storage.node.field_numb_day
     - field.storage.node.field_remainder
+    - field.storage.node.field_timestamp_certificate
     - node.type.certificate
     - node.type.transaction
     - views.view.balance
@@ -455,6 +457,9 @@ actions:
     successors:
       -
         id: Activity_0rnccp2
+        condition: ''
+      -
+        id: Activity_1mmht5g
         condition: ''
   Activity_1vo7lfn:
     plugin: action_message_action
@@ -888,3 +893,24 @@ actions:
       -
         id: Activity_15ltp1w
         condition: ''
+  Activity_1mmht5g:
+    plugin: eca_switch_account
+    label: 'Change to admin'
+    configuration:
+      user_id: '1'
+    successors:
+      -
+        id: Activity_1cfy28z
+        condition: ''
+  Activity_1cfy28z:
+    plugin: eca_set_field_value
+    label: 'Set timestamp certificate'
+    configuration:
+      field_name: field_timestamp_certificate
+      field_value: '[current-date:raw]'
+      method: 'set:clear'
+      strip_tags: false
+      trim: false
+      save_entity: true
+      object: loadcert
+    successors: {  }
