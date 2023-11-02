@@ -22,3 +22,54 @@ document.addEventListener("DOMContentLoaded", function() {
     element.textContent = "No";
   });
 });
+
+const block = document.querySelector("#block-vacationusermenu");
+const navigation = document.querySelector("#block-vacationusermenu .menu");
+const region = document.querySelector(".region-primary-menu");
+const formregion = document.querySelector(".page-wrapper__node-edit-form");
+
+// Додайте div з класом .burger-menu
+const burgerMenu = document.createElement("div");
+burgerMenu.classList.add("burger-menu");
+block.appendChild(burgerMenu);
+
+// Додайте слухач події на клик
+burgerMenu.addEventListener("click", function() {
+  // Додайте клас .show
+  burgerMenu.classList.toggle("show");
+  navigation.classList.toggle("show");
+  region.classList.toggle("show");
+  formregion.classList.toggle("show");
+});
+
+const expanded = document.querySelectorAll(".menu-item");
+
+expanded.forEach(element => {
+  if (element.classList.contains("menu-item--expanded")) {
+    const plus = document.createElement("div");
+    plus.classList.add("sub-burger");
+    element.insertBefore(plus, element.firstChild);
+  }
+});
+
+const exp = document.querySelectorAll(".sub-burger");
+
+exp.forEach(element => {
+  element.addEventListener("click", function() {
+    this.classList.toggle("show");
+    const submenu = this.closest(".menu-item--expanded");
+    submenu.classList.toggle("show");
+  });
+});
+window.addEventListener("resize", () => {
+  // Отримуємо ширину вікна в пікселях
+  const windowWidth = window.innerWidth;
+
+  // Якщо ширина вікна >= 801 пікселів, видаляємо клас `show` з елемента `navigation`
+  if (windowWidth >= 801) {
+    navigation.classList.remove("show");
+    region.classList.remove("show");
+    burgerMenu.classList.remove("show");
+    formregion.classList.remove("show");
+  }
+});

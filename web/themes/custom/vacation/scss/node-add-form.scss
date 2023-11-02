@@ -2,8 +2,76 @@
   z-index: 1;
   position: absolute;
   width: 100%;
+  #block-vacationusermenu {
+    .burger-menu {
+      position: fixed;
+      top: 35px;
+      left: 20px;
+      z-index: 6;
+      &.show {
+        position: fixed;
+        top: 35px;
+        left: 20px;
+      }
+    }
+  }
   #block-vacation-page-title {
     display: flex;
     justify-content: center;
+  }
+  #block-vacation-views-block-balance-block-2 {
+    position: fixed;
+    top: 17px;
+    right: 120px;
+    & > h2 {
+      font-size: 0;
+      &:after {
+        content: "UB:";
+        font-size: 17px;
+      }
+    }
+    & > div {
+      & > .view-id-balance {
+        & > .gin-layer-wrapper {
+          & > div {
+            & > table {
+              & > thead {
+
+              }
+              & > tbody {
+                font-size: 15px;
+                & > tr {
+                  & > td {
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &.show {
+    #block-vacation-views-block-balance-block-2 {
+      position: fixed;
+      top: 17px;
+      right: 120px;
+    }
+  }
+  #edit-gin-actions {
+    position: fixed;
+    top: 0;
+    right: 20px;
+    .meta-sidebar__trigger {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 720px ) and (max-width: 1390px) {
+  .page-wrapper__node-edit-form {
+    #block-vacationusermenu {
+      margin-right: 170px;
+    }
   }
 }
